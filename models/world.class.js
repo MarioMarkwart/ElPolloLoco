@@ -5,6 +5,7 @@ class World{
         new Chicken,
         new Chicken
     ];
+    cloud = new Cloud;
     canvas;
     ctx;
 
@@ -20,6 +21,9 @@ class World{
         this.enemies.forEach(enemy => {
             this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
         })
+        this.ctx.drawImage(this.cloud.img, this.cloud.x, this.cloud.y, this.cloud.width, this.cloud.height);
+
+
         // draw always be called on every frame
         // let self = this;
         // requestAnimationFrame(function(){ self.draw()})
