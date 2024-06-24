@@ -1,21 +1,20 @@
 class MovableObject {
     x = 120;
-    y = 400;
+    y = 200;
     img;
+    height = 250;
+    width = 100;
 
-    constructor(x, y, img){
-        this.x = x;
-        this.y = y;
-        this.img = img;
+    loadImage(path){
+        this.img = new Image();
+        this.img.src = path;
     }
 
     moveRight(){
+        this.x +=20;
         console.log('Moving right');
-        this.x += 10;
-        ctx.drawImage(this.img, this.x, this.y, 50, 150);
     }
 
-    
     moveLeft(){
         console.log('Moving left');
     }
