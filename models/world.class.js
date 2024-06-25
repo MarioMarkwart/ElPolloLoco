@@ -5,9 +5,22 @@ class World{
         new Chicken,
         new Chicken
     ];
-    cloud = new Cloud;
+
+    clouds = [
+        new Cloud,
+        new Cloud,
+    ];
+
+    backgroundObjects = [
+        new BackgroundObject('../assets/img/5_background/layers/air.png'),
+        new BackgroundObject('../assets/img/5_background/layers/3_third_layer/1.png'),
+        new BackgroundObject('../assets/img/5_background/layers/2_second_layer/1.png'),
+        new BackgroundObject('../assets/img/5_background/layers/1_first_layer/1.png'),
+    ];
+
     canvas;
     ctx;
+
 
     constructor(canvas){
         this.ctx = canvas.getContext('2d');
@@ -15,21 +28,22 @@ class World{
         this.draw();
     }
 
+
     draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
-        this.enemies.forEach(enemy => {
-            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
-        })
-        this.ctx.drawImage(this.cloud.img, this.cloud.x, this.cloud.y, this.cloud.width, this.cloud.height);
 
+        this.backgroundObjects.forEach(backgroundObject => this.addToMap(backgroundObject));
+        this.enemies.forEach(enemy =>  this.addToMap(enemy))
+        this.clouds.forEach(cloud => this.addToMap(cloud))
 
-        // draw always be called on every frame
-        // let self = this;
-        // requestAnimationFrame(function(){ self.draw()})
+        this.addToMap(this.character)
 
         requestAnimationFrame(() => this.draw());
     }
 
+
+    addToMap(moObj){
+        this.ctx.drawImage(moObj.img, moObj.x, moObj.y, moObj.width, moObj.height);
+    }
 }
 
