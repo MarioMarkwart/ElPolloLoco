@@ -32,18 +32,26 @@ class World{
     draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.backgroundObjects.forEach(backgroundObject => this.addToMap(backgroundObject));
-        this.enemies.forEach(enemy =>  this.addToMap(enemy))
-        this.clouds.forEach(cloud => this.addToMap(cloud))
-
+        this.addToMap(this.backgroundObjects);
+        this.addToMap(this.enemies);
+        this.addToMap(this.clouds);
         this.addToMap(this.character)
 
         requestAnimationFrame(() => this.draw());
     }
 
-
-    addToMap(moObj){
-        this.ctx.drawImage(moObj.img, moObj.x, moObj.y, moObj.width, moObj.height);
+    
+    /**
+     * Adds an object or an array of objects to the map. If the object is an array,
+     * it recursively calls itself for each object in the array. If the object is not
+     * an array, it draws the object's image on the canvas using the provided context.
+     *
+     * @param {Object|Array} obj - The object or array of objects to be added to the map.
+     */
+    addToMap(obj){
+        Array.isArray(obj)
+        ? obj.forEach(o => this.addToMap(o))
+        : this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
     }
 }
 
