@@ -8,7 +8,7 @@ class World{
 
     clouds = [
         new Cloud,
-        new Cloud,
+        new Cloud
     ];
 
     backgroundObjects = [
@@ -31,7 +31,6 @@ class World{
 
     draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.addToMap(this.backgroundObjects);
         this.addToMap(this.enemies);
         this.addToMap(this.clouds);
