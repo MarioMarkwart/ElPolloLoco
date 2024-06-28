@@ -4,10 +4,19 @@ class MovableObject {
     x = 120;
     y = 180;
     img;
+    imageCache = [];
 
     loadImage(path){
         this.img = new Image();
         this.img.src = path;
+    }
+
+    loadImages(arr){
+        arr.forEachH(path => {
+            const img = new Image();
+            img.src = path;
+            this.imageCache[path] = path;
+        })
     }
 
     moveRight(){
