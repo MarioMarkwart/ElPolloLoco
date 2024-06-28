@@ -15,8 +15,9 @@ class Cloud extends MovableObject {
     }
 
     moveCloud(){
+        let pixelMovement = Math.random() * (.5 - .15) + .15
         setInterval(() => {
-            this.x -= Math.random() * (.5 - .15) + .15
+            this.x -= pixelMovement;
         }, 1000/60); 
 
     }
