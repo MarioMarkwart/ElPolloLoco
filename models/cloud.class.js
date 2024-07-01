@@ -6,15 +6,15 @@ class Cloud extends MovableObject {
     count = 0;
 
     constructor() {
-        super().loadImage(cloudImages[(Math.floor(Math.random() * 3))]);
+        super().loadImage(IMAGES_CLOUD[(Math.floor(Math.random() * 3))]);
         this.x = Math.random() * 200;
         this.count++;
         this.setBackgroundClouds();
-        this.moveCloud();
+        this.animateCloud();
 
     }
 
-    moveCloud(){
+    animateCloud(){
         let pixelMovement = Math.random() * (.5 - .15) + .15
         setInterval(() => {
             this.x -= pixelMovement;

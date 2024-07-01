@@ -48,6 +48,7 @@ class World{
      * @param {Object|Array} obj - The object or array of objects to be added to the map.
      */
     addToMap(obj){
+        console.log(obj);
         Array.isArray(obj)
         ? obj.forEach(o => this.addToMap(o))
         : this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
