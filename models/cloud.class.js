@@ -3,11 +3,12 @@ class Cloud extends MovableObject {
     height = 300;
     y = 0;
 
+
     count = 0;
 
     constructor() {
         super().loadImage(IMAGES_CLOUD[(Math.floor(Math.random() * 3))]);
-        this.x = Math.random() * 200;
+        this.x = this.getRandomInt(0, 200)
         this.count++;
         this.setBackgroundClouds();
         this.animateCloud();
@@ -15,11 +16,7 @@ class Cloud extends MovableObject {
     }
 
     animateCloud(){
-        let pixelMovement = Math.random() * (.5 - .15) + .15
-        setInterval(() => {
-            this.x -= pixelMovement;
-        }, 1000/60); 
-
+        this.moveLeft();
     }
 
     setBackgroundClouds(){
