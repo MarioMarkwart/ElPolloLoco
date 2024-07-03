@@ -7,7 +7,8 @@ class Character extends MovableObject{
         '../assets/img/2_character_pepe/2_walk/W-24.png',
         '../assets/img/2_character_pepe/2_walk/W-25.png',
         '../assets/img/2_character_pepe/2_walk/W-26.png'
-    ]
+    ];
+    world;
     walkingSpeed = 100;
 
 
