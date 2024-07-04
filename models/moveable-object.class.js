@@ -27,6 +27,10 @@ class MovableObject {
     }
 
     moveLeft(){
+
+    };
+
+    moveLeftInterval(){
         let pixelMovement = Math.random() * (.5 - this.speed) + this.speed;
         setInterval(() => {
             this.x -= pixelMovement;
