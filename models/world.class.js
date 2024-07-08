@@ -21,6 +21,7 @@ class World{
     canvas;
     ctx;
     keyboard;
+    camera_x = -100;
 
 
     constructor(canvas, keyboard){
@@ -37,15 +38,21 @@ class World{
 
     draw(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.addToMap(this.backgroundObjects);
-        this.addToMap(this.enemies);
-        this.addToMap(this.clouds);
+        this.ctx.translate(this.camera_x, 0);
+        this.addObjectsToMap(this.backgroundObjects);
+        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.clouds);
         this.addToMap(this.character)
+        this.ctx.translate(-this.camera_x, 0);
 
         requestAnimationFrame(() => this.draw());
     }
 
-    
+    addObjectsToMap(objects){
+        objects.forEach(o => this.addToMap(o));
+    }
+
+
     /**
      * Adds an object or an array of objects to the map. If the object is an array,
      * it recursively calls itself for each object in the array. If the object is not
@@ -53,10 +60,28 @@ class World{
      *
      * @param {Object|Array} obj - The object or array of objects to be added to the map.
      */
-    addToMap(obj){
-        Array.isArray(obj)
-        ? obj.forEach(o => this.ctx.drawImage(o.img, o.x, o.y, o.width, o.height))
-        : this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
+    addToMap(mo){
+        if (mo.otherDirection){
+            this.flipImage(mo);
+        }
+
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        if (mo.otherDirection){
+            this.flipImageBack(mo);
+        }
+    }
+
+
+    flipImage(mo){
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+    flipImageBack(mo){
+        mo.x = mo.x * -1;
+        this.ctx.restore();
     }
 }
 

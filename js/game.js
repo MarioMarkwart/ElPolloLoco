@@ -19,7 +19,6 @@ window.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowDown') keyboard.DOWN = true;
     if (event.key === ' ') keyboard.SPACE = true;
 
-    console.log("down |", keyboard);
 })
 
 window.addEventListener('keyup', (event) => {
@@ -28,6 +27,4 @@ window.addEventListener('keyup', (event) => {
     if (event.key === 'ArrowUp') keyboard.UP = false;
     if (event.key === 'ArrowDown') keyboard.DOWN = false;
     if (event.key === ' ') keyboard.SPACE = false;
-
-    console.log("up | ", keyboard);
 })

@@ -7,6 +7,7 @@ class MovableObject {
     imageCache = {};
     currentImage = 0;
     speed = .15;
+    otherDirection = false;
 
     loadImage(path){
         this.img = new Image();
@@ -21,14 +22,16 @@ class MovableObject {
         })
     }
 
-    moveRight(){
-        this.x +=20;
-        console.log('Moving right');
-    }
-
-    moveLeft(){
-
-    };
+    // moveRight(){
+    //     this.x +=20;
+    //     console.log('Moving right');
+    // }
+    
+    // moveLeft(){
+    //     this.x -=20;
+    //     console.log('Moving left');
+        
+    // };
 
     moveLeftInterval(){
         let pixelMovement = Math.random() * (.5 - this.speed) + this.speed;
