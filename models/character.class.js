@@ -9,6 +9,7 @@ class Character extends MovableObject{
         '../assets/img/2_character_pepe/2_walk/W-26.png'
     ];
     world;
+    walking_sound = new Audio('../assets/audio/walk.mp3');
 
 
     constructor(){
@@ -39,8 +40,14 @@ class Character extends MovableObject{
                 let path = this.CHARACTER_IMAGES_WALKING[mod];
                 this.img = this.imageCache[path];
                 this.currentImage++;
+                this.walking_sound.play();
             }
+            else(
+                this.walking_sound.pause()
+
+            )
         }, 50)
+    
     }
 
 
