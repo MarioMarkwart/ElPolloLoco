@@ -11,7 +11,6 @@ class Character extends MovableObject{
     world;
     walking_sound = new Audio('../assets/audio/walk.mp3');
 
-
     constructor(){
         super().loadImage('../assets/img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.CHARACTER_IMAGES_WALKING);
@@ -23,7 +22,6 @@ class Character extends MovableObject{
         setInterval(() => {
             if (this.world.keyboard.RIGHT  && this.x < this.world.level.level_end_x){
                 this.x += this.speed * 50;
-                console.log('x', this.x);
                 this.otherDirection = false;
             }
             if (this.world.keyboard.LEFT && this.x > -1300){
