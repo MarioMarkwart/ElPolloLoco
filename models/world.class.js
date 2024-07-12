@@ -8,6 +8,7 @@ class World{
 
 
     constructor(canvas, keyboard){
+        console.log(canvas.width, canvas.height);
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;

@@ -3,6 +3,7 @@ class MovableObject {
     width = 100;
     x = 120;
     y = 180;
+
     img;
     imageCache = {};
     currentImage = 0;
@@ -21,6 +22,13 @@ class MovableObject {
             this.imageCache[path] = img;
         })
     }
+
+    playAnimation(images){
+        let mod = this.currentImage % images.length;
+        let path = images[mod];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    };
 
     // moveRight(){
     //     this.x +=20;
