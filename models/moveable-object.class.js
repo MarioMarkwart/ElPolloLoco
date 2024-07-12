@@ -21,6 +21,7 @@ class MovableObject {
             img.src = path;
             this.imageCache[path] = img;
         })
+        this.randomizeFirstPictures();
     }
 
     playAnimation(images){
@@ -29,18 +30,6 @@ class MovableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     };
-
-    // moveRight(){
-    //     this.x +=20;
-    //     console.log('Moving right');
-    // }
-    
-    // moveLeft(){
-    //     this.x -=20;
-    //     console.log('Moving left');
-        
-    // };
-
     moveLeftInterval(){
         let pixelMovement = Math.random() * (.5 - this.speed) + this.speed;
         setInterval(() => {
@@ -50,5 +39,9 @@ class MovableObject {
 
     getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    randomizeFirstPictures() {
+        this.currentImage = this.getRandomInt(0,  Object.keys(this.imageCache).length);
     }
 }
