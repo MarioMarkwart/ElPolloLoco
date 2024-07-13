@@ -33,7 +33,6 @@ class Character extends MovableObject{
         this.loadImages(this.CHARACTER_IMAGES_WALKING);
         this.loadImages(this.CHARACTER_IMAGES_JUMPING);
         this.animateCharacter();
-        console.log(this.currentImage);
         this.applyGravity();
     }
 
@@ -41,17 +40,18 @@ class Character extends MovableObject{
     animateCharacter(){
         setInterval(() => {
             if (this.world.keyboard.RIGHT  && this.x < this.world.level.level_end_x){
-                this.x += this.speed * 50;
-                this.otherDirection = false;
+                this.moveRight();
+                this.walking_sound.play();
             }
             if (this.world.keyboard.LEFT && this.x > -1300){
-                this.x -= this.speed * 50;
-                this.otherDirection = true;
+                this.moveLeft();
+                this.walking_sound.play();
             }
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()){
-                this.speedY = 12;
+                this.jump(12);
             }
+
             this.world.camera_x = -this.x + 100;
         },1000/60);
 
@@ -62,16 +62,11 @@ class Character extends MovableObject{
             }else{
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
                     this.playAnimation(this.CHARACTER_IMAGES_WALKING);
-                    this.walking_sound.play();
                 }
                 else(
                     this.walking_sound.pause()
                 )
             }
         }, 50)
-    }
-
-    jump(){
-
     }
 }

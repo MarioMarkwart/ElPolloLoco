@@ -41,6 +41,7 @@ class MovableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     };
+
     moveLeftInterval(){
         let pixelMovement = Math.random() * (.5 - this.speed) + this.speed;
         setInterval(() => {
@@ -56,5 +57,19 @@ class MovableObject {
         this.currentImage = this.getRandomInt(0,  Object.keys(this.imageCache).length);
     }
 
+    moveLeft(){
+        this.x -= this.speed * 50;
+        this.otherDirection = true;
+    }
+    
+    moveRight(){
+        this.x += this.speed * 50;
+        this.otherDirection = false;
+    }
+
+    jump(height){
+        console.log('jumping');
+        this.speedY = height;
+    }
     
 }
