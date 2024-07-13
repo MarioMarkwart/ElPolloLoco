@@ -53,8 +53,17 @@ class World{
         if (mo.otherDirection){
             this.flipImageBack(mo);
         }
+        this.drawRectangles(mo);
+
     }
 
+    drawRectangles(mo){
+        this.ctx.beginPath();
+        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = 'blue';
+        this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
+        this.ctx.stroke();
+    }
 
     flipImage(mo){
         this.ctx.save();
