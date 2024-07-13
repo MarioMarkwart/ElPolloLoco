@@ -1,15 +1,27 @@
 class MovableObject {
     height = 250;
     width = 100;
-    x = 120;
-    y = 180;
 
     img;
     imageCache = {};
     currentImage = 0;
     speed = .15;
     otherDirection = false;
+    speedY = 0;
+    acceleration = .5;
 
+    applyGravity(){
+        setInterval(() => {
+            if(this.isAboveGround()){
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000/60);
+    }
+
+    isAboveGround(){
+        return this.y < 180;
+    }
     loadImage(path){
         this.img = new Image();
         this.img.src = path;
@@ -44,4 +56,6 @@ class MovableObject {
     randomizeFirstPictures() {
         this.currentImage = this.getRandomInt(0,  Object.keys(this.imageCache).length);
     }
+
+    
 }
