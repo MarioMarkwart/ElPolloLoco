@@ -9,6 +9,7 @@ class MovableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = .5;
+    energy = 100;
 
 
     draw(ctx){
