@@ -12,7 +12,7 @@ class Chicken extends MovableObject{
         super().loadImage('../assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png');
         this.height = 70;
         this.width = 50;
-        this.x = this.getRandomInt(200, 500);
+        this.x = this.getRandomInt(200, 2200);
         this.y = this.getRandomInt(350, 360)
         this.loadImages(this.CHICKEN_IMAGES_WALKING);
         this.randomizeFirstPictures();
@@ -25,5 +25,6 @@ class Chicken extends MovableObject{
         setInterval(() => {
             this.playAnimation(this.CHICKEN_IMAGES_WALKING);
         }, 200);
+        console.log(this.isColliding(this));
     }
 }
