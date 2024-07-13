@@ -12,12 +12,26 @@ class Character extends MovableObject{
         '../assets/img/2_character_pepe/2_walk/W-25.png',
         '../assets/img/2_character_pepe/2_walk/W-26.png'
     ];
+
+    CHARACTER_IMAGES_JUMPING = [
+        '../assets/img/2_character_pepe/3_jump/J-31.png',
+        '../assets/img/2_character_pepe/3_jump/J-32.png',
+        '../assets/img/2_character_pepe/3_jump/J-33.png',
+        '../assets/img/2_character_pepe/3_jump/J-34.png',
+        '../assets/img/2_character_pepe/3_jump/J-35.png',
+        '../assets/img/2_character_pepe/3_jump/J-36.png',
+        '../assets/img/2_character_pepe/3_jump/J-37.png',
+        '../assets/img/2_character_pepe/3_jump/J-38.png',
+        '../assets/img/2_character_pepe/3_jump/J-39.png'
+    ]
+
     world;
     walking_sound = new Audio('../assets/audio/walk.mp3');
 
     constructor(){
         super().loadImage('../assets/img/2_character_pepe/2_walk/W-21.png');
-        super.loadImages(this.CHARACTER_IMAGES_WALKING);
+        this.loadImages(this.CHARACTER_IMAGES_WALKING);
+        this.loadImages(this.CHARACTER_IMAGES_JUMPING);
         this.animateCharacter();
         console.log(this.currentImage);
         this.applyGravity();
@@ -39,19 +53,20 @@ class Character extends MovableObject{
         
         // walking animation
         setInterval(() => {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
-                this.playAnimation(this.CHARACTER_IMAGES_WALKING);
-                this.walking_sound.play();
+            if (this.isAboveGround()){
+                this.playAnimation(this.CHARACTER_IMAGES_JUMPING);
+            }else{
+
+                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
+                    this.playAnimation(this.CHARACTER_IMAGES_WALKING);
+                    this.walking_sound.play();
+                }
+                else(
+                    this.walking_sound.pause()
+                )
             }
-            else(
-                this.walking_sound.pause()
-
-            )
         }, 50)
-    
     }
-
-
 
     jump(){
 

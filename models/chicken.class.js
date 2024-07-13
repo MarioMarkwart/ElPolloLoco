@@ -15,6 +15,8 @@ class Chicken extends MovableObject{
         this.x = this.getRandomInt(200, 500);
         this.y = this.getRandomInt(350, 360)
         this.loadImages(this.CHICKEN_IMAGES_WALKING);
+        this.randomizeFirstPictures();
+
         this.animateChicken();
     }
 

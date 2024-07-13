@@ -33,7 +33,6 @@ class MovableObject {
             img.src = path;
             this.imageCache[path] = img;
         })
-        this.randomizeFirstPictures();
     }
 
     playAnimation(images){
