@@ -15,3 +15,7 @@ body{
 canvas{
     background-color: black;
 }
+
+img{
+    border: 5px solid red;
+}
