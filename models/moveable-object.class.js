@@ -10,6 +10,7 @@ class MovableObject {
     speedY = 0;
     acceleration = .5;
     energy = 100;
+    lastHit = 0;
 
 
     draw(ctx){
@@ -20,11 +21,9 @@ class MovableObject {
         if (this instanceof Chicken || this instanceof Character){
             ctx.beginPath();
             ctx.lineWidth = 3;
-            
             ctx.strokeStyle = 'blue';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
-            
         }
     }
     applyGravity(){
@@ -93,5 +92,21 @@ class MovableObject {
             this.y + this.height > mo.y &&
             this.x < mo.x &&
             this.y < mo.y + mo.height
+    }
+
+    hit(){
+        if (this.energy > 0) {
+            this.lastHit = new Date().getTime(); 
+            this.energy -= 5;
+        }
+        console.log("energy: " + this.energy);
+    }
+
+    isHurt(){
+        let timePassed = new Date().getTime() - this.lastHit;
+        return timePassed < 500;
+    }
+    isDead(){
+        return this.energy == 0;
     }
 }
