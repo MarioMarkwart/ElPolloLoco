@@ -1,5 +1,6 @@
 class World{
     character = new Character;
+    statusBar = new StatusBar;
     level = level1;
     canvas;
     ctx;
@@ -28,7 +29,7 @@ class World{
                     this.character.hit();
                 };
             })
-        },100)
+        },200)
     }
 
     draw(){
@@ -37,7 +38,8 @@ class World{
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
-        this.addToMap(this.character)
+        this.addToMap(this.statusBar);
+        this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
 
         requestAnimationFrame(() => this.draw());

@@ -1,10 +1,4 @@
-class MovableObject {
-    height = 250;
-    width = 100;
-
-    img;
-    imageCache = {};
-    currentImage = 0;
+class MovableObject extends DrawableObject{
     speed = .15;
     otherDirection = false;
     speedY = 0;
@@ -13,19 +7,6 @@ class MovableObject {
     lastHit = 0;
 
 
-    draw(ctx){
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
-    drawFrame(ctx){
-        if (this instanceof Chicken || this instanceof Character){
-            ctx.beginPath();
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
     applyGravity(){
         setInterval(() => {
             if(this.isAboveGround() || this.speedY > 0){
@@ -35,21 +16,11 @@ class MovableObject {
         }, 1000/60);
     }
 
+
     isAboveGround(){
         return this.y < 180;
     }
-    loadImage(path){
-        this.img = new Image();
-        this.img.src = path;
-    }
 
-    loadImages(arr){
-        arr.forEach(path => {
-            const img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        })
-    }
 
     playAnimation(images){
         let mod = this.currentImage % images.length;
@@ -58,6 +29,7 @@ class MovableObject {
         this.currentImage++;
     };
 
+
     moveLeftInterval(){
         let pixelMovement = Math.random() * (.5 - this.speed) + this.speed;
         setInterval(() => {
@@ -65,27 +37,33 @@ class MovableObject {
         }, 1000/60); 
     }
 
+
     getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min) + min);
     }
 
+
     randomizeFirstPictures() {
         this.currentImage = this.getRandomInt(0,  Object.keys(this.imageCache).length);
     }
+
 
     moveLeft(){
         this.x -= this.speed * 50;
         this.otherDirection = true;
     }
 
+
     moveRight(){
         this.x += this.speed * 50;
         this.otherDirection = false;
     }
 
+
     jump(height){
         this.speedY = height;
     }
+
 
     isColliding(mo){
         return this.x + this.width > mo.x &&
@@ -93,6 +71,7 @@ class MovableObject {
             this.x < mo.x &&
             this.y < mo.y + mo.height
     }
+
 
     hit(){
         if (this.energy > 0) {
@@ -102,10 +81,13 @@ class MovableObject {
         console.log("energy: " + this.energy);
     }
 
+
     isHurt(){
         let timePassed = new Date().getTime() - this.lastHit;
         return timePassed < 500;
     }
+
+
     isDead(){
         return this.energy == 0;
     }

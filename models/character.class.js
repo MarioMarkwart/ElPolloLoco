@@ -65,14 +65,13 @@ class Character extends MovableObject{
                 this.moveLeft();
                 this.walking_sound.play();
             }
-
             if (this.world.keyboard.SPACE && !this.isAboveGround()){
                 this.jump(12);
             }
-            
+
             this.world.camera_x = -this.x + 100;
         },1000/60);
-        
+
         // walking and jumping animation
         setInterval(() => {
             if (this.isDead()){
