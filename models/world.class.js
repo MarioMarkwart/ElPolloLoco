@@ -1,6 +1,8 @@
 class World{
     character = new Character;
-    statusBar = new StatusBar;
+    statusBarHealth = new StatusBar(40, 0, 'IMAGES_HEALTH');
+    statusBarCoins = new StatusBar(40, 40);
+    statusBarBottles = new StatusBar(40, 80);
     level = level1;
     canvas;
     ctx;
@@ -27,6 +29,7 @@ class World{
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)){
                     this.character.hit();
+                    this.statusBarHealth.setPercentage(this.character.energy)
                 };
             })
         },200)
@@ -38,7 +41,13 @@ class World{
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
-        this.addToMap(this.statusBar);
+        
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBarHealth);
+        this.addToMap(this.statusBarCoins);
+        this.addToMap(this.statusBarBottles);
+        this.ctx.translate(this.camera_x, 0);
+        
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
 

@@ -4,10 +4,7 @@ class DrawableObject {
     img;
     imageCache = {};
     currentImage = 0;
-    constructor() {
 
-
-    }
 
     loadImage(path){
         this.img = new Image();
