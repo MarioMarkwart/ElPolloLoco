@@ -31,8 +31,8 @@ class MovableObject extends DrawableObject{
     };
 
 
-    moveLeftInterval(){
-        let pixelMovement = Math.random() * (.5 - this.speed) + this.speed;
+    moveLeftInterval() {
+        let pixelMovement = Math.random() * (1 - this.speed) + this.speed;
         setInterval(() => {
             this.x -= pixelMovement;
         }, 1000/60); 
@@ -91,5 +91,12 @@ class MovableObject extends DrawableObject{
 
     isDead(){
         return this.energy == 0;
+    }
+
+    animate(imageArr) {
+        this.moveLeftInterval();
+        setInterval(() => {
+            this.playAnimation(imageArr);
+        }, 200);
     }
 }

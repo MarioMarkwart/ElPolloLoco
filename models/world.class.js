@@ -1,8 +1,8 @@
 class World{
-    character = new Character;
-    statusBarHealth = new StatusBar(40, 0, 'IMAGES_HEALTH');
-    statusBarCoins = new StatusBar(40, 40);
-    statusBarBottles = new StatusBar(40, 80);
+    character = new Character();
+    statusBarHealth = new StatusBarHealth(40, 0);
+    statusBarCoins = new StatusBarCoins(40, 40);
+    statusBarBottles = new StatusBarBottles(40, 80);
     throwableObjects = [];
     level = level1;
     canvas;
@@ -12,7 +12,6 @@ class World{
 
 
     constructor(canvas, keyboard){
-        console.log(canvas.width, canvas.height);
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;

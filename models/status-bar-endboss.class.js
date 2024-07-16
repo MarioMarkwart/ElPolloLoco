@@ -1,4 +1,4 @@
-class StatusBar extends DrawableObject {
+class StatusBarEndboss extends DrawableObject {
 
     IMAGES = [
         '../assets/img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
@@ -40,5 +40,4 @@ class StatusBar extends DrawableObject {
         }else if(this.percentage > 20){ return 1;
         }else { return 0; }
     }
-
 }

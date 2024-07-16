@@ -5,9 +5,6 @@ class Chicken extends MovableObject{
         '../assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
         '../assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ]
-
-    walkingSpeed = 1000;
-
     constructor(){
         super().loadImage('../assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png');
         this.height = 70;
@@ -17,14 +14,6 @@ class Chicken extends MovableObject{
         this.loadImages(this.CHICKEN_IMAGES_WALKING);
         this.randomizeFirstPictures();
 
-        this.animateChicken();
-    }
-
-    animateChicken(){
-        this.moveLeftInterval();
-        setInterval(() => {
-            this.playAnimation(this.CHICKEN_IMAGES_WALKING);
-        }, 200);
-        console.log(this.isColliding(this));
+        this.animate(this.CHICKEN_IMAGES_WALKING);
     }
 }

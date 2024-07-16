@@ -11,6 +11,7 @@ class DrawableObject {
         this.img.src = path;
     }
 
+
     loadImages(arr){
         arr.forEach(path => {
             const img = new Image();
@@ -18,13 +19,15 @@ class DrawableObject {
             this.imageCache[path] = img;
         })
     }
+
+
     draw(ctx){
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
 
     drawFrame(ctx){
-        if (this instanceof Chicken || this instanceof Character){
+        if (this instanceof Chicken || this instanceof ChickenSmall || this instanceof Character){
             ctx.beginPath();
             ctx.lineWidth = 3;
             ctx.strokeStyle = 'blue';
