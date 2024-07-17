@@ -7,6 +7,12 @@ class MovableObject extends DrawableObject{
     lastHit = 0;
     soundCache = {};
     
+    loadSound(path){
+        const sound = new Audio();
+        sound.src = path;
+        this.soundCache[path] = sound;
+    }
+    
     loadSounds(arr){
         arr.forEach(path => {
             const sound = new Audio();
@@ -108,12 +114,11 @@ class MovableObject extends DrawableObject{
         }, 200);
     }
 
-    playSound(sound){
-        sound.play();
+    playSound(path){
+        this.soundCache[path].play();
     }
 
-    stopSound(sound, volume = 1){
-        // sound.volume(volume);
-        sound.pause();
+    stopSound(path){
+        this.soundCache[path].pause();
     }
 }

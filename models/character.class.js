@@ -42,7 +42,7 @@ class Character extends MovableObject{
     ]
 
     world;
-    walking_sound = new Audio('../assets/audio/character_walk.mp3');
+    walking_sound = '../assets/audio/character_walk.mp3';
 
     jumping_sounds = [
         '../assets/audio/character_jump_0.mp3',
@@ -68,6 +68,7 @@ class Character extends MovableObject{
         this.loadImages(this.CHARACTER_IMAGES_JUMPING);
         this.loadImages(this.CHARACTER_IMAGES_HURT);
         this.loadImages(this.CHARACTER_IMAGES_DEAD)
+        this.loadSound(this.walking_sound);
         this.loadSounds(this.jumping_sounds);
         this.setJumpingSoundVolume(.3)
         this.animateCharacter();
@@ -86,8 +87,14 @@ class Character extends MovableObject{
         console.log("SOUND: ", sound);
         sound.play();
         // this.getRandomInt(0, Array.from(this.jumping_sounds).length)
-
     }
+
+    stopAllJumpingSounds(){
+        this.jumping_sounds.forEach(sound =>{
+            this.soundCache[sound].pause();
+        })
+    }
+
     animateCharacter(){
         setInterval(() => {
             if (this.world.keyboard.RIGHT  && this.x < this.world.level.level_end_x){
@@ -110,6 +117,8 @@ class Character extends MovableObject{
         setInterval(() => {
             if (this.isDead()){
                 this.playAnimation(this.CHARACTER_IMAGES_DEAD);
+                this.stopSound(this.walking_sound)
+                this.stopAllJumpingSounds();
             }
             else if(this.isHurt()){
                 this.playAnimation(this.CHARACTER_IMAGES_HURT);
