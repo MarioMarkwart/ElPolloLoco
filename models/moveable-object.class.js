@@ -43,6 +43,10 @@ class MovableObject extends DrawableObject{
         return Math.floor(Math.random() * (max - min) + min);
     }
 
+    getRandomFloat(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
 
     randomizeFirstPictures() {
         this.currentImage = this.getRandomInt(0,  Object.keys(this.imageCache).length);
@@ -127,9 +131,11 @@ class MovableObject extends DrawableObject{
     }
 
     playSound(path, delay = 0){
-        setTimeout(() => {
             this.soundCache[path].play();
-        }, delay)
+            
+        // setTimeout(() => {
+        //     this.soundCache[path].play();
+        // }, delay) //FIXME: set to 'delay' when inserted Title-Screen - will work after user interacted with the page
     }
 
     stopSound(path){

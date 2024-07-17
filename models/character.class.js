@@ -75,12 +75,9 @@ class Character extends MovableObject{
     }
 
 
-    
     playRandomJumpingSound(){
         let sound = this.soundCache[this.jumping_sounds[this.getRandomInt(0, this.jumping_sounds.length)]];
-        console.log("SOUND: ", sound);
         sound.play();
-        // this.getRandomInt(0, Array.from(this.jumping_sounds).length)
     }
 
     stopAllJumpingSounds(){
