@@ -5,7 +5,15 @@ class MovableObject extends DrawableObject{
     acceleration = .5;
     energy = 100;
     lastHit = 0;
-
+    soundCache = {};
+    
+    loadSounds(arr){
+        arr.forEach(path => {
+            const sound = new Audio();
+            sound.src = path;
+            this.soundCache[path] = sound;
+        })
+    }
 
     applyGravity(){
         setInterval(() => {
@@ -98,5 +106,14 @@ class MovableObject extends DrawableObject{
         setInterval(() => {
             this.playAnimation(imageArr);
         }, 200);
+    }
+
+    playSound(sound){
+        sound.play();
+    }
+
+    stopSound(sound, volume = 1){
+        // sound.volume(volume);
+        sound.pause();
     }
 }
