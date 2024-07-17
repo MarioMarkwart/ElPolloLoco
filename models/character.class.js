@@ -69,18 +69,12 @@ class Character extends MovableObject{
         this.loadImages(this.CHARACTER_IMAGES_HURT);
         this.loadImages(this.CHARACTER_IMAGES_DEAD)
         this.loadSound(this.walking_sound);
-        this.loadSounds(this.jumping_sounds);
-        this.setJumpingSoundVolume(.3)
+        this.loadSounds(this.jumping_sounds, .3);
         this.animateCharacter();
         this.applyGravity();
     }
 
-    setJumpingSoundVolume(vol){
-        this.jumping_sounds.forEach(sound =>{
-            this.soundCache[sound].volume = vol;
-        }
-     )
-    }
+
     
     playRandomJumpingSound(){
         let sound = this.soundCache[this.jumping_sounds[this.getRandomInt(0, this.jumping_sounds.length)]];

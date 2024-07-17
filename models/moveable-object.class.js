@@ -6,20 +6,6 @@ class MovableObject extends DrawableObject{
     energy = 100;
     lastHit = 0;
     soundCache = {};
-    
-    loadSound(path){
-        const sound = new Audio();
-        sound.src = path;
-        this.soundCache[path] = sound;
-    }
-    
-    loadSounds(arr){
-        arr.forEach(path => {
-            const sound = new Audio();
-            sound.src = path;
-            this.soundCache[path] = sound;
-        })
-    }
 
     applyGravity(){
         setInterval(() => {
@@ -107,6 +93,10 @@ class MovableObject extends DrawableObject{
         return this.energy == 0;
     }
 
+    isOutOfBounds(){
+
+    }
+
     animate(imageArr) {
         this.moveLeftInterval();
         setInterval(() => {
@@ -114,11 +104,36 @@ class MovableObject extends DrawableObject{
         }, 200);
     }
 
-    playSound(path){
-        this.soundCache[path].play();
+    loadSound(path, vol = 1){
+        const sound = new Audio();
+        sound.src = path;
+        this.soundCache[path] = sound;
+
+        this.setSoundVolume(path, vol)
+    }
+
+    loadSounds(arr, vol = 1){
+        arr.forEach(path => {
+            const sound = new Audio();
+            sound.src = path;
+            this.soundCache[path] = sound;
+            this.setSoundVolume(path, vol);
+        })
+
+    }
+
+    setSoundVolume(path, vol){
+            this.soundCache[path].volume = vol;
+    }
+
+    playSound(path, delay = 0){
+        setTimeout(() => {
+            this.soundCache[path].play();
+        }, delay)
     }
 
     stopSound(path){
         this.soundCache[path].pause();
     }
+
 }
