@@ -39,20 +39,6 @@ class MovableObject extends DrawableObject{
     }
 
 
-    getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min) + min);
-    }
-
-    getRandomFloat(min, max) {
-        return Math.random() * (max - min) + min;
-    }
-
-
-    randomizeFirstPictures() {
-        this.currentImage = this.getRandomInt(0,  Object.keys(this.imageCache).length);
-    }
-
-
     moveLeft(){
         this.x -= this.speed * 50;
         this.otherDirection = true;

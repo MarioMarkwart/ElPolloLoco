@@ -5,6 +5,19 @@ class DrawableObject {
     imageCache = {};
     currentImage = 0;
 
+    getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    getRandomFloat(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+
+    randomizeFirstPictures() {
+        this.currentImage = this.getRandomInt(0,  Object.keys(this.imageCache).length);
+    }
+
 
     loadImage(path){
         this.img = new Image();
