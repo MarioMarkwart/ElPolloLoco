@@ -10,7 +10,7 @@ class Bottle extends DrawableObject{
         // this.loadImages(this.BOTTLE_IMAGES)
         this.x = this.getRandomInt(200, 2000);
         this.y = this.getRandomInt(350, 360);
-        this.height = 50;
-        this.width = 30;   
+        this.height = 80;
+        this.width = 80;   
     }
 }
