@@ -38,6 +38,16 @@ class World{
                 this.statusBarHealth.setPercentage(this.character.energy)
             };
         })
+        this.level.coins.forEach((coin) => {
+            if (this.character.isColliding(coin)){
+                this.collectCoin(coin);
+            }
+        })
+    }
+
+    collectCoin(coin){
+        this.level.coins.splice(this.level.coins.indexOf(coin), 1);
+        console.log('got coin!', this.level.coins)
     }
 
     checkThrowObjects(){
@@ -71,7 +81,7 @@ class World{
 
     addObjectsToMap(objects){
         objects.forEach(o => {
-            console.log(o);
+            // console.log(o);
             this.addToMap(o)
         });
     }

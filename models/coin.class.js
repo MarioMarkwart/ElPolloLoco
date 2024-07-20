@@ -8,4 +8,6 @@ class Coin extends DrawableObject {
         this.width = 70;
         this.height = 70;
     }
+
+
 }
