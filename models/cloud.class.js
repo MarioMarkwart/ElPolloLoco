@@ -13,7 +13,7 @@ class Cloud extends MovableObject {
     count = 0;
 
     constructor() {
-        super().loadImage(this.IMAGES_CLOUD[(Math.floor(Math.random() * 3))]);
+        super().loadImage(this.IMAGES_CLOUD[(this.getRandomInt(0,3))]);
         this.x = this.getRandomInt(0, 200)
         this.count++;
         this.setBackgroundClouds();

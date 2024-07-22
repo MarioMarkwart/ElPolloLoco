@@ -6,11 +6,11 @@ class Bottle extends DrawableObject{
     ]
     constructor(){
         super();
-        this.loadImage('../assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png')
-        // this.loadImages(this.BOTTLE_IMAGES)
+        this.loadImage(this.BOTTLE_IMAGES[this.getRandomInt(0, this.BOTTLE_IMAGES.length)])
+        this.loadImages(this.BOTTLE_IMAGES)
         this.x = this.getRandomInt(200, 2000);
         this.y = this.getRandomInt(350, 360);
         this.height = 80;
-        this.width = 80;   
+        this.width = 80;
     }
 }

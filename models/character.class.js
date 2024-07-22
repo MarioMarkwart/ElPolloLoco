@@ -2,6 +2,7 @@ class Character extends MovableObject{
 
     x = 120;
     y = 180;
+    immunity = true;
 
 
     CHARACTER_IMAGES_WALKING = [

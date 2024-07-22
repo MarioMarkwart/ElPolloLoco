@@ -15,9 +15,8 @@ class ChickenSmall extends MovableObject{
         this.x = this.getRandomInt(200, 2200);
         this.y = this.getRandomInt(370, 380 )
         this.loadImages(this.CHICKEN_IMAGES_WALKING);
-        this.loadSound(this.chicken_small_chirp, .1);
+        this.loadSound(this.chicken_small_chirp, 0.02);
         this.randomizeFirstPictures();
-        
         this.playSound(this.chicken_small_chirp, this.getRandomFloat(0.5, 1.5));
         this.animate(this.CHICKEN_IMAGES_WALKING);
     }

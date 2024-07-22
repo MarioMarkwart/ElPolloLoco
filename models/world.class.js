@@ -66,13 +66,12 @@ class World{
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles)
-        
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarBottles);
         this.ctx.translate(this.camera_x, 0);
-        
+
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
 
@@ -81,7 +80,6 @@ class World{
 
     addObjectsToMap(objects){
         objects.forEach(o => {
-            // console.log(o);
             this.addToMap(o)
         });
     }

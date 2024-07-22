@@ -26,6 +26,7 @@ class DrawableObject {
 
 
     loadImages(arr){
+        console.log(arr);
         arr.forEach(path => {
             const img = new Image();
             img.src = path;
