@@ -22,15 +22,6 @@ class MovableObject extends DrawableObject{
         return this.y < 180;
     }
 
-
-    playAnimation(images){
-        let mod = this.currentImage % images.length;
-        let path = images[mod];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-    };
-
-
     moveLeftInterval() {
         let pixelMovement = Math.random() * (1 - this.speed) + this.speed;
         setInterval(() => {
@@ -54,7 +45,6 @@ class MovableObject extends DrawableObject{
     jump(height){
         this.speedY = height;
     }
-
 
     isColliding(mo){
         return this.x + this.width > mo.x &&
@@ -87,12 +77,7 @@ class MovableObject extends DrawableObject{
 
     }
 
-    animate(imageArr) {
-        this.moveLeftInterval();
-        setInterval(() => {
-            this.playAnimation(imageArr);
-        }, 200);
-    }
+
 
     loadSound(path, vol = 1){
         const sound = new Audio();

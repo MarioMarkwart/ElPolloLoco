@@ -17,7 +17,19 @@ class DrawableObject {
     randomizeFirstPictures() {
         this.currentImage = this.getRandomInt(0,  Object.keys(this.imageCache).length);
     }
+    
+    playAnimation(images){
+        let mod = this.currentImage % images.length;
+        let path = images[mod];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    };
 
+    animate(imageArr, duration = 200) {
+        setInterval(() => {
+            this.playAnimation(imageArr);
+        }, duration);
+    }
 
     loadImage(path){
         this.img = new Image();
