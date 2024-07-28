@@ -5,6 +5,8 @@ class Coin extends MovableObject {
         '../assets/img/8_coin/coin_2.png'
     ];
 
+    COIN_SOUND = '../assets/audio/coin.mp3';
+
     constructor() {
         super();
         this.loadImage('../assets/img/8_coin/coin_1.png');
@@ -15,6 +17,7 @@ class Coin extends MovableObject {
         this.height = 70;
         this.randomizeFirstPictures();
         this.animate(this.COINS_IMAGES, this.getRandomInt(200,300));
+        this.loadSound(this.COIN_SOUND);
     };
 
 
@@ -22,5 +25,9 @@ class Coin extends MovableObject {
         setInterval(() => {
             this.playAnimation(imageArr);
         }, duration);
+    }
+
+    playCollectSound() {
+        this.playSound(this.COIN_SOUND);
     }
 }

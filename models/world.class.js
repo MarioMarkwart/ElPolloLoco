@@ -48,6 +48,7 @@ class World{
     collectCoin(coin){
         this.level.coins.splice(this.level.coins.indexOf(coin), 1);
         this.statusBarCoins.setAmount(this.statusBarCoins.amount + 1)
+        coin.playCollectSound();
     }
 
     checkThrowObjects(){
