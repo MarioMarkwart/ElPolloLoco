@@ -40,15 +40,9 @@ class World{
         })
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)){
-                this.collectCoin(coin);
+                coin.collectCoin(coin);
             }
         })
-    }
-
-    collectCoin(coin){
-        this.level.coins.splice(this.level.coins.indexOf(coin), 1);
-        this.statusBarCoins.setAmount(this.statusBarCoins.amount + 1)
-        coin.playCollectSound();
     }
 
     checkThrowObjects(){

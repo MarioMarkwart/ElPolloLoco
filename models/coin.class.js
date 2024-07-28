@@ -27,6 +27,13 @@ class Coin extends MovableObject {
         }, duration);
     }
 
+    collectCoin(coin){
+        world.level.coins.splice(world.level.coins.indexOf(coin), 1);
+        world.statusBarCoins.setAmount(world.statusBarCoins.amount + 1)
+        this.playCollectSound();
+    }
+
+
     playCollectSound() {
         this.playSound(this.COIN_SOUND);
     }
