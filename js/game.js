@@ -29,10 +29,3 @@ window.addEventListener('keyup', (event) => {
     if (event.key === 'd') keyboard.D = false;
     if (event.key === ' ') keyboard.SPACE = false;
 })
-
-let bg = 0;
-function switchBackground(){
-    document.body.style.backgroundImage = "url('assets/img/background (" + bg + ").jpg')";
-    bg++;
-    if (bg > 4) bg = 0;
-}
