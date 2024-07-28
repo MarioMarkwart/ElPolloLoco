@@ -47,7 +47,7 @@ class World{
 
     collectCoin(coin){
         this.level.coins.splice(this.level.coins.indexOf(coin), 1);
-        console.log('got coin!', this.level.coins)
+        this.statusBarCoins.setAmount(this.statusBarCoins.amount + 1)
     }
 
     checkThrowObjects(){
