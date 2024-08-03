@@ -29,6 +29,7 @@ class Coin extends MovableObject {
 
     collectCoin(coin){
         world.level.coins.splice(world.level.coins.indexOf(coin), 1);
+        world.statusBarCoins.increaseAmount();
         this.playSound(this.COIN_SOUND);
     }
 }

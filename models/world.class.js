@@ -46,8 +46,14 @@ class World{
         this.level.bottles.forEach((bottle) => {
             if (this.character.isColliding(bottle)){
                 bottle.collectBottle(bottle);
-            }
+        }
         })
+         //TODO: BOTTLE HIT ENDBOSS TODO:
+        // if (this.level.endboss.isColliding(this.character)){
+        //     this.character.hit();
+        //     this.statusBarHealth.setPercentage(this.character.energy)
+        // }
+        
     }
 
     checkThrowObjects(){
@@ -62,6 +68,7 @@ class World{
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.coins);

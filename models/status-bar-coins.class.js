@@ -20,7 +20,12 @@ class StatusBarCoins extends DrawableObject {
         this.y = y;
         this.width = 180;
         this.height = 50;
-        this.setAmount(0);
+        this.setAmount(this.amount);
+    }
+
+    increaseAmount(){
+        this.amount++;
+        this.setAmount(this.amount);
     }
 
 
@@ -28,7 +33,6 @@ class StatusBarCoins extends DrawableObject {
         this.amount = amount;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path]
-
     }
 
 

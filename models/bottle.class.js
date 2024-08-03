@@ -5,7 +5,12 @@ class Bottle extends MovableObject {
         '../assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
     ];
 
-    BOTTLE_SOUND = '../assets/audio/bottle_collect.mp3';
+    BOTTLE_COLLECT_SOUND = '../assets/audio/bottle_collect.mp3';
+
+    BOTTLE_HIT_SOUNDS = [
+        '../assets/audio/bottle_hit.mp3',
+        '../assets/audio/bottle_hit_2.mp3'
+    ];
 
     constructor(){
         super();
@@ -15,12 +20,19 @@ class Bottle extends MovableObject {
         this.y = this.getRandomInt(350, 360);
         this.height = 80;
         this.width = 80;
-        this.loadSound(this.BOTTLE_SOUND,.2);
+        this.loadSound(this.BOTTLE_COLLECT_SOUND,.2);
+        this.loadSounds(this.BOTTLE_HIT_SOUNDS, .2);
     }
 
     collectBottle(bottle){
         world.level.bottles.splice(world.level.bottles.indexOf(bottle), 1);
-        this.playSound(this.BOTTLE_SOUND);
+        this.playSound(this.BOTTLE_COLLECT_SOUND);
+        world.statusBarBottles.increaseAmount();
+    }
+
+    endbossHit(bottle){
+        world.level.bottles.splice(world.level.bottles.indexOf(bottle), 1);
+        this.playSound(this.BOTTLE_COLLECT_SOUNDS[this.getRandomInt(0, this.BOTTLE_HIT_SOUNDS.length)]);
     }
 
 }
