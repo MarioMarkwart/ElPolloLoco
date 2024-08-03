@@ -43,6 +43,11 @@ class World{
                 coin.collectCoin(coin);
             }
         })
+        this.level.bottles.forEach((bottle) => {
+            if (this.character.isColliding(bottle)){
+                bottle.collectBottle(bottle);
+            }
+        })
     }
 
     checkThrowObjects(){
