@@ -58,6 +58,7 @@ class Endboss extends MovableObject {
         this.health -= 5;
         world.statusBarEndboss.setPercentage(this.health);
         console.log(this.health)
+
     }
 
 

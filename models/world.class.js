@@ -53,7 +53,10 @@ class World{
         this.throwableObjects.forEach((bottle) => {
             if(this.endboss.isColliding(bottle)){
                 this.endboss.hit();
-                this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1);
+                this.throwableObjects[this.throwableObjects.indexOf(bottle)].bottleSplash()
+                
+               setTimeout(() => {
+                this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1)}, 100)
             }
         });
     }

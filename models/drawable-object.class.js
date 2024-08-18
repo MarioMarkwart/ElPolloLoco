@@ -25,10 +25,17 @@ class DrawableObject {
         this.currentImage++;
     };
 
-    animate(imageArr, duration = 200) {
-        setInterval(() => {
-            this.playAnimation(imageArr);
-        }, duration);
+    animate(imageArr, duration = 200, count = 0) {
+        if (count === 0){
+            let intervalId = setInterval(() => {
+                this.playAnimation(imageArr);
+                }, duration);
+            return intervalId;
+        }else{
+            for (let i=0; i<count; i++){
+                this.playAnimation(imageArr);
+            }
+        }
     }
 
     loadImage(path){
