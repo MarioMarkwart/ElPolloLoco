@@ -4,7 +4,7 @@ class World{
     statusBarHealth = new StatusBarHealth(40, 0);
     statusBarCoins = new StatusBarCoins(40, 40);
     statusBarBottles = new StatusBarBottles(40, 80);
-    StatusBarEndboss = new StatusBarEndboss(480, 0);
+    statusBarEndboss = new StatusBarEndboss(480, 0);
     throwableObjects = [];
     level = level1;
     canvas;
@@ -79,7 +79,7 @@ class World{
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarBottles);
-        this.addToMap(this.StatusBarEndboss);
+        this.addToMap(this.statusBarEndboss);
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.character);
