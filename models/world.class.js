@@ -1,5 +1,6 @@
 class World{
     character = new Character();
+    endboss = new Endboss();
     statusBarHealth = new StatusBarHealth(40, 0);
     statusBarCoins = new StatusBarCoins(40, 40);
     statusBarBottles = new StatusBarBottles(40, 80);
@@ -36,8 +37,8 @@ class World{
             if (this.character.isColliding(enemy)){
                 this.character.hit();
                 this.statusBarHealth.setPercentage(this.character.energy)
-            };
-        })
+            }
+        });
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)){
                 coin.collectCoin(coin);
@@ -47,13 +48,14 @@ class World{
             if (this.character.isColliding(bottle)){
                 bottle.collectBottle(bottle);
         }
-        })
-         //TODO: BOTTLE HIT ENDBOSS TODO:
-        // if (this.level.endboss.isColliding(this.character)){
-        //     this.character.hit();
-        //     this.statusBarHealth.setPercentage(this.character.energy)
-        // }
-        
+        });
+
+        this.throwableObjects.forEach((bottle) => {
+            if(this.endboss.isColliding(bottle)){
+                this.endboss.hit();
+                this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1);
+            }
+        });
     }
 
     checkThrowObjects(){
