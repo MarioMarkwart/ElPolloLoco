@@ -11,7 +11,6 @@ class World{
     keyboard;
     camera_x = -100;
 
-
     constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -124,6 +123,8 @@ class World{
     flipImageBack(mo){
         mo.x = mo.x * -1;
         this.ctx.restore();
+
+        
     }
 }
 

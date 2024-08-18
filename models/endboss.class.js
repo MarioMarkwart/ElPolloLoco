@@ -21,26 +21,38 @@ class Endboss extends MovableObject {
         '../assets/img/4_enemie_boss_chicken/4_hurt/G23.png',
     ]
 
+    SOUNDS_HIT = [
+        '../assets/audio/bottle_hit.mp3',
+        '../assets/audio/bottle_hit_2.mp3'
+    ]
+
 
     constructor() {
         super().loadImage('../assets/img/4_enemie_boss_chicken/1_walk/G1.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HIT);
+        this.loadSounds(this.SOUNDS_HIT);
         this.animate();
 
     }
 
     animate() {
-        setInterval(() => {
+        let invt = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
+        console.log(invt);
+        
     }
 
     hit(){
         console.log('hit');
-        setInterval(() => {
+        this.playSound(this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]);
+        let invt = setInterval(() => {
             this.playAnimation(this.IMAGES_HIT);
             console.log('hit animation');
         }, 200);
+        console.log('endboss hit interval: ', invt);
     }
+
+
 }

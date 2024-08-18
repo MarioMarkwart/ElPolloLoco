@@ -1,14 +1,24 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let intervalIds = [];
 
 
 function init(){
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    
+
     console.log("My world is: ",  world);
     console.log("My character is: ",  world.character);
+}
+
+function setStoppableInterval(fn, time){
+    let id = setInterval(fn, time);
+    this.intervalIds.push(id);
+}
+
+function stopGame(){
+    this.intervalIds.forEach(id => clearInterval(id));
 }
 
 window.addEventListener('keydown', (event) => {
