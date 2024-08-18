@@ -3,6 +3,7 @@ class Endboss extends MovableObject {
     height = 300
     x = 300;
     y = 150;
+    health = 100;
 
     IMAGES_WALKING = [
         '../assets/img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -51,7 +52,8 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_HIT);
             console.log('hit animation');
         }, 200);
-        console.log('endboss hit interval: ', invt);
+        this.health -=10;
+        console.log(this.health)
     }
 
 
