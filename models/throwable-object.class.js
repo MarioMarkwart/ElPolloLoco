@@ -43,11 +43,6 @@ class ThrowableObject extends MovableObject {
 
     bottleSplash(){
         clearInterval(this.throwingAnimationId);
-        let bottleSplashAnimation = this.animate(this.IMAGES_BOTTLE_SPLASH, 50, 1);
-        console.log('bottleSplashAnimation: ', bottleSplashAnimation );
-        
-        setTimeout(() => {
-            clearInterval(bottleSplashAnimation);
-        },500)
+        this.animate(this.IMAGES_BOTTLE_SPLASH, 50, 1);
     }
 }

@@ -33,30 +33,32 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HIT);
         this.loadSounds(this.SOUNDS_HIT);
-        this.animate();
+        this.animate(this.IMAGES_WALKING);
 
     }
 
-    animate() {
-        let invt = setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 200);
-        console.log(invt);
+    // animate() {
+    //     let invt = setInterval(() => {
+    //         this.playAnimation(this.IMAGES_WALKING);
+    //     }, 200);
+    //     console.log(invt);
         
-    }
+    // }
 
     hit(){
-        console.log('hit');
         this.playSound(this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]);
+        this.animate(this.IMAGES_HIT,50);
+
         let invt = setInterval(() => {
             this.playAnimation(this.IMAGES_HIT);
-            console.log('hit animation doesnt work!');
         }, 200);
+
         setTimeout(() => {
             clearInterval(invt);
+            this.animate(this.IMAGES_WALKING)
         }, 1000);
-        this.health -= 5;
-        world.statusBarEndboss.setPercentage(this.health);
+
+        world.statusBarEndboss.setPercentage(this.health -= 5);
         console.log(this.health)
 
     }

@@ -1,6 +1,6 @@
 class World{
     character = new Character();
-    endboss = new Endboss();
+    // endboss = new Endboss();
     statusBarHealth = new StatusBarHealth(40, 0);
     statusBarCoins = new StatusBarCoins(40, 40);
     statusBarBottles = new StatusBarBottles(40, 80);
@@ -29,7 +29,7 @@ class World{
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        },200)
+        },100)
     }
 
     checkCollisions(){
@@ -51,13 +51,12 @@ class World{
         });
 
         this.throwableObjects.forEach((bottle) => {
-            if(this.endboss.isColliding(bottle)){
-                this.endboss.hit();
+            if(this.level.endboss[0].isColliding(bottle)){
+                this.level.endboss[0].hit();
                 this.throwableObjects[this.throwableObjects.indexOf(bottle)].bottleSplash()
-                
-               setTimeout(() => {
-                this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1)}, 100)
-            }
+                setTimeout(() => {
+                    this.throwableObjects.splice(this.throwableObjects.indexOf(bottle), 1)}, 100)
+                }
         });
     }
 
