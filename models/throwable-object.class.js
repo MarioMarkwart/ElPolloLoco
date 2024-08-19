@@ -10,12 +10,12 @@ class ThrowableObject extends MovableObject {
     ];
 
     IMAGES_BOTTLE_SPLASH =[
-    '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
-    '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
-    '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
-    '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
-    '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-    '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
+        '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+        '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+        '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+        '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+        '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+        '../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ];
 
     constructor(x, y){
@@ -32,7 +32,6 @@ class ThrowableObject extends MovableObject {
 
     throw(){
         this.throwingAnimationId = this.animate(this.IMAGES_BOTTLE_ROTATION, 50);
-        
         this.speedY = 10;
         this.applyGravity();
         this.intervalId = setInterval(() => {
