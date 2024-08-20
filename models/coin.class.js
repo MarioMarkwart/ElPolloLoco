@@ -1,35 +1,33 @@
 class Coin extends MovableObject {
+	COINS_IMAGES = [
+		"../assets/img/8_coin/coin_1.png",
+		"../assets/img/8_coin/coin_2.png",
+	];
 
-    COINS_IMAGES = [
-        '../assets/img/8_coin/coin_1.png',
-        '../assets/img/8_coin/coin_2.png'
-    ];
+	COIN_SOUND = "../assets/audio/coin.mp3";
 
-    COIN_SOUND = '../assets/audio/coin.mp3';
+	constructor() {
+		super();
+		this.loadImage("../assets/img/8_coin/coin_1.png");
+		this.loadImages(this.COINS_IMAGES);
+		this.x = this.getRandomInt(200, 2200);
+		this.y = this.getRandomInt(200, 350);
+		this.width = 70;
+		this.height = 70;
+		this.randomizeFirstPictures();
+		this.animate(this.COINS_IMAGES, this.getRandomInt(200, 300));
+		this.loadSound(this.COIN_SOUND);
+	}
 
-    constructor() {
-        super();
-        this.loadImage('../assets/img/8_coin/coin_1.png');
-        this.loadImages(this.COINS_IMAGES);
-        this.x = this.getRandomInt(200, 2200);
-        this.y = this.getRandomInt(200, 350);
-        this.width = 70;
-        this.height = 70;
-        this.randomizeFirstPictures();
-        this.animate(this.COINS_IMAGES, this.getRandomInt(200,300));
-        this.loadSound(this.COIN_SOUND);
-    };
+	animate(imageArr, duration = 200) {
+		setInterval(() => {
+			this.playAnimation(imageArr);
+		}, duration);
+	}
 
-
-    animate(imageArr, duration = 200) {
-        setInterval(() => {
-            this.playAnimation(imageArr);
-        }, duration);
-    }
-
-    collectCoin(coin){
-        world.level.coins.splice(world.level.coins.indexOf(coin), 1);
-        world.statusBarCoins.increaseAmount();
-        this.playSound(this.COIN_SOUND);
-    }
+	collectCoin(coin) {
+		world.level.coins.splice(world.level.coins.indexOf(coin), 1);
+		world.statusBarCoins.increaseAmount();
+		this.playSound(this.COIN_SOUND);
+	}
 }
