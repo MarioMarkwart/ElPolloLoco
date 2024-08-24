@@ -26,6 +26,9 @@ class World {
 	}
 
 	run() {
+		
+	this.level.clouds[0].makeBackgroundCloudSmaller();
+		
 		setInterval(() => {
 			this.checkCollisions();
 			this.checkThrowObjects();

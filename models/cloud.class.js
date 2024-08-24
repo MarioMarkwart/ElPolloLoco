@@ -15,7 +15,6 @@ class Cloud extends MovableObject {
 		super().loadImage(this.IMAGES_CLOUD[this.getRandomInt(0, 3)]);
 		this.x = this.getRandomInt(0, 200);
 		this.count++;
-		this.setBackgroundClouds();
 		this.animateCloud();
 	}
 
@@ -23,7 +22,8 @@ class Cloud extends MovableObject {
 		this.moveLeftInterval();
 	}
 
-	setBackgroundClouds() {
-		console.log("Made cloud smaller");
+	makeBackgroundCloudSmaller() {
+		this.width = this.width * 0.7;
+		this.height = this.height * 0.7;
 	}
 }
