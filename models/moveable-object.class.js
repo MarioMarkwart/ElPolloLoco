@@ -56,7 +56,6 @@ class MovableObject extends DrawableObject {
 			this.lastHit = new Date().getTime();
 			this.energy -= 5;
 		}
-		// console.log("energy: " + this.energy);
 	}
 
 	isHurt() {
@@ -67,8 +66,6 @@ class MovableObject extends DrawableObject {
 	isDead() {
 		return this.energy == 0;
 	}
-
-	isOutOfBounds() {}
 
 	loadSound(path, vol = 1) {
 		const sound = new Audio();
@@ -101,5 +98,16 @@ class MovableObject extends DrawableObject {
 
 	stopSound(path) {
 		this.soundCache[path].pause();
+	}
+
+	checkIsOutOfWorld(){
+		return this.x + this.width < -1438;
+	}
+
+	removeObjWhenOutOfWorld(){
+		if (this.checkIsOutOfWorld()) {
+			if (this instanceof Cloud) world.level.clouds.splice(world.level.clouds.indexOf(this), 1);
+			else if (this instanceof Chicken || this instanceof ChickenSmall) world.level.enemies.splice(world.level.enemies.indexOf(this), 1);
+		}
 	}
 }

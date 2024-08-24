@@ -1,6 +1,5 @@
 class World {
 	character = new Character();
-	// endboss = new Endboss();
 	statusBarHealth = new StatusBarHealth(40, 0);
 	statusBarCoins = new StatusBarCoins(40, 40);
 	statusBarBottles = new StatusBarBottles(40, 80);
@@ -26,12 +25,11 @@ class World {
 	}
 
 	run() {
-		
-	this.level.clouds[0].makeBackgroundCloudSmaller();
-		
+		this.adjustClouds();		
 		setInterval(() => {
 			this.checkCollisions();
 			this.checkThrowObjects();
+
 		}, 200);
 	}
 
@@ -69,6 +67,8 @@ class World {
 		});
 	}
 
+	
+
 	checkThrowObjects() {
 		if (this.keyboard.D) {
 			let bottle = new ThrowableObject(
@@ -79,6 +79,10 @@ class World {
 		}
 	}
 
+	adjustClouds(){
+		for (let i=0; i<this.level.clouds.length; i++) 
+			this.level.clouds[i].makeBackgroundCloudSmaller(i);
+	}
 	draw() {
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.ctx.translate(this.camera_x, 0);

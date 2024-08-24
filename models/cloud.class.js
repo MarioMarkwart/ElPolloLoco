@@ -8,22 +8,29 @@ class Cloud extends MovableObject {
 		"../assets/img/5_background/layers/4_clouds/2.png",
 		"../assets/img/5_background/layers/4_clouds/full.png",
 	];
-
-	count = 0;
+	static speeds = [];
 
 	constructor() {
 		super().loadImage(this.IMAGES_CLOUD[this.getRandomInt(0, 3)]);
-		this.x = this.getRandomInt(0, 200);
-		this.count++;
+		this.x = this.getRandomInt(0, 2250);
 		this.animateCloud();
+
+		setInterval(() => {
+			this.removeObjWhenOutOfWorld();
+		}),200;
 	}
 
 	animateCloud() {
-		this.moveLeftInterval();
+		this.moveLeftInterval()
 	}
 
 	makeBackgroundCloudSmaller() {
-		this.width = this.width * 0.7;
-		this.height = this.height * 0.7;
+		let times = this.getRandomFloat(0.5, 1);
+		this.width = this.width * times
+		this.height = this.height * times
+		if (times <= 0.7) {this.y = this.y + 10; console.log('times <= 0,7', times <= 0.7);}
+
 	}
 }
+
+// TODO: je langsamer die Wolke, desto kleiner (weiter weg) TODO:
