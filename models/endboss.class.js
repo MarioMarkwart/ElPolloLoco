@@ -35,13 +35,6 @@ class Endboss extends MovableObject {
 		this.animate(this.IMAGES_WALKING);
 	}
 
-	// animate() {
-	//     let invt = setInterval(() => {
-	//         this.playAnimation(this.IMAGES_WALKING);
-	//     }, 200);
-	//     console.log(invt);
-
-	// }
 
 	hit() {
 		this.playSound(
@@ -49,12 +42,8 @@ class Endboss extends MovableObject {
 		);
 		this.animate(this.IMAGES_HIT);
 
-		setInterval(() => {
-			this.playAnimation(this.IMAGES_HIT);
-		}, 200);
-
 		setTimeout(() => {
-			this.animate(this.IMAGES_WALKING);
+			this.animate((this.IMAGES_WALKING));
 		}, 1000);
 
 		world.statusBarEndboss.setPercentage((this.health -= 5));

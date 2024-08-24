@@ -4,6 +4,7 @@ class DrawableObject {
 	img;
 	imageCache = {};
 	currentImage = 0;
+	intervalIds = [];
 
 	getRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min) + min);
@@ -27,18 +28,21 @@ class DrawableObject {
 		this.currentImage++;
 	}
 
-	animate(imageArr, duration = 200, count = 0) {
-		if (count === 0) {
-			let intervalId = setInterval(() => {
-				this.playAnimation(imageArr);
-			}, duration);
-			return intervalId;
-		} else {
-			for (let i = 0; i < count; i++) {
-				this.playAnimation(imageArr);
-			}
-		}
+	animate(imageArr, duration = 200) {
+		this.intervalIds.forEach((intervalId) => {
+			clearInterval(intervalId);
+		})
+		this.intervalIds.push(setInterval(() => {
+			this.playAnimation(imageArr);
+			}, duration));
 	}
+
+	stopAnimation(){
+		this.intervalIds.forEach((intervalId) => {
+			clearInterval(intervalId);
+		})
+	}
+	
 
 	loadImage(path) {
 		this.img = new Image();
