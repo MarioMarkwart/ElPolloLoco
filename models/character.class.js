@@ -153,6 +153,9 @@ class Character extends MovableObject {
 				if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
 					this.playAnimation(this.CHARACTER_IMAGES_WALKING);
 					this.lastMovement = Date.now();
+				}
+				else if (this.world.keyboard.D) {
+					this.lastMovement = Date.now();
 				} else {
 					if (this.lastMovement < Date.now() - 2500){
 						this.playAnimation(this.CHARACTER_IMAGES_LONG_IDLE);
