@@ -120,10 +120,7 @@ class Character extends MovableObject {
 
 	animateCharacter() {
 		setInterval(() => {
-			if (
-				this.world.keyboard.RIGHT &&
-				this.x < this.world.level.level_end_x_max
-			) {
+			if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x_max) {
 				this.moveRight();
 				this.playSound(this.walking_sound);
 			}
