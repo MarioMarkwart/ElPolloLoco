@@ -6,6 +6,22 @@ class DrawableObject {
 	currentImage = 0;
 	intervalIds = [];
 
+
+	setStoppableInterval(fn, time){
+		this.stopIntervals();
+		let id = setInterval(fn, time)
+		this.intervalIds.push(id)
+	}
+
+	stopIntervals(){
+		this.intervalIds.forEach((intervalId) => {
+			console.log('Interval ' + intervalId + ' stopped');
+			clearInterval(intervalId);
+			this.intervalIds = [];
+		})
+	}
+
+
 	getRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min) + min);
 	}
