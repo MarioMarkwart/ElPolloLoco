@@ -4,6 +4,7 @@ class DrawableObject {
 	img;
 	imageCache = {};
 	currentImage = 0;
+	setCurrentImage = false;
 	intervalIds = [];
 
 
