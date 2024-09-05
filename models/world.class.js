@@ -37,7 +37,7 @@ class World {
 		this.level.enemies.forEach((enemy) => {
 			if(this.character.isColliding(enemy) && this.character.isFalling) {
 				this.level.enemies.splice(this.level.enemies.indexOf(enemy),1)
-				this.character.jump(12);
+				this.character.jump();
 			}
 			else if (this.character.isColliding(enemy)) {
 				this.character.hit();

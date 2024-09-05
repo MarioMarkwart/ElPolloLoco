@@ -130,7 +130,7 @@ class Character extends MovableObject {
 			}
 			if (this.world.keyboard.SPACE && !this.isAboveGround()) {
 				this.currentImage = 0;
-				this.jump(12);
+				this.jump();
 				this.playRandomJumpingSound();
 			}
 
