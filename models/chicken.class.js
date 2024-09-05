@@ -5,7 +5,7 @@ class Chicken extends MovableObject {
 		'../assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png',
 	];
 
-	CHICKEN_IMAGE_DEAD = '../assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
+	IMAGE_DEAD = '../assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
 
 	chicken_chirp = '../assets/audio/chicken_chirp.mp3';
 	constructor() {
@@ -31,9 +31,9 @@ class Chicken extends MovableObject {
 		}, 200);
 	}
 	
-	chickenDie() {
+	enemyDie() {
 		this.stopAnimation();
-		this.loadImage(this.CHICKEN_IMAGE_DEAD);
+		this.loadImage(this.IMAGE_DEAD);
 		setTimeout(() => {
 			world.level.enemies.splice(world.level.enemies.indexOf(this), 1);
 			

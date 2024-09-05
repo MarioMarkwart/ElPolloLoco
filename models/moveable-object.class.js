@@ -114,4 +114,6 @@ class MovableObject extends DrawableObject {
 			else if (this instanceof Chicken || this instanceof ChickenSmall) world.level.enemies.splice(world.level.enemies.indexOf(this), 1);
 		}
 	}
+
+
 }
