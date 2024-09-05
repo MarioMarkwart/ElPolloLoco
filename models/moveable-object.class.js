@@ -6,12 +6,16 @@ class MovableObject extends DrawableObject {
 	energy = 100;
 	lastHit = 0;
 	soundCache = {};
+	isFalling = false;
 
 	applyGravity() {
 		setInterval(() => {
 			if (this.isAboveGround() || this.speedY > 0) {
 				this.y -= this.speedY;
 				this.speedY -= this.acceleration;
+				if(this.speedY < 0) this.isFalling = true;
+			}else{
+				this.isFalling = false;
 			}
 		}, 1000 / 60);
 	}

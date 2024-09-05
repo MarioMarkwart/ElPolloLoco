@@ -146,6 +146,9 @@ class Character extends MovableObject {
 			} else if (this.isHurt()) {
 				this.playAnimation(this.CHARACTER_IMAGES_HURT);
 			} else if (this.isAboveGround()) {
+				if(this.isFalling) {
+					console.log('is falling');
+				}
 				this.lastMovement = Date.now();
 				this.playAnimation(this.CHARACTER_IMAGES_JUMPING);
 			} else {
