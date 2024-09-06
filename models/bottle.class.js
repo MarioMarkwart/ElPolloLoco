@@ -1,14 +1,14 @@
 class Bottle extends MovableObject {
 	BOTTLE_IMAGES = [
-		"../assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png",
-		"../assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png",
+		"assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png",
+		"assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png",
 	];
 
-	BOTTLE_COLLECT_SOUND = "../assets/audio/bottle_collect.mp3";
+	BOTTLE_COLLECT_SOUND = "assets/audio/bottle_collect.mp3";
 
 	BOTTLE_HIT_SOUNDS = [
-		"../assets/audio/bottle_hit.mp3",
-		"../assets/audio/bottle_hit_2.mp3",
+		"assets/audio/bottle_hit.mp3",
+		"assets/audio/bottle_hit_2.mp3",
 	];
 
 	constructor() {

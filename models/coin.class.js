@@ -1,14 +1,14 @@
 class Coin extends MovableObject {
 	COINS_IMAGES = [
-		"../assets/img/8_coin/coin_1.png",
-		"../assets/img/8_coin/coin_2.png",
+		"assets/img/8_coin/coin_1.png",
+		"assets/img/8_coin/coin_2.png",
 	];
 
-	COIN_SOUND = "../assets/audio/coin.mp3";
+	COIN_SOUND = "assets/audio/coin.mp3";
 
 	constructor() {
 		super();
-		this.loadImage("../assets/img/8_coin/coin_1.png");
+		this.loadImage("assets/img/8_coin/coin_1.png");
 		this.loadImages(this.COINS_IMAGES);
 		this.x = this.getRandomInt(200, 2200);
 		this.y = this.getRandomInt(200, 350);

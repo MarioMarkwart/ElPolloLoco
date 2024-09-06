@@ -1,15 +1,15 @@
 class ChickenSmall extends MovableObject {
 	CHICKEN_IMAGES_WALKING = [
-		"../assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
-		"../assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
-		"../assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
+		"assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
+		"assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
+		"assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
 	];
 
-	chicken_small_chirp = "../assets/audio/chicken_small_chirp.mp3";
+	chicken_small_chirp = "assets/audio/chicken_small_chirp.mp3";
 
 	constructor() {
 		super().loadImage(
-			"../assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png"
+			"assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png"
 		);
 		this.height = 50;
 		this.width = 30;

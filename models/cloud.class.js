@@ -4,9 +4,9 @@ class Cloud extends MovableObject {
 	y = 0;
 
 	IMAGES_CLOUD = [
-		"../assets/img/5_background/layers/4_clouds/1.png",
-		"../assets/img/5_background/layers/4_clouds/2.png",
-		"../assets/img/5_background/layers/4_clouds/full.png",
+		"assets/img/5_background/layers/4_clouds/1.png",
+		"assets/img/5_background/layers/4_clouds/2.png",
+		"assets/img/5_background/layers/4_clouds/full.png",
 	];
 	static speeds = [];
 
