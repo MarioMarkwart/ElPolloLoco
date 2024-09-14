@@ -56,7 +56,7 @@ class MovableObject extends DrawableObject {
 	}
 
 	hit() {
-		if (this.energy > 0) {
+		if (this.energy > 0 && this.lastHit < new Date().getTime() - 1000) {
 			this.lastHit = new Date().getTime();
 			this.energy -= 5;
 		}
@@ -64,7 +64,7 @@ class MovableObject extends DrawableObject {
 
 	isHurt() {
 		let timePassed = new Date().getTime() - this.lastHit;
-		return timePassed < 500;
+		return timePassed < 1000;
 	}
 
 	isDead() {
@@ -116,4 +116,16 @@ class MovableObject extends DrawableObject {
 	}
 
 
+	enemyDie(enemy) {
+		this.stopAnimation();
+		this.loadImage(this.setDyingImage(enemy));
+		setTimeout(() => {
+			world.level.enemies.splice(world.level.enemies.indexOf(this), 1);
+		},300)
+	}
+
+	setDyingImage(enemy) {
+		if (enemy instanceof Chicken) return 'assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
+		if (enemy instanceof ChickenSmall) return 'assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png'
+	}
 }
