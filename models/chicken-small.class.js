@@ -5,6 +5,10 @@ class ChickenSmall extends MovableObject {
 		"assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
 	];
 
+	IMAGES_DYING = [
+		'assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png'
+	];
+
 	chicken_small_chirp = "assets/audio/chicken_small_chirp.mp3";
 
 	constructor() {
@@ -16,6 +20,7 @@ class ChickenSmall extends MovableObject {
 		this.x = this.getRandomInt(200, 2200);
 		this.y = this.getRandomInt(370, 380);
 		this.loadImages(this.CHICKEN_IMAGES_WALKING);
+		this.loadImages(this.IMAGES_DYING);
 		this.loadSound(this.chicken_small_chirp, 0.02);
 		this.randomizeFirstPictures();
 		this.playSound(this.chicken_small_chirp, this.getRandomFloat(0.5, 1.5));

@@ -118,14 +118,9 @@ class MovableObject extends DrawableObject {
 
 	enemyDie(enemy) {
 		this.stopAnimation();
-		this.loadImage(this.setDyingImage(enemy));
+		this.animate(enemy.IMAGES_DYING)
 		setTimeout(() => {
 			world.level.enemies.splice(world.level.enemies.indexOf(this), 1);
 		},300)
-	}
-
-	setDyingImage(enemy) {
-		if (enemy instanceof Chicken) return 'assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
-		if (enemy instanceof ChickenSmall) return 'assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png'
 	}
 }
