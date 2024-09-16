@@ -16,6 +16,14 @@ function fullscreenOn() {
 }
 
 function fullscreenOff(){
-    document.exitFullscreen();
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
     btnFullscreen.setAttribute('onclick','fullscreenOn()');
 }
