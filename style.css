@@ -25,6 +25,29 @@ body{
     background-size: cover;
 }
 
+#content{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 canvas{
     background-color: black;
 }
+
+.buttons{
+    position: absolute;
+    top:0;
+    padding: 5px;
+}
+.btn{
+    width: 50px;
+    top:0;
+}
+
+/* #btnPlay{
+    position: absolute;
+    top:0
+} */
