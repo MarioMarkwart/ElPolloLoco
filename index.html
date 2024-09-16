@@ -35,14 +35,14 @@
     <title>El pollo loco</title>
 </head>
 
-<body onload="init()">
+<body onload="">
     <h1>El pollo loco</h1>
     <div id="content">
         <canvas id="canvas" width="720px" height="480px"></canvas>
         <div class="buttons">
-            <img class="btn" id="btnPlay" src="assets/img/buttons/play.png">
+            <img class="btn" id="btnPlay" src="assets/img/buttons/play.png" onclick="startGame()">
             <img class="btn" id="btnHelp" src="assets/img/buttons/help.png">
-            <img class="btn" id="btnFullscreen" onclick="fullscreenOn()" src="assets/img/buttons/fullscreenOn.png">
+            <img class="btn" id="btnFullscreen" src="assets/img/buttons/fullscreenOn.png"  onclick="fullscreenOn()" >
         </div>
     </div>
 

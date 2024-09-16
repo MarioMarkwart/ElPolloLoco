@@ -37,3 +37,32 @@ window.addEventListener("keyup", (event) => {
 	if (event.key === "d") keyboard.D = false;
 	if (event.key === " ") keyboard.SPACE = false;
 });
+
+
+function startGame(){
+	initLevel();
+	init();
+	btnPlay.src = "assets/img/buttons/restart.png";
+	btnPlay.setAttribute('onclick','restartGame()');
+}
+
+
+function restartGame(){
+	stopAllIntervals();
+	stopAllSounds();
+	btnPlay.src = "assets/img/buttons/play.png";
+	btnPlay.setAttribute('onclick','startGame()');
+	startGame();
+}
+
+
+function stopAllIntervals(){
+	for(let i=0; i<1000;i++) clearInterval(i);
+}
+
+
+function stopAllSounds() {
+	world.level.enemies.forEach((enemy) =>
+		Object.keys(enemy.soundCache).forEach((sound) => enemy.soundCache[sound].pause())
+	);
+}
