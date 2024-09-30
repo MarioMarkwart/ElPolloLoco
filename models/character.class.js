@@ -95,8 +95,6 @@ class Character extends MovableObject {
 		'assets/audio/pepe_hurt_4.mp3',
 		'assets/audio/pepe_hurt_5.mp3',
 		'assets/audio/pepe_hurt_6.mp3',
-		'assets/audio/pepe_hurt_7.mp3',
-		'assets/audio/pepe_hurt_8.mp3',
 	]
 
 	world;
@@ -115,13 +113,22 @@ class Character extends MovableObject {
 		this.applyGravity();
 	}
 
-	playRandomSound(arr) {
-		let sound = this.soundCache[arr[this.getRandomInt(0, arr.length)]];
+	playRandomJumpingSound() {
+		let sound = this.soundCache[this.CHARACTER_JUMPING_SOUNDS[this.getRandomInt(0, this.CHARACTER_JUMPING_SOUNDS.length)]];
 		sound.play();
 	}
 
-	stopAllJumpingSounds() {
-		this.CHARACTER_JUMPING_SOUNDS.forEach((sound) => {
+	playRandomHurtSound() {
+		let sound = this.soundCache[this.CHARACTER_HURT_SOUNDS[this.getRandomInt(0, this.CHARACTER_HURT_SOUNDS.length)]];
+		
+		sound.play();
+
+		//FIXME: a lot of sounds are running. How can I fix it that only one sound is playing at the same time?
+		//and when this sound is finished and Pepe is hurt then the next sound should be played
+	}
+
+	stopAllSounds(arr) {
+		arr.forEach((sound) => {
 			this.soundCache[sound].pause();
 		});
 	}
@@ -139,7 +146,7 @@ class Character extends MovableObject {
 			if (this.world.keyboard.SPACE && !this.isAboveGround()) {
 				this.currentImage = 0;
 				this.jump();
-				this.playRandomSound(this.CHARACTER_JUMPING_SOUNDS);
+				this.playRandomJumpingSound();
 			}
 
 			this.world.camera_x = -this.x + 100;
@@ -150,9 +157,11 @@ class Character extends MovableObject {
 			if (this.isDead()) {
 				this.playAnimation(this.CHARACTER_IMAGES_DEAD);
 				this.stopSound(this.CHARACTER_WALKING_SOUND);
-				this.stopAllJumpingSounds();
+				this.stopAllSounds(this.CHARACTER_HURT_SOUNDS);
+				this.stopAllSounds(this.CHARACTER_JUMPING_SOUNDS);
 			} else if (this.isHurt()) {
 				this.playAnimation(this.CHARACTER_IMAGES_HURT);
+				this.playRandomHurtSound();
 			} else if (this.isAboveGround()) {
 				if(this.isFalling) {
 					console.log('is falling');
