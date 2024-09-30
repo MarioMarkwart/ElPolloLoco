@@ -3,7 +3,6 @@ class Endboss extends MovableObject {
 	height = 300;
 	x = 2300; //2300
 	y = 150;
-	health = 100;
 
 	IMAGES_WALKING = [
 		"assets/img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -46,14 +45,13 @@ class Endboss extends MovableObject {
 			this.animate((this.IMAGES_WALKING));
 		}, 1000);
 
-		world.statusBarEndboss.setPercentage((this.health -= 5));
-		console.log(this.health);
+		world.statusBarEndboss.setPercentage((this.energy -= 5));
+		console.log(this.energy);
 	}
 
 	checkIfEndbossIsDead() {
-		if (this.health <= 0) {
-			world.statusBarEndboss.setPercentage(0);
-			this.die();
+		if (this.energy <= 0) {
+			//tbd
 		}
 	}
 }

@@ -29,7 +29,7 @@ class World {
 		setInterval(() => {
 			this.checkCollisions();
 			this.checkThrowObjects();
-			world.level.endboss[0].checkIfEndbossIsDead();
+			// world.level.endboss[0].checkIfEndbossIsDead();
 		}, 200);
 	}
 
