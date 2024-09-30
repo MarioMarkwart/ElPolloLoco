@@ -49,4 +49,11 @@ class Endboss extends MovableObject {
 		world.statusBarEndboss.setPercentage((this.health -= 5));
 		console.log(this.health);
 	}
+
+	checkIfEndbossIsDead() {
+		if (this.health <= 0) {
+			world.statusBarEndboss.setPercentage(0);
+			this.die();
+		}
+	}
 }
