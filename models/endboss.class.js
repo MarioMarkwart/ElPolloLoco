@@ -1,8 +1,9 @@
 class Endboss extends MovableObject {
 	width = 200;
 	height = 300;
-	x = 2300; //2300
+	x = 300; //2300
 	y = 150;
+	energy = 5;
 
 	IMAGES_WALKING = [
 		"assets/img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -21,6 +22,12 @@ class Endboss extends MovableObject {
 		"assets/img/4_enemie_boss_chicken/4_hurt/G23.png",
 	];
 
+	IMAGES_DEAD = [
+		"assets/img/4_enemie_boss_chicken/5_dead/G24.png",
+		"assets/img/4_enemie_boss_chicken/5_dead/G25.png",
+		"assets/img/4_enemie_boss_chicken/5_dead/G26.png"
+	]
+
 	SOUNDS_HIT = [
 		"assets/audio/bottle_hit.mp3",
 		"assets/audio/bottle_hit_2.mp3",
@@ -30,28 +37,34 @@ class Endboss extends MovableObject {
 		super().loadImage("assets/img/4_enemie_boss_chicken/1_walk/G1.png");
 		this.loadImages(this.IMAGES_WALKING);
 		this.loadImages(this.IMAGES_HIT);
+		this.loadImages(this.IMAGES_DEAD);
 		this.loadSounds(this.SOUNDS_HIT);
 		this.animate(this.IMAGES_WALKING);
 	}
 
 
 	hit() {
+		world.statusBarEndboss.setPercentage((this.energy -= 5));
 		this.playSound(
 			this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]
 		);
 		this.animate(this.IMAGES_HIT);
 
-		setTimeout(() => {
+		if (this.checkIfEndbossIsDead()){
+			this.animate(this.IMAGES_DEAD);
+			setTimeout(() => {
+				youWon();
+			},1000)
+		}else{
+			console.log('endboss is not dead');
+			setTimeout(() => {
 			this.animate((this.IMAGES_WALKING));
 		}, 1000);
-
-		world.statusBarEndboss.setPercentage((this.energy -= 5));
-		console.log(this.energy);
-	}
-
-	checkIfEndbossIsDead() {
-		if (this.energy <= 0) {
-			//tbd
 		}
 	}
+ 
+	checkIfEndbossIsDead() {
+		return this.energy <= 0;
+	}
+
 }

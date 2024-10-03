@@ -29,7 +29,6 @@ class World {
 		setInterval(() => {
 			this.checkCollisions();
 			this.checkThrowObjects();
-			// world.level.endboss[0].checkIfEndbossIsDead();
 		}, 200);
 	}
 
@@ -43,6 +42,7 @@ class World {
 		this.level.enemies.forEach((enemy) => {
 			if(this.character.isColliding(enemy) && this.character.isFalling) {
 				enemy.enemyDie(enemy);
+				this.character.playRandomKillSound();
 				this.character.jump();
 			}
 			else if (this.character.isColliding(enemy)) {
@@ -62,8 +62,9 @@ class World {
 		});
 
 		this.throwableObjects.forEach((bottle) => {
-			if (this.level.endboss[0].isColliding(bottle)) {
-				this.level.endboss[0].hit();
+			let endboss = this.level.endboss[0];
+			if (endboss.isColliding(bottle)) {
+				endboss.hit();
 				this.throwableObjects[
 					this.throwableObjects.indexOf(bottle)
 				].bottleSplash();

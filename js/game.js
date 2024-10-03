@@ -8,7 +8,7 @@ function init() {
 	world = new World(canvas, keyboard);
 	console.log("My world is: ", world);
 	console.log("My character is: ", world.character);
-	switchGameState('startScreen')
+	// switchGameState('startScreen')
 }
 
 function setStoppableInterval(fn, time) {
@@ -109,6 +109,21 @@ function setFinalScreen(wonOrLost){
 	}
 }
 
+function youWon(){
+	world.character.jump();
+	setTimeout(() => {
+		stopAllIntervals();
+		setFinalScreen('won');
+	},1000)
+}
+
+function youLost(){
+	console.log('you');
+	setTimeout(() => {
+		stopAllIntervals();
+		setFinalScreen('lost');
+	}, 1000)
+}
 
 function restartGame(){
 	stopAllIntervals();

@@ -24,7 +24,7 @@ class Chicken extends MovableObject {
 
 		this.randomizeFirstPictures();
 
-		this.playSound(this.chicken_chirp, this.getRandomFloat(0.5, 1.5));
+		this.playSound(this.chicken_chirp, this.getRandomFloat(200, 2000));
 		this.animate(this.CHICKEN_IMAGES_WALKING);
 		this.moveLeftInterval();
 

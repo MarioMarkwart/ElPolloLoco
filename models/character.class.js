@@ -3,6 +3,7 @@ class Character extends MovableObject {
 	y = 180;
 	immunity = true;
 	lastMovement;
+	// energy = 15;
 
 	CHARACTER_IMAGES_WALKING = [
 		'assets/img/2_character_pepe/2_walk/W-21.png',
@@ -72,29 +73,24 @@ class Character extends MovableObject {
 	CHARACTER_JUMPING_SOUNDS = [
 		'assets/audio/character_jump_0.mp3',
 		'assets/audio/character_jump_1.mp3',
-		'assets/audio/character_jump_2.mp3',
-		'assets/audio/character_jump_3.mp3',
-		'assets/audio/character_jump_4.mp3',
-		'assets/audio/character_jump_5.mp3',
-		'assets/audio/character_jump_6.mp3',
-		'assets/audio/character_jump_7.mp3',
-		'assets/audio/character_jump_8.mp3',
-		'assets/audio/character_jump_9.mp3',
-		'assets/audio/character_jump_10.mp3',
-		'assets/audio/character_jump_11.mp3',
-		'assets/audio/character_jump_12.mp3',
-		'assets/audio/character_jump_13.mp3',
-		'assets/audio/character_jump_14.mp3',
+	];
+
+	CHARACTER_WON_SOUND = [
+		'assets/audio/character_won.mp3'
 	];
 
 	CHARACTER_HURT_SOUNDS = [
 		'assets/audio/pepe_hurt_0.mp3',
 		'assets/audio/pepe_hurt_1.mp3',
-		'assets/audio/pepe_hurt_2.mp3',
-		'assets/audio/pepe_hurt_3.mp3',
-		'assets/audio/pepe_hurt_4.mp3',
-		'assets/audio/pepe_hurt_5.mp3',
-		'assets/audio/pepe_hurt_6.mp3',
+	]
+
+	CHARACTER_DEAD_SOUND = [
+		'assets/audio/pepe_dead.mp3'
+	]
+
+	CHARACTER_KILLING_ENEMY_SOUNDS = [
+		'assets/audio/character_enemy_kill_0.mp3',
+		'assets/audio/character_enemy_kill_1.mp3',
 	]
 
 	world;
@@ -109,6 +105,9 @@ class Character extends MovableObject {
 		this.loadSound(this.CHARACTER_WALKING_SOUND);
 		this.loadSounds(this.CHARACTER_JUMPING_SOUNDS, 0.3);
 		this.loadSounds(this.CHARACTER_HURT_SOUNDS, 0.5);
+		this.loadSounds(this.CHARACTER_KILLING_ENEMY_SOUNDS, 0.5);
+		this.loadSounds(this.CHARACTER_WON_SOUND);
+		this.loadSounds(this.CHARACTER_DEAD_SOUND);
 		this.animateCharacter();
 		this.applyGravity();
 	}
@@ -127,10 +126,9 @@ class Character extends MovableObject {
 		//and when this sound is finished and Pepe is hurt then the next sound should be played
 	}
 
-	stopAllSounds(arr) {
-		arr.forEach((sound) => {
-			this.soundCache[sound].pause();
-		});
+	playRandomKillSound(){
+		let sound = this.soundCache[this.CHARACTER_KILLING_ENEMY_SOUNDS[this.getRandomInt(0, this.CHARACTER_KILLING_ENEMY_SOUNDS.length)]];
+		sound.play();
 	}
 
 	animateCharacter() {
@@ -155,13 +153,15 @@ class Character extends MovableObject {
 		// animations
 		setInterval(() => {
 			if (this.isDead()) {
-				this.playAnimation(this.CHARACTER_IMAGES_DEAD);
+				this.animate(this.CHARACTER_IMAGES_DEAD);
 				this.stopSound(this.CHARACTER_WALKING_SOUND);
 				this.stopAllSounds(this.CHARACTER_HURT_SOUNDS);
 				this.stopAllSounds(this.CHARACTER_JUMPING_SOUNDS);
+				// youLost();
 			} else if (this.isHurt()) {
 				this.playAnimation(this.CHARACTER_IMAGES_HURT);
 				this.playRandomHurtSound();
+				this.lastMovement = Date.now();
 			} else if (this.isAboveGround()) {
 				if(this.isFalling) {
 					console.log('is falling');

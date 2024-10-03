@@ -93,12 +93,18 @@ class MovableObject extends DrawableObject {
 		this.soundCache[path].volume = vol;
 	}
 
-	playSound(path, delay = 0) {
-		this.soundCache[path].play();
+	playSound(path, delayInMs = 0) {
+		// this.soundCache[path].play();
+		if (delayInMs !== 0) console.log(path, delayInMs);
+		setTimeout(() => {
+		    this.soundCache[path].play();
+		}, delayInMs) //FIXME: set to 'delay' when inserted Title-Screen - will work after user interacted with the page
+	}
 
-		// setTimeout(() => {
-		//     this.soundCache[path].play();
-		// }, delay) //FIXME: set to 'delay' when inserted Title-Screen - will work after user interacted with the page
+	stopAllSounds(arr) {
+		arr.forEach((sound) => {
+			this.soundCache[sound].pause();
+		});
 	}
 
 	stopSound(path) {
@@ -118,7 +124,9 @@ class MovableObject extends DrawableObject {
 
 
 	enemyDie(enemy) {
+		console.log('enemies left: ', world.level.enemies.length);
 		this.stopAnimation();
+		this.stopAllSounds(Object.keys(enemy.soundCache))
 		this.animate(enemy.IMAGES_DYING)
 		setTimeout(() => {
 			world.level.enemies.splice(world.level.enemies.indexOf(this), 1);
