@@ -12,7 +12,7 @@ class Cloud extends MovableObject {
 
 	constructor() {
 		super().loadImage(this.IMAGES_CLOUD[this.getRandomInt(0, 3)]);
-		this.x = this.getRandomInt(0, 2250);
+		this.x = this.getRandomInt(0, 2250 + this.width);
 		this.animateCloud();
 
 		setInterval(() => {
@@ -29,8 +29,5 @@ class Cloud extends MovableObject {
 		this.width = this.width * times
 		this.height = this.height * times
 		if (times <= 0.7) {this.y = this.y + 10; console.log('times <= 0,7', times <= 0.7);}
-
 	}
 }
-
-// TODO: je langsamer die Wolke, desto kleiner (weiter weg) TODO:

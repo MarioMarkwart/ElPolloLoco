@@ -110,15 +110,16 @@ function setFinalScreen(wonOrLost){
 }
 
 function youWon(){
-	world.character.jump();
+	world.character.playWinSound();
 	setTimeout(() => {
 		stopAllIntervals();
+		stopAllSounds();
 		setFinalScreen('won');
 	},1000)
 }
 
 function youLost(){
-	console.log('you');
+	console.log('you lost');
 	setTimeout(() => {
 		stopAllIntervals();
 		setFinalScreen('lost');

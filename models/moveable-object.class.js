@@ -123,7 +123,6 @@ class MovableObject extends DrawableObject {
 		}
 	}
 
-
 	enemyDie(enemy) {
 		console.log('enemies left: ', world.level.enemies.length);
 		this.stopAnimation();

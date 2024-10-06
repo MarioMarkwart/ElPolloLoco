@@ -106,8 +106,8 @@ class Character extends MovableObject {
 		this.loadSounds(this.CHARACTER_JUMPING_SOUNDS, 0.3);
 		this.loadSounds(this.CHARACTER_HURT_SOUNDS, 0.5);
 		this.loadSounds(this.CHARACTER_KILLING_ENEMY_SOUNDS, 0.5);
-		this.loadSounds(this.CHARACTER_WON_SOUND);
-		this.loadSounds(this.CHARACTER_DEAD_SOUND);
+		this.loadSounds(this.CHARACTER_WON_SOUND, 0.5);
+		this.loadSounds(this.CHARACTER_DEAD_SOUND, 0.5);
 		this.animateCharacter();
 		this.applyGravity();
 	}
@@ -129,6 +129,11 @@ class Character extends MovableObject {
 	playRandomKillSound(){
 		let sound = this.soundCache[this.CHARACTER_KILLING_ENEMY_SOUNDS[this.getRandomInt(0, this.CHARACTER_KILLING_ENEMY_SOUNDS.length)]];
 		sound.play();
+	}
+
+	playWinSound() {
+		this.playSound(this.CHARACTER_WON_SOUND, .2);
+		this.jump();
 	}
 
 	animateCharacter() {

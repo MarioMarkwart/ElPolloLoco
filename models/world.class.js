@@ -26,10 +26,9 @@ class World {
 
 	run() {
 		this.adjustClouds();
-		setInterval(() => {
-			this.checkCollisions();
-			this.checkThrowObjects();
-		}, 200);
+		setInterval(() => this.checkCollisions(), 200);
+		setInterval(() => this.checkThrowObjects(), 100);
+		setInterval(() => this.createNewClouds(), 5000)
 	}
 
 	checkCollisions() {
@@ -153,5 +152,14 @@ class World {
 	flipImageBack(mo) {
 		mo.x = mo.x * -1;
 		this.ctx.restore();
+	}
+
+	createNewClouds(){
+		if (world.level.clouds.length < 5) {
+			console.log('new Cloud added');
+			let newCloud = new Cloud();
+			newCloud.x = 2250 + newCloud.width;
+			world.level.clouds.push(newCloud);
+		}
 	}
 }
