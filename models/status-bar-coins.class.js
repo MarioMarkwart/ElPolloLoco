@@ -25,6 +25,14 @@ class StatusBarCoins extends DrawableObject {
 	increaseAmount() {
 		this.amount++;
 		this.setAmount(this.amount);
+		if (this.amount == 5) {
+			this.decreaseAmount();
+			world.statusBarBottles.increaseAmount();
+		}
+	}
+	decreaseAmount() {
+		this.amount = 0;
+		this.setAmount(this.amount);
 	}
 
 	setAmount(amount) {
