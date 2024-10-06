@@ -39,12 +39,16 @@ class ThrowableObject extends MovableObject {
 		this.applyGravity();
 		this.moveToInterval = setInterval(() => {
 			this.x += 10;
-			if(this.y > 360) {
-				this.speedY = 0;
-				this.bottleSplash();
-				clearInterval(this.moveToInterval);
-			}
+			this.checkIfBottleHitsTheGround();
 		}, 25);
+	}
+
+	checkIfBottleHitsTheGround() {
+		if (this.y > 360) {
+			this.speedY = 0;
+			this.bottleSplash();
+			clearInterval(this.moveToInterval);
+		}
 	}
 
 	bottleSplash() {
@@ -53,6 +57,6 @@ class ThrowableObject extends MovableObject {
 		setTimeout(() => {
 			this.height = 0;
 			this.width = 0;
-		},100)
- 	}
+		}, 100);
+	}
 }

@@ -27,6 +27,11 @@ class StatusBarBottles extends DrawableObject {
 		this.setAmount(this.amount);
 	}
 
+	decreaseAmount() {
+		this.amount--;
+		this.setAmount(this.amount);
+	}
+
 	setAmount(amount) {
 		this.amount = amount;
 		let path = this.IMAGES[this.resolveImageIndex()];

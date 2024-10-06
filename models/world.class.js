@@ -25,7 +25,7 @@ class World {
 	}
 
 	run() {
-		this.adjustClouds();		
+		this.adjustClouds();
 		setInterval(() => {
 			this.checkCollisions();
 			this.checkThrowObjects();
@@ -38,14 +38,13 @@ class World {
 				this.character.hit();
 				this.statusBarHealth.setPercentage(this.character.energy);
 			}
-		})
+		});
 		this.level.enemies.forEach((enemy) => {
-			if(this.character.isColliding(enemy) && this.character.isFalling) {
+			if (this.character.isColliding(enemy) && this.character.isFalling) {
 				enemy.enemyDie(enemy);
 				this.character.playRandomKillSound();
 				this.character.jump();
-			}
-			else if (this.character.isColliding(enemy)) {
+			} else if (this.character.isColliding(enemy)) {
 				this.character.hit();
 				this.statusBarHealth.setPercentage(this.character.energy);
 			}
@@ -80,16 +79,19 @@ class World {
 
 	checkThrowObjects() {
 		if (this.keyboard.D) {
-			let bottle = new ThrowableObject(
-				this.character.x + 50,
-				this.character.y + 100
-			);
-			this.throwableObjects.push(bottle);
+			if (world.statusBarBottles.amount > 0) {
+				let bottle = new ThrowableObject(
+					this.character.x + 50,
+					this.character.y + 100
+				);
+				this.throwableObjects.push(bottle);
+				world.statusBarBottles.decreaseAmount();
+			}
 		}
 	}
 
-	adjustClouds(){
-		for (let i=0; i<this.level.clouds.length; i++) 
+	adjustClouds() {
+		for (let i = 0; i < this.level.clouds.length; i++)
 			this.level.clouds[i].makeBackgroundCloudSmaller(i);
 	}
 	draw() {

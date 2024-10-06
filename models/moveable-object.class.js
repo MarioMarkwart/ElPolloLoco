@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
 	lastHit = 0;
 	soundCache = {};
 	isFalling = false;
+	amount = 0;
 
 	applyGravity() {
 		setInterval(() => {
