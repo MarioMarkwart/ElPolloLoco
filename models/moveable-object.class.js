@@ -112,16 +112,6 @@ class MovableObject extends DrawableObject {
 		this.soundCache[path].pause();
 	}
 
-	checkIsOutOfWorld(){
-		return this.x + this.width < -1438;
-	}
-
-	removeObjWhenOutOfWorld(){
-		if (this.checkIsOutOfWorld()) {
-			if (this instanceof Cloud) world.level.clouds.splice(world.level.clouds.indexOf(this), 1);
-			else if (this instanceof Chicken || this instanceof ChickenSmall) world.level.enemies.splice(world.level.enemies.indexOf(this), 1);
-		}
-	}
 
 	enemyDie(enemy) {
 		console.log('enemies left: ', world.level.enemies.length);

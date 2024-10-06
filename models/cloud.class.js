@@ -15,9 +15,6 @@ class Cloud extends MovableObject {
 		this.x = this.getRandomInt(0, 2250 + this.width);
 		this.animateCloud();
 
-		setInterval(() => {
-			this.removeObjWhenOutOfWorld();
-		}),200;
 	}
 
 	animateCloud() {

@@ -28,6 +28,7 @@ class World {
 		this.adjustClouds();
 		setInterval(() => this.checkCollisions(), 200);
 		setInterval(() => this.checkThrowObjects(), 100);
+		setInterval(() => this.removeObjWhenOutOfWorld(), 1000);
 		setInterval(() => this.createNewClouds(), 5000)
 	}
 
@@ -159,7 +160,30 @@ class World {
 			console.log('new Cloud added');
 			let newCloud = new Cloud();
 			newCloud.x = 2250 + newCloud.width;
+			console.log(newCloud.x);
 			world.level.clouds.push(newCloud);
+			console.log(world.level.clouds);
 		}
 	}
+
+	checkIsOutOfWorld(obj){
+		return obj.x + obj.width < -1438;
+	}
+
+	removeObjWhenOutOfWorld(){
+		world.level.clouds.forEach((cloud) => {
+			if (this.checkIsOutOfWorld(cloud)) {
+				world.level.clouds.splice(world.level.clouds.indexOf(cloud), 1);
+				console.log('cloud removed', world.level.clouds);
+			}
+		})
+
+		world.level.enemies.forEach(enemy => {
+			if (this.checkIsOutOfWorld(enemy)) {
+				world.level.enemies.splice(world.level.enemies.indexOf(enemy), 1);
+				console.log("enemy removed", world.level.enemies);
+			}
+		}
+		)
+	}	
 }
