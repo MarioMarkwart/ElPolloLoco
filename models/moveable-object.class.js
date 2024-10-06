@@ -70,7 +70,7 @@ class MovableObject extends DrawableObject {
 	}
 
 	isDead() {
-		return this.energy == 0;
+		return this.energy <= 0;
 	}
 
 	loadSound(path, vol = 1) {

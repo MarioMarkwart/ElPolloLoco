@@ -102,7 +102,7 @@ function setFinalScreen(wonOrLost){
 		overlay.innerHTML += '<img src="assets/img/9_intro_outro_screens/win/won_2.png" width="720px" height="480px" alt="you won">';
 	}
 	if (wonOrLost === 'lost'){
-		overlay.innerHTML += '<img src="assets/img/9_intro_outro_screens/game_over/oh no you lost!.png" width="100%" height="100%" alt="you lost">';
+		overlay.innerHTML += '<img src="assets/img/9_intro_outro_screens/game_over/oh no you lost!.png" width="720px" height="480px" alt="you lost">';
 		setTimeout(() => {
 			overlay.innerHTML = '<img src="assets/img/9_intro_outro_screens/game_over/game over!.png" width="720px" height="480px" alt="game over">';
 		},1000)
@@ -119,9 +119,11 @@ function youWon(){
 }
 
 function youLost(){
-	console.log('you lost');
+	console.log('!!!!!!!!!!!!!!!!!!!!!!!LOSER!!!!!!!!!!!!!!!!!!!!');
+	world.character.playLostSound();
 	setTimeout(() => {
 		stopAllIntervals();
+		stopAllSounds();
 		setFinalScreen('lost');
 	}, 1000)
 }

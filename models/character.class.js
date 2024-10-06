@@ -3,7 +3,7 @@ class Character extends MovableObject {
 	y = 180;
 	immunity = true;
 	lastMovement;
-	// energy = 15;
+	energy = 50;
 
 	CHARACTER_IMAGES_WALKING = [
 		'assets/img/2_character_pepe/2_walk/W-21.png',
@@ -136,6 +136,10 @@ class Character extends MovableObject {
 		this.jump();
 	}
 
+	playLostSound() {
+		this.playSound(this.CHARACTER_DEAD_SOUND, .2);
+	}
+
 	animateCharacter() {
 		setInterval(() => {
 			if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x_max) {
@@ -158,11 +162,11 @@ class Character extends MovableObject {
 		// animations
 		setInterval(() => {
 			if (this.isDead()) {
-				this.animate(this.CHARACTER_IMAGES_DEAD);
+				this.playAnimation(this.CHARACTER_IMAGES_DEAD);
 				this.stopSound(this.CHARACTER_WALKING_SOUND);
 				this.stopAllSounds(this.CHARACTER_HURT_SOUNDS);
 				this.stopAllSounds(this.CHARACTER_JUMPING_SOUNDS);
-				// youLost();
+				youLost();
 			} else if (this.isHurt()) {
 				this.playAnimation(this.CHARACTER_IMAGES_HURT);
 				this.playRandomHurtSound();
