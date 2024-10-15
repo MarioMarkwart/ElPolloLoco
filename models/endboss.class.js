@@ -66,22 +66,18 @@ class Endboss extends MovableObject {
 	}
 
 	hit() {
-		world.statusBarEndboss.setPercentage((this.energy -= 5));
-		this.playSound(
-			this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]
-		);
-		this.animate(this.IMAGES_HIT);
-
-		if (this.checkIfEndbossIsDead()) {
-			this.animate(this.IMAGES_DEAD);
-			setTimeout(() => {
-				youWon();
-			}, 1000);
-		} else {
-			console.log("endboss is not dead");
+		if (!this.checkIfEndbossIsDead()) {
+			world.statusBarEndboss.setPercentage((this.energy -= 10));
+			this.animate(this.IMAGES_HIT);
+			this.playSound(this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]);
 			setTimeout(() => {
 				this.animate(this.IMAGES_ALERT);
 			}, 1000);
+		}else{
+			this.animate(this.IMAGES_DEAD);
+			setTimeout(() => {
+				youWon();
+			}, 500);
 		}
 	}
 
@@ -109,17 +105,14 @@ class Endboss extends MovableObject {
 
 	attackAnimation() {
 		setInterval(() => {
-			// console.log('NEAR TO CHAR: ', this.checkDistanceToCharacter());
-			
 			if (this.hadFirstContact) {
 				if(this.nearToCharacter) {
-					// console.log('#### ATTACKING ####');
 					this.animate(this.IMAGES_ATTACK);
 				} else {
-					// console.log('#### WALKING ####');
 					if (world.character.x > this.x) {
 						this.otherDirection = true;
-						this.moveRightInterval(3);
+						this.animate(this.IMAGES_WALK);
+						this.moveRightInterval(2);
 					}
 					else{
 						this.otherDirection = false;
@@ -141,13 +134,5 @@ class Endboss extends MovableObject {
 
 	checkDistanceToCharacter() {
 		return Math.abs(world.character.x - this.x) <= 100;
-	}
-
-	moveRightInterval(multiplicator = 1){
-			let pixelMovement = (Math.random() * (1 - this.speed) + this.speed) * multiplicator;
-			this.intervalIds.push(setInterval(() => {
-				this.x += pixelMovement;
-			}, 1000 / 60));
-	}
-	
+	}	
 }

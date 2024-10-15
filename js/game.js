@@ -8,7 +8,7 @@ function init() {
 	world = new World(canvas, keyboard);
 	console.log("My world is: ", world);
 	console.log("My character is: ", world.character);
-	// switchGameState('startScreen')
+	switchGameState('startScreen')
 }
 
 function setStoppableInterval(fn, time) {
@@ -75,37 +75,36 @@ function switchGameState(state='startScreen'){
 function addButtons(){
 	console.log('addButtons');
 	
-	document.getElementById('canvasOverlay').innerHTML = /*html*/`<div id="buttons" class="buttons">
-            <img class="btn" id="btnPlay" src="assets/img/buttons/play.png" onclick="startGame()">
-            <img class="btn" id="btnHelp" src="assets/img/buttons/help.png">
-            <img class="btn" id="btnFullscreen" src="assets/img/buttons/fullscreenOn.png"  onclick="fullscreenOn()" >
-        </div>`
-}
+	document.getElementById('buttons').innerHTML = /*html*/`
+		<img class="btn" id="btnPlay" src="assets/img/buttons/play.png" onclick="startGame()">
+		<img class="btn" id="btnHelp" src="assets/img/buttons/help.png">
+		<img class="btn" id="btnFullscreen" src="assets/img/buttons/fullscreenOn.png"  onclick="fullscreenOn()" >`
+	}
 
 function setStartScreen(){
 	addButtons();
 	let overlay = document.getElementById('canvasOverlay');
 	overlay.classList.remove('d-none')
-	overlay.innerHTML += '<img src="assets/img/9_intro_outro_screens/start/startscreen_1.png" width="720px" height="480px">';
+	overlay.innerHTML = '<img src="assets/img/9_intro_outro_screens/start/startscreen_1.png" width="720px" height="480px">';
 }
 
 function setGameScreen(){
 	let overlay = document.getElementById('canvasOverlay');
-	addButtons();
+	overlay.innerHTML = '';
 }
 
-function setFinalScreen(wonOrLost){
-	addButtons();
+function setFinalScreen(result){
 	let overlay = document.getElementById('canvasOverlay');
 	overlay.classList.remove('d-none');
-	if (wonOrLost === 'won'){
-		overlay.innerHTML += '<img src="assets/img/9_intro_outro_screens/win/won_2.png" width="720px" height="480px" alt="you won">';
+	if (result === 'won'){
+		overlay.innerHTML = '<img src="assets/img/9_intro_outro_screens/win/won_2.png" width="720px" height="480px" alt="you won">';
+
 	}
-	if (wonOrLost === 'lost'){
-		overlay.innerHTML += '<img src="assets/img/9_intro_outro_screens/game_over/oh no you lost!.png" width="720px" height="480px" alt="you lost">';
+	if (result === 'lost'){
+		overlay.innerHTML = '<img src="assets/img/9_intro_outro_screens/game_over/oh no you lost!.png" width="720px" height="480px" alt="you lost">';
 		setTimeout(() => {
 			overlay.innerHTML = '<img src="assets/img/9_intro_outro_screens/game_over/game over!.png" width="720px" height="480px" alt="game over">';
-		},1000)
+		},2000)
 	}
 }
 
@@ -119,13 +118,12 @@ function youWon(){
 }
 
 function youLost(){
-	console.log('!!!!!!!!!!!!!!!!!!!!!!!LOSER!!!!!!!!!!!!!!!!!!!!');
 	world.character.playLostSound();
 	setTimeout(() => {
 		stopAllIntervals();
 		stopAllSounds();
 		setFinalScreen('lost');
-	}, 1000)
+	}, 500)
 }
 
 function restartGame(){
