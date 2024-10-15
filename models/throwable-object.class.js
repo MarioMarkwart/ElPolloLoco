@@ -32,17 +32,29 @@ class ThrowableObject extends MovableObject {
 
 	throw() {
 		this.throwingAnimationId = this.animate(
-			this.IMAGES_BOTTLE_ROTATION,
-			50
-		);
+			this.IMAGES_BOTTLE_ROTATION, 50);
 		this.speedY = 10;
 		this.applyGravity();
+		if (world.character.otherDirection) {
+			this.throwToLeft();
+		} else
+			this.throwToRight();
+	}
+
+	throwToLeft(){
+		this.moveToInterval = setInterval(() => {
+			this.x -= 10;
+			this.checkIfBottleHitsTheGround();
+		}, 25);
+	}
+
+	throwToRight(){
 		this.moveToInterval = setInterval(() => {
 			this.x += 10;
 			this.checkIfBottleHitsTheGround();
 		}, 25);
 	}
-
+	
 	checkIfBottleHitsTheGround() {
 		if (this.y > 360) {
 			this.speedY = 0;
