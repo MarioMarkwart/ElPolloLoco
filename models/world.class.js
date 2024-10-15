@@ -31,6 +31,7 @@ class World {
 		setInterval(() => this.removeObjWhenOutOfWorld(), 1000);
 		setInterval(() => this.createNewClouds(), 5000)
 		setInterval(() => this.createNewBottles(), 2000)
+		setInterval(() => this.createNewCoins(), 2000)
 	}
 
 	checkCollisions() {
@@ -164,6 +165,20 @@ class World {
 			console.log(newCloud.x);
 			world.level.clouds.push(newCloud);
 			console.log(world.level.clouds);
+		}
+	}
+
+	createNewBottles(){
+		if(world.level.bottles.length < 5 && world.level.bottles.length <= 10){
+			 world.level.bottles.push(new Bottle());
+			 console.log('created new bottle');
+		}
+	}
+
+	createNewCoins(){
+		if(world.level.coins.length < 5 && world.level.coins.length <= 10){
+			 world.level.coins.push(new Coin());
+			 console.log('created new Coin');
 		}
 	}
 

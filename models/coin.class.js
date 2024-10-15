@@ -10,8 +10,8 @@ class Coin extends MovableObject {
 		super();
 		this.loadImage("assets/img/8_coin/coin_1.png");
 		this.loadImages(this.COINS_IMAGES);
-		this.x = this.getRandomInt(200, 2200);
-		this.y = this.getRandomInt(200, 350);
+		this.x = this.getRandomInt(-1238, 2250);
+		this.y = this.getRandomInt(100, 200);
 		this.width = 70;
 		this.height = 70;
 		this.randomizeFirstPictures();
@@ -26,8 +26,10 @@ class Coin extends MovableObject {
 	}
 
 	collectCoin(coin) {
-		world.level.coins.splice(world.level.coins.indexOf(coin), 1);
-		world.statusBarCoins.increaseAmount();
-		this.playSound(this.COIN_SOUND);
+		if (world.statusBarBottles.amount < 5){
+			world.level.coins.splice(world.level.coins.indexOf(coin), 1);
+			world.statusBarCoins.increaseAmount();
+			this.playSound(this.COIN_SOUND);
+		}
 	}
 }

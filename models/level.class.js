@@ -4,7 +4,7 @@ class Level {
 	backgroundObjects;
 	coins;
 	bottles;
-	level_end_min = -1438;
+	level_end_x_min = -1438;
 	level_end_x_max = 2250;
 	endboss;
 
