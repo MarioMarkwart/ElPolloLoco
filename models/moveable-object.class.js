@@ -21,9 +21,9 @@ class MovableObject extends DrawableObject {
 		}, 1000 / 60);
 	}
 
-	isAboveGround() {
+	isAboveGround(height = 180) {
 		if (this instanceof ThrowableObject) return true;
-		return this.y < 180;
+		return this.y < height;
 	}
 
 	moveLeftInterval(multiplicator = 1) {

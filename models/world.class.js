@@ -30,11 +30,12 @@ class World {
 		setInterval(() => this.checkThrowObjects(), 100);
 		setInterval(() => this.removeObjWhenOutOfWorld(), 1000);
 		setInterval(() => this.createNewClouds(), 5000)
+		setInterval(() => this.createNewBottles(), 2000)
 	}
 
 	checkCollisions() {
 		this.level.endboss.forEach((endboss) => {
-			if (this.character.isColliding(endboss)) {
+			if (this.character.isColliding(endboss) && !this.character.isAboveGround(100)) {
 				this.character.hit();
 				this.statusBarHealth.setPercentage(this.character.energy);
 			}
