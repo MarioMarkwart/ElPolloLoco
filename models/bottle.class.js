@@ -26,9 +26,11 @@ class Bottle extends MovableObject {
 	}
 
 	collectBottle(bottle) {
-		world.level.bottles.splice(world.level.bottles.indexOf(bottle), 1);
-		this.playSound(this.BOTTLE_COLLECT_SOUND);
-		world.statusBarBottles.increaseAmount();
+		if (world.statusBarBottles.amount < 5){
+			world.level.bottles.splice(world.level.bottles.indexOf(bottle), 1);
+			this.playSound(this.BOTTLE_COLLECT_SOUND);
+			world.statusBarBottles.increaseAmount();
+		}
 	}
 
 	endbossHit(bottle) {
