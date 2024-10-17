@@ -84,26 +84,26 @@ function addButtons(){
 function setStartScreen(){
 	addButtons();
 	let overlay = document.getElementById('canvasOverlay');
-	overlay.classList.remove('d-none')
-	overlay.innerHTML = '<img src="assets/img/9_intro_outro_screens/start/startscreen_1.png" width="720px" height="480px">';
+	overlay.classList.add('start');
 }
 
 function setGameScreen(){
 	let overlay = document.getElementById('canvasOverlay');
-	overlay.innerHTML = '';
+	overlay.removeAttribute('class');
 }
 
 function setFinalScreen(result){
 	let overlay = document.getElementById('canvasOverlay');
 	overlay.classList.remove('d-none');
 	if (result === 'won'){
-		overlay.innerHTML = '<img src="assets/img/9_intro_outro_screens/win/won_2.png" width="720px" height="480px" alt="you won">';
-
+		overlay.classList.add('won');
 	}
 	if (result === 'lost'){
-		overlay.innerHTML = '<img src="assets/img/9_intro_outro_screens/game_over/oh no you lost!.png" width="720px" height="480px" alt="you lost">';
+		overlay.classList.add('lost')
 		setTimeout(() => {
-			overlay.innerHTML = '<img src="assets/img/9_intro_outro_screens/game_over/game over!.png" width="720px" height="480px" alt="game over">';
+			overlay.classList.remove('lost');
+			overlay.classList.add('game-over');
+			
 		},2000)
 	}
 }
