@@ -15,11 +15,13 @@ class DrawableObject {
 	}
 
 	stopIntervals(){
+		if (this instanceof Endboss) {
+			console.log('ENDBOSS')
+		}
 		this.intervalIds.forEach((intervalId) => {
-			console.log('Interval ' + intervalId + ' stopped');
 			clearInterval(intervalId);
-			this.intervalIds = [];
 		})
+		this.intervalIds = [];
 	}
 
 

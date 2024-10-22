@@ -25,6 +25,6 @@ class Cloud extends MovableObject {
 		let times = this.getRandomFloat(0.5, 1);
 		this.width = this.width * times
 		this.height = this.height * times
-		if (times <= 0.7) {this.y = this.y + 10; console.log('times <= 0,7', times <= 0.7);}
+		if (times <= 0.7) {this.y = this.y + 10;}
 	}
 }

@@ -17,7 +17,8 @@ function setStoppableInterval(fn, time) {
 }
 
 function stopGame() {
-	this.intervalIds.forEach((id) => clearInterval(id));
+	// this.intervalIds.forEach((id) => clearInterval(id));
+	for (let i=0; i<10000;i++) clearInterval(i);
 }
 
 window.addEventListener("keydown", (event) => {
@@ -41,6 +42,7 @@ window.addEventListener("keyup", (event) => {
 
 function startGame(){
 	initLevel();
+	world = '';
 	init();
 	switchGameState('game');
 	btnPlay.src = "assets/img/buttons/restart.png";
@@ -62,11 +64,13 @@ function switchGameState(state='startScreen'){
 		case 'game':
 			setGameScreen();
 			break;
-		case 'won':
-			setFinalScreen('won');
-			break;
+			case 'won':
+				setFinalScreen('won');
+				stopGame();
+				break;
 			case 'lost':
-			setFinalScreen('lost');
+				setFinalScreen('lost');
+				stopGame();
 			break;
 	}
 }

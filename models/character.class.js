@@ -172,9 +172,6 @@ class Character extends MovableObject {
 				this.playRandomHurtSound();
 				this.lastMovement = Date.now();
 			} else if (this.isAboveGround()) {
-				if(this.isFalling) {
-					console.log('is falling');
-				}
 				this.lastMovement = Date.now();
 				this.playAnimation(this.CHARACTER_IMAGES_JUMPING);
 			} else {

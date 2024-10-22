@@ -29,9 +29,9 @@ class World {
 		setInterval(() => this.checkCollisions(), 200);
 		setInterval(() => this.checkThrowObjects(), 100);
 		setInterval(() => this.removeObjWhenOutOfWorld(), 1000);
-		setInterval(() => this.createNewClouds(), 5000)
-		setInterval(() => this.createNewBottles(), 2000)
-		setInterval(() => this.createNewCoins(), 2000)
+		setInterval(() => this.createNewClouds(), 5000);
+		setInterval(() => this.createNewBottles(), 2000);
+		setInterval(() => this.createNewCoins(), 2000);
 	}
 
 	checkCollisions() {
@@ -157,49 +157,41 @@ class World {
 		this.ctx.restore();
 	}
 
-	createNewClouds(){
+	createNewClouds() {
 		if (world.level.clouds.length < 5) {
-			console.log('new Cloud added');
 			let newCloud = new Cloud();
 			newCloud.x = 2250 + newCloud.width;
-			console.log(newCloud.x);
 			world.level.clouds.push(newCloud);
-			console.log(world.level.clouds);
 		}
 	}
 
-	createNewBottles(){
-		if(world.level.bottles.length < 5 && world.level.bottles.length <= 10){
-			 world.level.bottles.push(new Bottle());
-			 console.log('created new bottle');
+	createNewBottles() {
+		if (world.level.bottles.length < 5 && world.level.bottles.length <= 10) {
+			world.level.bottles.push(new Bottle());
 		}
 	}
 
-	createNewCoins(){
-		if(world.level.coins.length < 5 && world.level.coins.length <= 10){
-			 world.level.coins.push(new Coin());
-			 console.log('created new Coin');
+	createNewCoins() {
+		if (world.level.coins.length < 5 && world.level.coins.length <= 10) {
+			world.level.coins.push(new Coin());
 		}
 	}
 
-	checkIsOutOfWorld(obj){
+	checkIsOutOfWorld(obj) {
 		return obj.x + obj.width < -1438;
 	}
 
-	removeObjWhenOutOfWorld(){
+	removeObjWhenOutOfWorld() {
 		world.level.clouds.forEach((cloud) => {
 			if (this.checkIsOutOfWorld(cloud)) {
 				world.level.clouds.splice(world.level.clouds.indexOf(cloud), 1);
-				console.log('cloud removed', world.level.clouds);
 			}
-		})
+		});
 
-		world.level.enemies.forEach(enemy => {
+		world.level.enemies.forEach((enemy) => {
 			if (this.checkIsOutOfWorld(enemy)) {
-				world.level.enemies.splice(world.level.enemies.indexOf(enemy), 1);
-				console.log("enemy removed", world.level.enemies);
+				world.level.enemies.splice(world.level.enemies.indexOf(enemy),1);
 			}
-		}
-		)
-	}	
+		});
+	}
 }
