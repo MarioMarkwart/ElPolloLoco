@@ -6,6 +6,7 @@ class Endboss extends MovableObject {
 	energy = 100;
 	hadFirstContact = false;
 	nearToCharacter = false;
+	attackInterval;
 
 	IMAGES_WALK = [
 		"assets/img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -69,11 +70,14 @@ class Endboss extends MovableObject {
 		if (!this.checkIfEndbossIsDead()) {
 			world.statusBarEndboss.setPercentage((this.energy -= 10));
 			this.animate(this.IMAGES_HIT);
-			this.playSound(this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]);
+			this.playSound(
+				this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]
+			);
 			setTimeout(() => {
 				this.animate(this.IMAGES_ALERT);
+				if (this.hadFirstContact) this.attack();
 			}, 1000);
-		}else{
+		} else {
 			this.animate(this.IMAGES_DEAD);
 			setTimeout(() => {
 				youWon();
@@ -94,45 +98,51 @@ class Endboss extends MovableObject {
 			}
 		}, 1000);
 	}
+
 	atFirstContact() {
 		this.hadFirstContact = true;
 		this.animate(this.IMAGES_ATTACK);
 		setTimeout(() => {
-			this.animate(this.IMAGES_ALERT);
+			this.playAnimation(this.IMAGES_ALERT);
+			this.runAfterFirstContact();
 		}, 2500);
-		this.runAfterFirstContact();
-	}
-
-	attackAnimation() {
-		setInterval(() => {
-			if (this.hadFirstContact) {
-				if(this.nearToCharacter) {
-					this.animate(this.IMAGES_ATTACK);
-				} else {
-					if (world.character.x > this.x) {
-						this.otherDirection = true;
-						this.animate(this.IMAGES_WALK);
-						this.moveRightInterval(2);
-					}
-					else{
-						this.otherDirection = false;
-						this.animate(this.IMAGES_WALK);
-						this.moveLeftInterval(3);
-					}
-				}
-			}
-		},1000)
 	}
 
 	runAfterFirstContact() {
 		setInterval(() => {
 			if (this.checkDistanceToCharacter()) this.nearToCharacter = true;
 			else this.nearToCharacter = false;
-		},100)
-		this.attackAnimation();
+		}, 100);
+		this.attack();
+	}
+
+	endbossMove() {
+		if (world.character.x > this.x) {
+			this.otherDirection = true;
+			this.x += 5;
+		} else {
+			this.otherDirection = false;
+			this.x -= 5;
+		}
+		this.playAnimation(this.IMAGES_WALK);
+	}
+
+	attack() {
+		console.warn("attack");
+		this.stopIntervals();
+
+		if (this.nearToCharacter) {
+			setTimeout(() => {
+				this.playAnimation(this.IMAGES_ATTACK);
+			}, 200);
+		} else {
+			setInterval(() => {
+				this.endbossMove();
+			}, 75);
+		}
 	}
 
 	checkDistanceToCharacter() {
 		return Math.abs(world.character.x - this.x) <= 100;
-	}	
+	}
 }

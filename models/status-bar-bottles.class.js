@@ -19,7 +19,8 @@ class StatusBarBottles extends DrawableObject {
 		this.y = y;
 		this.width = 180;
 		this.height = 50;
-		this.setAmount(0);
+
+		godmode ? this.setAmount(1000) : this.setAmount(0)
 	}
 
 	increaseAmount() {

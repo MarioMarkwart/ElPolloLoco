@@ -26,19 +26,12 @@ class MovableObject extends DrawableObject {
 		return this.y < height;
 	}
 
-	moveLeftInterval(multiplicator = 1) {
-		let pixelMovement = (Math.random() * (1 - this.speed) + this.speed) * multiplicator;
-		this.setStoppableInterval(() => {
-			this.x -= pixelMovement;
-		}, 1000 / 60);
-	}
-
-	moveRightInterval(multiplicator = 1){
-		let pixelMovement = (Math.random() * (1 - this.speed) + this.speed) * multiplicator;
-		this.setStoppableInterval(() => {
-			this.x += pixelMovement;
-		}, 1000 / 60);
-	}
+	moveLeftInterval(){
+        let pixelMovement = Math.random() * (.5 - this.speed) + this.speed;
+        setInterval(() => {
+            this.x -= pixelMovement;
+        }, 1000/60); 
+    }
 
 	moveLeft() {
 		this.x -= this.speed * 50;

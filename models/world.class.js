@@ -36,7 +36,7 @@ class World {
 
 	checkCollisions() {
 		this.level.endboss.forEach((endboss) => {
-			if (this.character.isColliding(endboss) && !this.character.isAboveGround(100)) {
+			if (this.character.isColliding(endboss) && !this.character.isAboveGround(100) && !godmode) {
 				this.character.hit();
 				this.statusBarHealth.setPercentage(this.character.energy);
 			}
@@ -46,7 +46,7 @@ class World {
 				enemy.enemyDie(enemy);
 				this.character.playRandomKillSound();
 				this.character.jump();
-			} else if (this.character.isColliding(enemy)) {
+			} else if (this.character.isColliding(enemy) && !godmode) {
 				this.character.hit();
 				this.statusBarHealth.setPercentage(this.character.energy);
 			}

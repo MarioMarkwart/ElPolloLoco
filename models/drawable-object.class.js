@@ -8,16 +8,12 @@ class DrawableObject {
 	intervalIds = [];
 
 
-	setStoppableInterval(fn, time){
-		this.stopIntervals();
+	setStoppableInterval(fn, time) {
 		let id = setInterval(fn, time)
 		this.intervalIds.push(id)
 	}
 
 	stopIntervals(){
-		if (this instanceof Endboss) {
-			console.log('ENDBOSS')
-		}
 		this.intervalIds.forEach((intervalId) => {
 			clearInterval(intervalId);
 		})
@@ -34,10 +30,7 @@ class DrawableObject {
 	}
 
 	randomizeFirstPictures() {
-		this.currentImage = this.getRandomInt(
-			0,
-			Object.keys(this.imageCache).length
-		);
+		this.currentImage = this.getRandomInt(0, Object.keys(this.imageCache).length);
 	}
 
 	playAnimation(images) {

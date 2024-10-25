@@ -1,24 +1,27 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let intervalIds = [];
+let globalIntervalIds = [];
+let gameRunning = false;
+let godmode = true;
 
 function init() {
 	canvas = document.getElementById("canvas");
 	world = new World(canvas, keyboard);
 	console.log("My world is: ", world);
 	console.log("My character is: ", world.character);
+	if (godmode) console.log('Godmode is on');
 	switchGameState('startScreen')
 }
 
-function setStoppableInterval(fn, time) {
+function setStoppableInterval(fn, time, description) {
 	let id = setInterval(fn, time);
-	this.intervalIds.push(id);
+	globalIntervalIds.push({ 'interval': id, 'description': description }); //globalIntervalIds.push(id);
 }
 
 function stopGame() {
-	// this.intervalIds.forEach((id) => clearInterval(id));
-	for (let i=0; i<10000;i++) clearInterval(i);
+	globalIntervalIds.forEach((id) => clearInterval(id.interval));
+	// for (let i=0; i<10000;i++) clearInterval(i);
 }
 
 window.addEventListener("keydown", (event) => {
@@ -45,6 +48,7 @@ function startGame(){
 	world = '';
 	init();
 	switchGameState('game');
+	gameRunning = true;
 	btnPlay.src = "assets/img/buttons/restart.png";
 	btnPlay.setAttribute('onclick','restartGame()');
 }
