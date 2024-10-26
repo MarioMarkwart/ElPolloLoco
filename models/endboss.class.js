@@ -67,29 +67,6 @@ class Endboss extends MovableObject {
 		this.checkIfFirstContact();
 	}
 
-	// setBehaviour(){
-	// 	setInterval(() => {
-	// 		switch (this.behaviour) {
-	// 			case 'ALERT':
-	// 				this.playAnimation(this.IMAGES_ALERT);
-	// 				break;
-	// 			case "HIT":
-	// 				this.playAnimation(this.IMAGES_HIT);
-	// 				break;
-	// 			case "DEAD":
-	// 				this.playAnimation(this.IMAGES_DEAD);
-	// 				break;
-	// 			case "ATTACK":
-	// 				this.playAnimation(this.IMAGES_ATTACK);
-	// 				break;
-	// 			case "WALK":
-	// 				this.playAnimation(this.IMAGES_WALK);
-	// 				break;
-	// 		}
-	// 		console.log('behaviour: ', this.behaviour)
-	// 	},300);
-	// }
-
 	setBehaviour(){
 		setInterval(() => {
 			if(this.behaviour === 'DEAD'){
@@ -104,8 +81,8 @@ class Endboss extends MovableObject {
 				this.playAnimation(this.IMAGES_ALERT);
 			}
 			console.log('behaviour: ', this.behaviour, 'gotHit: ', this.gotHit)
-	},200)
-}
+		},200)
+	}
 
 
 	checkIfEndbossIsDead() {
