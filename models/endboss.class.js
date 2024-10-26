@@ -6,7 +6,8 @@ class Endboss extends MovableObject {
 	energy = 100;
 	hadFirstContact = false;
 	nearToCharacter = false;
-	attackInterval;
+	gotHit = false;
+	behaviour = 'ALERT'
 
 	IMAGES_WALK = [
 		"assets/img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -62,28 +63,50 @@ class Endboss extends MovableObject {
 		this.loadImages(this.IMAGES_HIT);
 		this.loadImages(this.IMAGES_DEAD);
 		this.loadSounds(this.SOUNDS_HIT);
-		this.animate(this.IMAGES_ALERT);
+		this.setBehaviour();
 		this.checkIfFirstContact();
 	}
 
-	hit() {
-		if (!this.checkIfEndbossIsDead()) {
-			world.statusBarEndboss.setPercentage((this.energy -= 10));
-			this.animate(this.IMAGES_HIT);
-			this.playSound(
-				this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]
-			);
-			setTimeout(() => {
-				this.animate(this.IMAGES_ALERT);
-				if (this.hadFirstContact) this.attack();
-			}, 1000);
-		} else {
-			this.animate(this.IMAGES_DEAD);
-			setTimeout(() => {
-				youWon();
-			}, 500);
-		}
-	}
+	// setBehaviour(){
+	// 	setInterval(() => {
+	// 		switch (this.behaviour) {
+	// 			case 'ALERT':
+	// 				this.playAnimation(this.IMAGES_ALERT);
+	// 				break;
+	// 			case "HIT":
+	// 				this.playAnimation(this.IMAGES_HIT);
+	// 				break;
+	// 			case "DEAD":
+	// 				this.playAnimation(this.IMAGES_DEAD);
+	// 				break;
+	// 			case "ATTACK":
+	// 				this.playAnimation(this.IMAGES_ATTACK);
+	// 				break;
+	// 			case "WALK":
+	// 				this.playAnimation(this.IMAGES_WALK);
+	// 				break;
+	// 		}
+	// 		console.log('behaviour: ', this.behaviour)
+	// 	},300);
+	// }
+
+	setBehaviour(){
+		setInterval(() => {
+			if(this.behaviour === 'DEAD'){
+				this.playAnimation(this.IMAGES_DEAD);
+			} else if(this.behaviour === 'HIT'){
+				this.playAnimation(this.IMAGES_HIT);
+			} else if(this.behaviour === 'ATTACK'){
+				this.playAnimation(this.IMAGES_ATTACK);
+			} else if(this.behaviour === 'WALK'){
+				this.playAnimation(this.IMAGES_WALK);
+			} else if(this.behaviour === 'ALERT'){
+				this.playAnimation(this.IMAGES_ALERT);
+			}
+			console.log('behaviour: ', this.behaviour, 'gotHit: ', this.gotHit)
+	},200)
+}
+
 
 	checkIfEndbossIsDead() {
 		return this.energy <= 0;
@@ -99,13 +122,14 @@ class Endboss extends MovableObject {
 		}, 1000);
 	}
 
+
 	atFirstContact() {
 		this.hadFirstContact = true;
-		this.animate(this.IMAGES_ATTACK);
+		this.behaviour = 'ATTACK';
 		setTimeout(() => {
-			this.playAnimation(this.IMAGES_ALERT);
+			this.behaviour = 'ALERT';
 			this.runAfterFirstContact();
-		}, 2500);
+		}, 1500);
 	}
 
 	runAfterFirstContact() {
@@ -116,7 +140,26 @@ class Endboss extends MovableObject {
 		this.attack();
 	}
 
+	attack() {
+		console.warn("attack");
+		setInterval(() => {
+			if (this.checkIfEndbossIsDead()){
+				this.behaviour = 'DEAD';
+			}
+			else if (this.gotHit){
+				this.behaviour = 'HIT';
+			}
+			else if (this.nearToCharacter) {
+				this.behaviour = 'ATTACK';
+
+			} else {
+				this.endbossMove();
+			}
+		}, 100);
+	}
+
 	endbossMove() {
+		this.behaviour = "WALK";
 		if (world.character.x > this.x) {
 			this.otherDirection = true;
 			this.x += 5;
@@ -124,21 +167,22 @@ class Endboss extends MovableObject {
 			this.otherDirection = false;
 			this.x -= 5;
 		}
-		this.playAnimation(this.IMAGES_WALK);
 	}
 
-	attack() {
-		console.warn("attack");
-		this.stopIntervals();
-
-		if (this.nearToCharacter) {
+	hit() {
+		if (!this.checkIfEndbossIsDead()) {
+			this.gotHit = true
+			this.behaviour = 'HIT';
+			world.statusBarEndboss.setPercentage((this.energy -= 10));
+			this.playSound(
+				this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]
+			);
 			setTimeout(() => {
-				this.playAnimation(this.IMAGES_ATTACK);
-			}, 200);
+				this.gotHit = false;
+			}, 1000);
 		} else {
-			setInterval(() => {
-				this.endbossMove();
-			}, 75);
+			this.behaviour = 'DEAD'
+			setTimeout(() => { youWon();}, 500);
 		}
 	}
 
