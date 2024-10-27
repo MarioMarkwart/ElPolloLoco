@@ -1,9 +1,8 @@
 class Character extends MovableObject {
 	x = 120;
 	y = 180;
-	immunity = true;
 	lastMovement;
-	energy = 50;
+	energy = 100;
 
 	CHARACTER_IMAGES_WALKING = [
 		'assets/img/2_character_pepe/2_walk/W-21.png',

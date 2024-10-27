@@ -10,8 +10,8 @@ function init() {
 	world = new World(canvas, keyboard);
 	console.log("My world is: ", world);
 	console.log("My character is: ", world.character);
-	if (godmode) console.log('Godmode is on');
 	switchGameState('startScreen')
+	addListenerForGodmode();
 }
 
 function setStoppableInterval(fn, time, description) {
@@ -152,4 +152,22 @@ function stopAllSounds() {
 	world.level.enemies.forEach((enemy) =>
 		Object.keys(enemy.soundCache).forEach((sound) => enemy.soundCache[sound].pause())
 	);
+}
+
+function addListenerForGodmode(){
+	document.addEventListener("keyup", (event) => {
+		if (event.key === "g") toggleGodmode();
+	});
+}
+
+function toggleGodmode(){
+	godmode = !godmode;
+	if (godmode){
+		console.warn('Godmode is on');
+		world.statusBarBottles.setAmount(500);
+	} 
+	else {
+		console.warn('Godmode is off');
+		world.statusBarBottles.setAmount(5);
+	}
 }
