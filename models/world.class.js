@@ -1,9 +1,9 @@
 class World {
 	character = new Character();
-	statusBarHealth = new StatusBarHealth(40, 0);
-	statusBarCoins = new StatusBarCoins(40, 40);
-	statusBarBottles = new StatusBarBottles(40, 80);
-	statusBarEndboss = new StatusBarEndboss(480, 0);
+	statusBarHealth = new StatusBarHealth();
+	statusBarCoins = new StatusBarCoins();
+	statusBarBottles = new StatusBarBottles();
+	statusBarEndboss = new StatusBarEndboss();
 	throwableObjects = [];
 	level = level1;
 	canvas;

@@ -1,4 +1,4 @@
-class StatusBarBottles extends DrawableObject {
+class StatusBarBottles extends StatusBar {
 	IMAGES = [
 		"assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/green/0.png",
 		"assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/green/20.png",
@@ -8,43 +8,13 @@ class StatusBarBottles extends DrawableObject {
 		"assets/img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png",
 	];
 
-	amount = 0;
-	x;
-	y;
+	y = 80;
 
-	constructor(x, y) {
+	constructor() {
 		super();
 		this.loadImages(this.IMAGES);
-		this.x = x;
-		this.y = y;
-		this.width = 180;
-		this.height = 50;
+		// this.setAmount(this.amount);
 
 		godmode ? this.setAmount(1000) : this.setAmount(0)
-	}
-
-	increaseAmount() {
-		this.amount++;
-		this.setAmount(this.amount);
-	}
-
-	decreaseAmount() {
-		this.amount--;
-		this.setAmount(this.amount);
-	}
-
-	setAmount(amount) {
-		this.amount = amount;
-		let path = this.IMAGES[this.resolveImageIndex()];
-		this.img = this.imageCache[path];
-	}
-
-	resolveImageIndex() {
-		if (this.amount == 0) return 0;
-		else if (this.amount == 1) return 1;
-		else if (this.amount == 2) return 2;
-		else if (this.amount == 3) return 3;
-		else if (this.amount == 4) return 4;
-		else return 5;
 	}
 }
