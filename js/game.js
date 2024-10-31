@@ -42,6 +42,26 @@ window.addEventListener("keyup", (event) => {
 	if (event.key === " ") keyboard.SPACE = false;
 });
 
+window.addEventListener('touchstart', (event) => {
+	if (event.target.id === 'btnLeft')  keyboard.LEFT = true; 
+	if (event.target.id === 'btnRight')  keyboard.RIGHT = true; 
+	if (event.target.id === 'btnJump')  keyboard.SPACE = true; 
+	if (event.target.id === 'btnThrow')  keyboard.D = true; 
+});
+
+window.addEventListener('touchend', (event) => {
+	if (event.target.id === 'btnLeft')  keyboard.LEFT = false; 
+	if (event.target.id === 'btnRight')  keyboard.RIGHT = false; 
+	if (event.target.id === 'btnJump')  keyboard.SPACE = false; 
+	if (event.target.id === 'btnThrow')  keyboard.D = false; 
+});
+
+window.addEventListener('touchcancel', (event) => {
+	if (event.target.id === 'btnLeft')  keyboard.LEFT = false; 
+	if (event.target.id === 'btnRight')  keyboard.RIGHT = false; 
+	if (event.target.id === 'btnJump')  keyboard.SPACE = false; 
+	if (event.target.id === 'btnThrow')  keyboard.D = false; 
+});
 
 function startGame(){
 	initLevel();
@@ -53,13 +73,16 @@ function startGame(){
 	btnPlay.setAttribute('onclick','restartGame()');
 }
 
+
 function gameLost(){
 	switchGameState('lost');
 }
 
+
 function gameWon(){
 	switchGameState('won');
 }
+
 function switchGameState(state='startScreen'){
 	switch(state){
 		case 'startScreen':
@@ -68,14 +91,14 @@ function switchGameState(state='startScreen'){
 		case 'game':
 			setGameScreen();
 			break;
-			case 'won':
-				setFinalScreen('won');
-				stopGame();
-				break;
-			case 'lost':
-				setFinalScreen('lost');
-				stopGame();
+		case 'won':
+			setFinalScreen('won');
+			stopGame();
 			break;
+		case 'lost':
+			setFinalScreen('lost');
+			stopGame();
+		break;
 	}
 }
 

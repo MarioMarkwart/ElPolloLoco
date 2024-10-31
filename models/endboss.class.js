@@ -80,7 +80,6 @@ class Endboss extends MovableObject {
 			} else if(this.behaviour === 'ALERT'){
 				this.playAnimation(this.IMAGES_ALERT);
 			}
-			console.log('behaviour: ', this.behaviour, 'gotHit: ', this.gotHit)
 		},200)
 	}
 
