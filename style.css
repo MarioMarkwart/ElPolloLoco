@@ -1,19 +1,23 @@
-*{
+:root {
+    --progress: 0%;
+}
+
+* {
     padding: 0;
-    margin:0;
+    margin: 0;
     box-sizing: border-box;
 }
 
-h1{
+h1 {
     margin-block: 22px;
 }
 
-html{
+html {
     height: 100%;
     font-family: system-ui, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-body{
+body {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,7 +29,7 @@ body{
     background-size: cover;
 }
 
-#content{
+#content {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -33,7 +37,7 @@ body{
     align-items: center;
 }
 
-canvas{
+canvas {
     /* background-color: black; */
     background-image: url('assets/img/background.jpg');
     width: 100%;
@@ -41,7 +45,7 @@ canvas{
     max-height: 100%;
 }
 
-#canvasOverlay{
+#canvasOverlay {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -49,48 +53,54 @@ canvas{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
+    opacity: calc(--progress / 100);
 
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-    }
+}
 
-.lost{
+.lost {
     background: url("assets/img/9_intro_outro_screens/game_over/oh no you lost!.png");
 
 }
 
-.won{
+.won {
     background: url("assets/img/9_intro_outro_screens/win/won_2.png");
     background-size: contain !important;
     background-color: rgba(0, 0, 0, .3);
 }
 
-.game-over{
+.game-over {
     background: url("assets/img/9_intro_outro_screens/game_over/game over!.png");
 }
 
-.start{
+#loading-screen {
+    z-index: 200;
+    transform: rotate(15deg);
+}
+
+.start {
     background: url("assets/img/9_intro_outro_screens/start/startscreen_1.png");
     background-size: contain !important;
     /* FIXME: height not 480px!!! */
 }
 
-.buttons{
+.buttons {
     position: absolute;
-    top:0;
+    top: 0;
     padding: 5px;
     z-index: 500000;
     transform: translateX(-84px);
 }
 
-.btn{
+.btn {
     width: 50px;
-    top:0;
+    top: 0;
 
-    &:hover{
+    &:hover {
         cursor: pointer;
 
         filter: brightness(70%);
@@ -100,45 +110,39 @@ canvas{
         -o-transition: all 125ms ease;
         -ms-transition: all 125ms ease;
         transition: all 125ms ease;
-
-        
     }
 }
 
-.d-none{
+.d-none {
     display: none;
 }
-/* #btnPlay{
-    position: absolute;
-    top:0
-} */
 
-.keyboard-keys{
-    padding: 10px;
+.keyboard-keys {
     display: flex;
+    padding: 10px;
     width: 100%;
+    max-width: 720px;
     height: fit-content;
     z-index: 100;
+    justify-content: space-between;
 }
 
-.key{
+.key {
     display: flex;
     flex-direction: row;
-    width: 100%;
     height: 50px;
     align-items: center;
     gap: 10px;
     font-weight: bold;
 
-    & img{
+    & img {
         width: 50px;
         height: 50px;
 
     }
 
-    & :hover{
+    & :hover {
         cursor: pointer;
-
         filter: brightness(70%);
         -webkit-filter: brightness(70%);
         -webkit-transition: all 125ms ease;

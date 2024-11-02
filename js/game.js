@@ -3,25 +3,36 @@ let world;
 let keyboard = new Keyboard();
 let globalIntervalIds = [];
 let gameRunning = false;
-let godmode = true;
+let godmode = false;
+let	totalImages = 0;
+let totalImagesLoaded = 0;
+let totalImagesLoadedPercent = 0;
+let totalImagesLoadedPercentOld = 999;
+let allGraphicsLoaded = false;
+let loadingScreenImagesCache = {};
+
+
 
 function init() {
 	canvas = document.getElementById("canvas");
 	world = new World(canvas, keyboard);
 	console.log("My world is: ", world);
 	console.log("My character is: ", world.character);
-	switchGameState('startScreen')
 	addListenerForGodmode();
 }
 
 function setStoppableInterval(fn, time, description) {
 	let id = setInterval(fn, time);
-	globalIntervalIds.push({ 'interval': id, 'description': description }); //globalIntervalIds.push(id);
+	globalIntervalIds.push({ 'interval': id, 'description': description });
 }
 
 function stopGame() {
-	globalIntervalIds.forEach((id) => clearInterval(id.interval));
-	// for (let i=0; i<10000;i++) clearInterval(i);
+	for (let i=0; i<10000;i++){
+		clearInterval(i);
+		clearTimeout(i);
+	}
+	gameRunning = false;
+	console.log('Game stopped');
 }
 
 window.addEventListener("keydown", (event) => {
@@ -63,14 +74,54 @@ window.addEventListener('touchcancel', (event) => {
 	if (event.target.id === 'btnThrow')  keyboard.D = false; 
 });
 
+
 function startGame(){
+	switchGameState('loadingScreen');
 	initLevel();
 	world = '';
 	init();
-	switchGameState('game');
 	gameRunning = true;
 	btnPlay.src = "assets/img/buttons/restart.png";
 	btnPlay.setAttribute('onclick','restartGame()');
+}
+
+
+const loadingScreenImages = [
+  'assets/img/loadingScreen/loadingScreen_0.png',
+  'assets/img/loadingScreen/loadingScreen_10.png',
+  'assets/img/loadingScreen/loadingScreen_20.png',
+  'assets/img/loadingScreen/loadingScreen_30.png',
+  'assets/img/loadingScreen/loadingScreen_40.png',
+  'assets/img/loadingScreen/loadingScreen_50.png',
+  'assets/img/loadingScreen/loadingScreen_60.png',
+  'assets/img/loadingScreen/loadingScreen_70.png',
+  'assets/img/loadingScreen/loadingScreen_80.png',
+  'assets/img/loadingScreen/loadingScreen_90.png',
+  'assets/img/loadingScreen/loadingScreen_100.png',
+];
+
+
+function preloadLoadingScreenImages() {
+	loadingScreenImages.forEach(imagePath => {
+	  const image = new Image();
+	  image.src = imagePath;
+	  loadingScreenImagesCache[imagePath] = image;
+	});
+  }
+
+function setLoadingScreenImage() {
+	let loadingScreen = document.getElementById('loading-screen');
+	
+	if (totalImagesLoadedPercent !== totalImagesLoadedPercentOld) {
+		const imageSrc = loadingScreenImagesCache['assets/img/loadingScreen/loadingScreen_' + totalImagesLoadedPercent + '.png'].src;
+		loadingScreen.innerHTML = `<img src="${imageSrc}">`
+		totalImagesLoadedPercentOld = totalImagesLoadedPercent;
+	}
+
+	if (totalImagesLoaded == totalImages) {
+		loadingScreen.style.display = 'none';
+		switchGameState('game');
+	}
 }
 
 
@@ -83,13 +134,24 @@ function gameWon(){
 	switchGameState('won');
 }
 
+
+function removeClassesFromOverlay(){
+	let overlay = document.getElementById('canvasOverlay');
+	overlay.removeAttribute('class');
+}
+
+
 function switchGameState(state='startScreen'){
+	
 	switch(state){
 		case 'startScreen':
 			setStartScreen();
 			break;
+		case 'loadingScreen':
+			// setLoadingScreen();
+			break;
 		case 'game':
-			setGameScreen();
+			removeClassesFromOverlay();
 			break;
 		case 'won':
 			setFinalScreen('won');
@@ -98,7 +160,6 @@ function switchGameState(state='startScreen'){
 		case 'lost':
 			setFinalScreen('lost');
 			stopGame();
-		break;
 	}
 }
 
@@ -113,14 +174,10 @@ function addButtons(){
 	}
 
 function setStartScreen(){
+	preloadLoadingScreenImages();
 	addButtons();
 	let overlay = document.getElementById('canvasOverlay');
 	overlay.classList.add('start');
-}
-
-function setGameScreen(){
-	let overlay = document.getElementById('canvasOverlay');
-	overlay.removeAttribute('class');
 }
 
 function setFinalScreen(result){
@@ -158,7 +215,8 @@ function youLost(){
 }
 
 function restartGame(){
-	stopAllIntervals();
+	stopGame()
+	// stopAllIntervals();
 	stopAllSounds();
 	btnPlay.src = "assets/img/buttons/play.png";
 	btnPlay.setAttribute('onclick','startGame()');

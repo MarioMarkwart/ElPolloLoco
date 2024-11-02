@@ -13,7 +13,6 @@ class StatusBarBottles extends StatusBar {
 	constructor() {
 		super();
 		this.loadImages(this.IMAGES);
-		// this.setAmount(this.amount);
 
 		godmode ? this.setAmount(1000) : this.setAmount(0)
 	}

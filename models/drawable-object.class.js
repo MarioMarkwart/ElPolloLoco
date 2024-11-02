@@ -7,7 +7,6 @@ class DrawableObject {
 	setCurrentImage = false;
 	intervalIds = [];
 
-
 	setStoppableInterval(fn, time) {
 		this.stopIntervals();
 		let id = setInterval(fn, time)
@@ -64,9 +63,17 @@ class DrawableObject {
 
 	loadImages(arr) {
 		arr.forEach((path) => {
+			totalImages++
 			const img = new Image();
 			img.src = path;
 			this.imageCache[path] = img;
+			if (!gameRunning){
+				img.onload = function() {
+					totalImagesLoaded++;
+					totalImagesLoadedPercent = Math.round(100 * (totalImagesLoaded / totalImages) / 10) * 10;		  
+					setLoadingScreenImage();
+				}
+			}
 		});
 	}
 

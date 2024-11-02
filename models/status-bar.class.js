@@ -15,7 +15,6 @@ class StatusBar extends DrawableObject {
     }
 
     increaseAmount() {
-        console.log(this)
 		this.amount++;
         if (this instanceof StatusBarCoins){
             if (this.amount == 5) {
