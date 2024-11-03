@@ -111,25 +111,6 @@ class Character extends MovableObject {
 		this.applyGravity();
 	}
 
-	playRandomJumpingSound() {
-		let sound = this.soundCache[this.CHARACTER_JUMPING_SOUNDS[this.getRandomInt(0, this.CHARACTER_JUMPING_SOUNDS.length)]];
-		sound.play();
-	}
-
-	playRandomHurtSound() {
-		let sound = this.soundCache[this.CHARACTER_HURT_SOUNDS[this.getRandomInt(0, this.CHARACTER_HURT_SOUNDS.length)]];
-		
-		sound.play();
-
-		//FIXME: a lot of sounds are running. How can I fix it that only one sound is playing at the same time?
-		//and when this sound is finished and Pepe is hurt then the next sound should be played
-	}
-
-	playRandomKillSound(){
-		let sound = this.soundCache[this.CHARACTER_KILLING_ENEMY_SOUNDS[this.getRandomInt(0, this.CHARACTER_KILLING_ENEMY_SOUNDS.length)]];
-		sound.play();
-	}
-
 	playWinSound() {
 		this.playSound(this.CHARACTER_WON_SOUND, .2);
 		this.jump();
@@ -141,34 +122,40 @@ class Character extends MovableObject {
 
 	animateCharacter() {
 		setInterval(() => {
-			if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x_max) {
-				this.moveRight();
-				this.playSound(this.CHARACTER_WALKING_SOUND);
+			if (!world.isPaused) {
+				if (
+					this.world.keyboard.RIGHT &&
+					this.x < this.world.level.level_end_x_max
+				) {
+					this.moveRight();
+					this.playSound(this.CHARACTER_WALKING_SOUND);
+				}
+				if (this.world.keyboard.LEFT && this.x > -1300) {
+					this.moveLeft();
+					this.playSound(this.CHARACTER_WALKING_SOUND);
+				}
+				if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+					this.currentImage = 0;
+					this.jump();
+					this.playRandomSound(this.CHARACTER_JUMPING_SOUNDS);
+				}
 			}
-			if (this.world.keyboard.LEFT && this.x > -1300) {
-				this.moveLeft();
-				this.playSound(this.CHARACTER_WALKING_SOUND);
-			}
-			if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-				this.currentImage = 0;
-				this.jump();
-				this.playRandomJumpingSound();
-			}
-
 			this.world.camera_x = -this.x + 100;
 		}, 1000 / 60);
 
 		// animations
 		setInterval(() => {
-			if (this.isDead()) {
-				this.playAnimation(this.CHARACTER_IMAGES_DEAD);
-				this.stopSound(this.CHARACTER_WALKING_SOUND);
+			if(!world.isPaused) {
+				
+				if (this.isDead()) {
+					this.playAnimation(this.CHARACTER_IMAGES_DEAD);
+					this.stopSound(this.CHARACTER_WALKING_SOUND);
 				this.stopAllSounds(this.CHARACTER_HURT_SOUNDS);
 				this.stopAllSounds(this.CHARACTER_JUMPING_SOUNDS);
 				youLost();
 			} else if (this.isHurt()) {
 				this.playAnimation(this.CHARACTER_IMAGES_HURT);
-				this.playRandomHurtSound();
+				this.playRandomSound(this.CHARACTER_HURT_SOUNDS);
 				this.lastMovement = Date.now();
 			} else if (this.isAboveGround()) {
 				this.lastMovement = Date.now();
@@ -190,6 +177,7 @@ class Character extends MovableObject {
 					this.stopSound(this.CHARACTER_WALKING_SOUND);
 				}
 			}
+		}
 		}, 125);
 	}
 }

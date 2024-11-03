@@ -11,10 +11,14 @@ let totalImagesLoadedPercentOld = 999;
 let allGraphicsLoaded = false;
 let loadingScreenImagesCache = {};
 
+function init(){
+	preloadLoadingScreenImages();
+	switchGameState('startScreen');
+}
 
-
-function init() {
+function initWorld() {
 	canvas = document.getElementById("canvas");
+	world = '';
 	world = new World(canvas, keyboard);
 	console.log("My world is: ", world);
 	console.log("My character is: ", world.character);
@@ -35,54 +39,11 @@ function stopGame() {
 	console.log('Game stopped');
 }
 
-window.addEventListener("keydown", (event) => {
-	if (event.key === "ArrowLeft") keyboard.LEFT = true;
-	if (event.key === "ArrowRight") keyboard.RIGHT = true;
-	if (event.key === "ArrowUp") keyboard.UP = true;
-	if (event.key === "ArrowDown") keyboard.DOWN = true;
-	if (event.key === "d") keyboard.D = true;
-	if (event.key === " ") keyboard.SPACE = true;
-});
-
-window.addEventListener("keyup", (event) => {
-	if (event.key === "ArrowLeft") keyboard.LEFT = false;
-	if (event.key === "ArrowRight") keyboard.RIGHT = false;
-	if (event.key === "ArrowUp") keyboard.UP = false;
-	if (event.key === "ArrowDown") keyboard.DOWN = false;
-	if (event.key === "d") keyboard.D = false;
-	if (event.key === " ") keyboard.SPACE = false;
-});
-
-window.addEventListener('touchstart', (event) => {
-	if (event.target.id === 'btnLeft')  keyboard.LEFT = true; 
-	if (event.target.id === 'btnRight')  keyboard.RIGHT = true; 
-	if (event.target.id === 'btnJump')  keyboard.SPACE = true; 
-	if (event.target.id === 'btnThrow')  keyboard.D = true; 
-});
-
-window.addEventListener('touchend', (event) => {
-	if (event.target.id === 'btnLeft')  keyboard.LEFT = false; 
-	if (event.target.id === 'btnRight')  keyboard.RIGHT = false; 
-	if (event.target.id === 'btnJump')  keyboard.SPACE = false; 
-	if (event.target.id === 'btnThrow')  keyboard.D = false; 
-});
-
-window.addEventListener('touchcancel', (event) => {
-	if (event.target.id === 'btnLeft')  keyboard.LEFT = false; 
-	if (event.target.id === 'btnRight')  keyboard.RIGHT = false; 
-	if (event.target.id === 'btnJump')  keyboard.SPACE = false; 
-	if (event.target.id === 'btnThrow')  keyboard.D = false; 
-});
-
-
 function startGame(){
-	switchGameState('loadingScreen');
 	initLevel();
-	world = '';
-	init();
+	initWorld();
 	gameRunning = true;
-	btnPlay.src = "assets/img/buttons/restart.png";
-	btnPlay.setAttribute('onclick','restartGame()');
+	changePlayButton()
 }
 
 
@@ -136,19 +97,17 @@ function gameWon(){
 
 
 function removeClassesFromOverlay(){
-	let overlay = document.getElementById('canvasOverlay');
-	overlay.removeAttribute('class');
+	let overlay = document.getElementById('gamestate-screen');
+	if(gameRunning){
+		overlay.removeAttribute('class');
+	}
 }
 
 
-function switchGameState(state='startScreen'){
-	
+function switchGameState(state){
 	switch(state){
 		case 'startScreen':
 			setStartScreen();
-			break;
-		case 'loadingScreen':
-			// setLoadingScreen();
 			break;
 		case 'game':
 			removeClassesFromOverlay();
@@ -160,28 +119,33 @@ function switchGameState(state='startScreen'){
 		case 'lost':
 			setFinalScreen('lost');
 			stopGame();
+			break;
+		case 'restart':
+			restartGame();
+			break;
 	}
 }
 
 
-function addButtons(){
-	console.log('addButtons');
-	
-	document.getElementById('buttons').innerHTML = /*html*/`
-		<img class="btn" id="btnPlay" src="assets/img/buttons/play.png" onclick="startGame()">
-		<img class="btn" id="btnHelp" src="assets/img/buttons/help.png">
-		<img class="btn" id="btnFullscreen" src="assets/img/buttons/fullscreenOn.png"  onclick="fullscreenOn()" >`
+function changePlayButton(){
+	let btn = document.getElementById('btn-play');
+	if (gameRunning){
+		btn.src = 'assets/img/buttons/restart.png'
+		btn.setAttribute('onclick', 'switchGameState("restart")');
+	} else {
+		btn.src = 'assets/img/buttons/play.png';
+		btn.setAttribute('onclick', 'startGame()');
 	}
+}
+
 
 function setStartScreen(){
-	preloadLoadingScreenImages();
-	addButtons();
-	let overlay = document.getElementById('canvasOverlay');
+	let overlay = document.getElementById('gamestate-screen');
 	overlay.classList.add('start');
 }
 
 function setFinalScreen(result){
-	let overlay = document.getElementById('canvasOverlay');
+	let overlay = document.getElementById('gamestate-screen');
 	overlay.classList.remove('d-none');
 	if (result === 'won'){
 		overlay.classList.add('won');
@@ -191,7 +155,6 @@ function setFinalScreen(result){
 		setTimeout(() => {
 			overlay.classList.remove('lost');
 			overlay.classList.add('game-over');
-			
 		},2000)
 	}
 }
@@ -215,11 +178,8 @@ function youLost(){
 }
 
 function restartGame(){
-	stopGame()
-	// stopAllIntervals();
+	stopGame();
 	stopAllSounds();
-	btnPlay.src = "assets/img/buttons/play.png";
-	btnPlay.setAttribute('onclick','startGame()');
 	startGame();
 }
 

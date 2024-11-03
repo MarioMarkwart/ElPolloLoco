@@ -119,17 +119,20 @@ class Endboss extends MovableObject {
 	attack() {
 		console.warn("attack");
 		setInterval(() => {
-			if (this.checkIfEndbossIsDead()){
-				this.behaviour = 'DEAD';
-			}
-			else if (this.gotHit){
-				this.behaviour = 'HIT';
-			}
-			else if (this.nearToCharacter) {
-				this.behaviour = 'ATTACK';
+			if (!world.isPaused){
 
-			} else {
-				this.endbossMove();
+				if (this.checkIfEndbossIsDead()){
+					this.behaviour = 'DEAD';
+				}
+				else if (this.gotHit){
+					this.behaviour = 'HIT';
+				}
+				else if (this.nearToCharacter) {
+					this.behaviour = 'ATTACK';
+					
+				} else {
+					this.endbossMove();
+				}
 			}
 		}, 100);
 	}
@@ -150,9 +153,7 @@ class Endboss extends MovableObject {
 		if (!this.checkIfEndbossIsDead()) {
 			this.gotHit = true
 			this.behaviour = 'HIT';
-			this.playSound(
-				this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]
-			);
+			this.playRandomSound(this.SOUNDS_HIT);
 			setTimeout(() => {
 				this.gotHit = false;
 			}, 1000);

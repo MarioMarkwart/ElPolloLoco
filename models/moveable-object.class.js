@@ -29,7 +29,9 @@ class MovableObject extends DrawableObject {
 	moveLeftInterval(){
         let pixelMovement = Math.random() * (.5 - this.speed) + this.speed;
         setInterval(() => {
-            this.x -= pixelMovement;
+			if(!world.isPaused){
+				this.x -= pixelMovement;
+			}
         }, 1000/60); 
     }
 
@@ -94,12 +96,18 @@ class MovableObject extends DrawableObject {
 	}
 
 	playSound(path, delayInMs = 0) {
-		// this.soundCache[path].play();
-		if (delayInMs !== 0) console.log(path, delayInMs);
+		if(this instanceof Chicken || this instanceof ChickenSmall) console.log(path, delayInMs);
 		setTimeout(() => {
 		    this.soundCache[path].play();
 		}, delayInMs) //FIXME: set to 'delay' when inserted Title-Screen - will work after user interacted with the page
 	}
+
+	
+	playRandomSound(arr){
+		let sound = this.soundCache[arr[this.getRandomInt(0, arr.length)]];
+		sound.play();
+	}
+
 
 	stopAllSounds(arr) {
 		arr.forEach((sound) => {

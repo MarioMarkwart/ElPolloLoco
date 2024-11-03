@@ -10,6 +10,8 @@ class World {
 	ctx;
 	keyboard;
 	camera_x = -100;
+	isPaused = false;
+	animationFrameId;
 
 	constructor(canvas, keyboard) {
 		this.ctx = canvas.getContext("2d");
@@ -35,8 +37,13 @@ class World {
 	}
 
 	checkCollisions() {
+		if (!this.isPaused) {
 		this.level.endboss.forEach((endboss) => {
-			if (this.character.isColliding(endboss) && !this.character.isAboveGround(100) && !godmode) {
+			if (
+				this.character.isColliding(endboss) &&
+				!this.character.isAboveGround(100) &&
+				!godmode
+			) {
 				this.character.hit();
 				this.statusBarHealth.setPercentage(this.character.energy);
 			}
@@ -44,7 +51,7 @@ class World {
 		this.level.enemies.forEach((enemy) => {
 			if (this.character.isColliding(enemy) && this.character.isFalling) {
 				enemy.enemyDie(enemy);
-				this.character.playRandomKillSound();
+				this.character.playRandomSound(this.character.CHARACTER_KILLING_ENEMY_SOUNDS);
 				this.character.jump();
 			} else if (this.character.isColliding(enemy) && !godmode) {
 				this.character.hit();
@@ -78,6 +85,7 @@ class World {
 			}
 		});
 	}
+}
 
 	checkThrowObjects() {
 		if (this.keyboard.D) {
@@ -97,32 +105,49 @@ class World {
 			this.level.clouds[i].makeBackgroundCloudSmaller(i);
 	}
 	draw() {
-		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		this.ctx.translate(this.camera_x, 0);
-		this.addObjectsToMap(this.level.backgroundObjects);
-		this.addObjectsToMap(this.level.enemies);
-		this.addObjectsToMap(this.level.endboss);
-		this.addObjectsToMap(this.level.clouds);
-		this.addObjectsToMap(this.throwableObjects);
-		this.addObjectsToMap(this.level.coins);
-		this.addObjectsToMap(this.level.bottles);
-		this.ctx.translate(-this.camera_x, 0);
-		this.addToMap(this.statusBarHealth);
-		this.addToMap(this.statusBarCoins);
-		this.addToMap(this.statusBarBottles);
-		this.addToMap(this.statusBarEndboss);
-		this.ctx.translate(this.camera_x, 0);
+		if (!this.isPaused) {
+			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+			this.ctx.translate(this.camera_x, 0);
+			this.addObjectsToMap(this.level.backgroundObjects);
+			this.addObjectsToMap(this.level.enemies);
+			this.addObjectsToMap(this.level.endboss);
+			this.addObjectsToMap(this.level.clouds);
+			this.addObjectsToMap(this.throwableObjects);
+			this.addObjectsToMap(this.level.coins);
+			this.addObjectsToMap(this.level.bottles);
+			this.ctx.translate(-this.camera_x, 0);
+			this.addToMap(this.statusBarHealth);
+			this.addToMap(this.statusBarCoins);
+			this.addToMap(this.statusBarBottles);
+			this.addToMap(this.statusBarEndboss);
+			this.ctx.translate(this.camera_x, 0);
 
-		this.addToMap(this.character);
-		this.ctx.translate(-this.camera_x, 0);
+			this.addToMap(this.character);
+			this.ctx.translate(-this.camera_x, 0);
 
-		requestAnimationFrame(() => this.draw());
+			this.animationFrameId = requestAnimationFrame(() => this.draw());
+		}
 	}
 
 	addObjectsToMap(objects) {
 		objects.forEach((o) => {
 			this.addToMap(o);
 		});
+	}
+
+	pause() {
+		//TODO: stop all intervals
+
+		this.isPaused = true;
+		gameRunning = false;
+		cancelAnimationFrame(this.animationFrameId);
+	}
+
+	// Function to resume the animation
+	resume() {
+		gameRunning = true;
+		this.isPaused = false;
+		this.animationFrameId = requestAnimationFrame(() => this.draw());
 	}
 
 	/**
@@ -166,7 +191,10 @@ class World {
 	}
 
 	createNewBottles() {
-		if (world.level.bottles.length < 5 && world.level.bottles.length <= 10) {
+		if (
+			world.level.bottles.length < 5 &&
+			world.level.bottles.length <= 10
+		) {
 			world.level.bottles.push(new Bottle());
 		}
 	}
@@ -190,8 +218,60 @@ class World {
 
 		world.level.enemies.forEach((enemy) => {
 			if (this.checkIsOutOfWorld(enemy)) {
-				world.level.enemies.splice(world.level.enemies.indexOf(enemy),1);
+				world.level.enemies.splice(
+					world.level.enemies.indexOf(enemy),
+					1
+				);
 			}
 		});
 	}
 }
+
+window.addEventListener("keydown", (event) => {
+	if (!world.isPaused) {
+		if (event.key === "ArrowLeft") keyboard.LEFT = true;
+		if (event.key === "ArrowRight") keyboard.RIGHT = true;
+		if (event.key === "ArrowUp") keyboard.UP = true;
+		if (event.key === "ArrowDown") keyboard.DOWN = true;
+		if (event.key === "d") keyboard.D = true;
+		if (event.key === " ") keyboard.SPACE = true;
+	}
+});
+
+window.addEventListener("keyup", (event) => {
+	if (!world.isPaused) {
+		if (event.key === "ArrowLeft") keyboard.LEFT = false;
+		if (event.key === "ArrowRight") keyboard.RIGHT = false;
+		if (event.key === "ArrowUp") keyboard.UP = false;
+		if (event.key === "ArrowDown") keyboard.DOWN = false;
+		if (event.key === "d") keyboard.D = false;
+		if (event.key === " ") keyboard.SPACE = false;
+	}
+});
+
+window.addEventListener("touchstart", (event) => {
+	if (!world.isPaused) {
+		if (event.target.id === "btnLeft") keyboard.LEFT = true;
+		if (event.target.id === "btnRight") keyboard.RIGHT = true;
+		if (event.target.id === "btnJump") keyboard.SPACE = true;
+		if (event.target.id === "btnThrow") keyboard.D = true;
+	}
+});
+
+window.addEventListener("touchend", (event) => {
+	if (!world.isPaused) {
+		if (event.target.id === "btnLeft") keyboard.LEFT = false;
+		if (event.target.id === "btnRight") keyboard.RIGHT = false;
+		if (event.target.id === "btnJump") keyboard.SPACE = false;
+		if (event.target.id === "btnThrow") keyboard.D = false;
+	}
+});
+
+window.addEventListener("touchcancel", (event) => {
+	if (!world.isPaused) {
+		if (event.target.id === "btnLeft") keyboard.LEFT = false;
+		if (event.target.id === "btnRight") keyboard.RIGHT = false;
+		if (event.target.id === "btnJump") keyboard.SPACE = false;
+		if (event.target.id === "btnThrow") keyboard.D = false;
+	}
+});

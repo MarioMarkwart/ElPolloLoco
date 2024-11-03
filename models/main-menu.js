@@ -1,5 +1,3 @@
-function init() { }
-
 function fullscreenOn() {
 	const fullscreenElement = document.getElementById("content");
 	if (fullscreenElement.requestFullscreen) {
@@ -11,6 +9,7 @@ function fullscreenOn() {
 	} else if (fullscreenElement.msRequestFullscreen) {
 		fullscreenElement.msRequestFullscreen();
 	}
+	let btnFullscreen = document.getElementById('btn-fullscreen');
 	btnFullscreen.src = "assets/img/buttons/fullscreenOff.png";
 	btnFullscreen.setAttribute('onclick', 'fullscreenOff()');
 }
@@ -25,6 +24,7 @@ function fullscreenOff() {
 	} else if (document.msExitFullscreen) {
 		document.msExitFullscreen();
 	}
+	let btnFullscreen = document.getElementById('btn-fullscreen');
 	btnFullscreen.src = "assets/img/buttons/fullscreenOn.png";
 	btnFullscreen.setAttribute('onclick', 'fullscreenOn()');
 }
