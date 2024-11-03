@@ -178,9 +178,12 @@ function youLost(){
 }
 
 function restartGame(){
+	switchGameState('startScreen');
+	gameRunning = false;
 	stopGame();
 	stopAllSounds();
 	startGame();
+	switchGameState('game');
 }
 
 
