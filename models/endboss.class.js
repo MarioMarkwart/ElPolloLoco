@@ -146,10 +146,10 @@ class Endboss extends MovableObject {
 	}
 
 	hit() {
+		world.statusBarEndboss.setPercentage((this.energy -= 10));
 		if (!this.checkIfEndbossIsDead()) {
 			this.gotHit = true
 			this.behaviour = 'HIT';
-			world.statusBarEndboss.setPercentage((this.energy -= 10));
 			this.playSound(
 				this.SOUNDS_HIT[this.getRandomInt(0, this.SOUNDS_HIT.length)]
 			);
