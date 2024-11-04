@@ -93,18 +93,13 @@ class World {
 				}
 			});
 
-			this.throwableObjects.forEach((bottle) => {
+			this.throwableObjects.forEach((to) => {
 				let endboss = this.level.endboss[0];
-				if (endboss.isColliding(bottle)) {
+				if (endboss.isColliding(to)) {
 					endboss.hit();
-					this.throwableObjects[
-						this.throwableObjects.indexOf(bottle)
-					].bottleSplash();
+					this.throwableObjects[this.throwableObjects.indexOf(to)].bottleSplash();
 					setTimeout(() => {
-						this.throwableObjects.splice(
-							this.throwableObjects.indexOf(bottle),
-							1
-						);
+						this.throwableObjects.splice(this.throwableObjects.indexOf(to),1);
 					}, 100);
 				}
 			});

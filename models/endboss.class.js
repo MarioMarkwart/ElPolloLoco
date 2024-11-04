@@ -191,14 +191,10 @@ class Endboss extends MovableObject {
 			this.gotHit = true;
 			this.behaviour = "HIT";
 			this.playRandomSound(this.SOUNDS_HIT);
-			setTimeout(() => {
-				this.gotHit = false;
-			}, 1000);
+			setTimeout(() => this.gotHit = false, 1000);
 		} else {
 			this.behaviour = "DEAD";
-			setTimeout(() => {
-				youWon();
-			}, 500);
+			setTimeout(() => youWon(), 500);
 		}
 	}
 

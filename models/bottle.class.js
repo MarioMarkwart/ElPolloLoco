@@ -46,20 +46,4 @@ class Bottle extends MovableObject {
 			world.statusBarBottles.increaseAmount();
 		}
 	}
-
-
-	/**
-	 * Handles the event when the bottle hits the endboss.
-	 * Removes the bottle from the level and plays a random bottle hit sound.
-	 *
-	 * @param {Bottle} bottle - The bottle that hit the endboss.
-	 */
-	endbossHit(bottle) {
-		world.level.bottles.splice(world.level.bottles.indexOf(bottle), 1);
-		this.playSound(
-			this.BOTTLE_COLLECT_SOUNDS[
-				this.getRandomInt(0, this.BOTTLE_HIT_SOUNDS.length)
-			]
-		);
-	}
 }

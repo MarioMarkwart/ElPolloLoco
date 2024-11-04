@@ -94,6 +94,7 @@ class ThrowableObject extends MovableObject {
 			this.speedY = 0;
 			this.bottleSplash();
 			clearInterval(this.moveToInterval);
+			setTimeout(() => world.throwableObjects.splice(world.throwableObjects.indexOf(this), 1), 200); 
 		}
 	}
 
