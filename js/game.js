@@ -118,37 +118,20 @@ function removeClassesFromOverlay(){
 /**
  * Switches the game state to the specified state.
  * 
- * This function is the central hub for changing the game state to any of the
- * following states: 'startScreen', 'game', 'won', 'lost', or 'restart'. It uses
- * a switch statement to call the appropriate function for each state.
+ * This function manages the transition between different game states, such as
+ * 'startScreen', 'game', 'won', 'lost', and 'restart'. Each state triggers a
+ * corresponding action to update the game state and display the appropriate
+ * screen. The function ensures that the game logic and visuals are consistently
+ * updated according to the current state.
  * 
- * Note that the 'startScreen' state is used to set up the start screen, the
- * 'game' state is used to set up the game, the 'won' and 'lost' states are used
- * to set up the final screens when the game is won or lost, and the 'restart'
- * state is used to restart the game.
- * @param {string} state - The desired game state.
+ * @param {string} state - The desired game state to switch to.
  * @returns {void}
  */
 function switchGameState(state){
-	switch(state){
-		case 'startScreen':
-			setStartScreen();
-			break;
-		case 'game':
-			removeClassesFromOverlay();
-			break;
-		case 'won':
-			setFinalScreen('won');
-			stopGame();
-			break;
-		case 'lost':
-			setFinalScreen('lost');
-			stopGame();
-			break;
-		case 'restart':
-			restartGame();
-			break;
-	}
+	if (state == 'startScreen') setStartScreen();
+	else if (state == 'game') removeClassesFromOverlay();
+	else if (state == 'won' || state == 'lost') setFinalScreen(state);
+	else if (state == 'restart') restartGame();
 }
 
 
