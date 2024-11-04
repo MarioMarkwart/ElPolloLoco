@@ -13,6 +13,7 @@ let loadingScreenImagesCache = {};
 
 function init(){
 	preloadLoadingScreenImages();
+	addKeyboardEventListener();
 	switchGameState('startScreen');
 }
 
@@ -22,7 +23,6 @@ function initWorld() {
 	world = new World(canvas, keyboard);
 	console.log("My world is: ", world);
 	console.log("My character is: ", world.character);
-	addListenerForGodmode();
 }
 
 function setStoppableInterval(fn, time, description) {
@@ -63,12 +63,12 @@ const loadingScreenImages = [
 
 
 function preloadLoadingScreenImages() {
-	loadingScreenImages.forEach(imagePath => {
-	  const image = new Image();
-	  image.src = imagePath;
-	  loadingScreenImagesCache[imagePath] = image;
+	loadingScreenImages.forEach((imagePath) => {
+		const image = new Image();
+		image.src = imagePath;
+		loadingScreenImagesCache[imagePath] = image;
 	});
-  }
+}
 
 function setLoadingScreenImage() {
 	let loadingScreen = document.getElementById('loading-screen');
@@ -144,6 +144,7 @@ function setStartScreen(){
 	overlay.classList.add('start');
 }
 
+
 function setFinalScreen(result){
 	let overlay = document.getElementById('gamestate-screen');
 	overlay.classList.remove('d-none');
@@ -198,24 +199,59 @@ function stopAllSounds() {
 	);
 }
 
-function addListenerForGodmode() {
-	let godModeSessionStorage = sessionStorage.getItem("godmode");
-	if (!godModeSessionStorage) {
-		document.addEventListener("keyup", (event) => {
-			if (event.key === "g") toggleGodmode();
-		});
-		sessionStorage.setItem("godmode", true);
+
+function toggleGodmode(){
+	if (gameRunning) {
+		godmode = !godmode;
+		if (godmode){
+			console.warn('Godmode is on');
+			world.statusBarBottles.setAmount(500);
+		} 
+		else {
+			console.warn('Godmode is off');
+			world.statusBarBottles.setAmount(5);
+		}
 	}
 }
 
-function toggleGodmode(){
-	godmode = !godmode;
-	if (godmode){
-		console.warn('Godmode is on');
-		world.statusBarBottles.setAmount(500);
-	} 
-	else {
-		console.warn('Godmode is off');
-		world.statusBarBottles.setAmount(5);
-	}
+
+function addKeyboardEventListener() {
+	window.addEventListener("keydown", (event) => {
+		if (event.key === "ArrowLeft") keyboard.LEFT = true;
+		if (event.key === "ArrowRight") keyboard.RIGHT = true;
+		if (event.key === "d") keyboard.D = true;
+		if (event.key === " ") keyboard.SPACE = true;
+	});
+
+	window.addEventListener("keyup", (event) => {
+		if (event.key === "ArrowLeft") keyboard.LEFT = false;
+		if (event.key === "ArrowRight") keyboard.RIGHT = false;
+		if (event.key === "d") keyboard.D = false;
+		if (event.key === " ") keyboard.SPACE = false;
+	});
+	
+	window.addEventListener("keyup", (event) => {
+		if (event.key === "g") toggleGodmode();
+	});
+
+	window.addEventListener("touchstart", (event) => {
+		if (event.target.id === "btnLeft") keyboard.LEFT = true;
+		if (event.target.id === "btnRight") keyboard.RIGHT = true;
+		if (event.target.id === "btnJump") keyboard.SPACE = true;
+		if (event.target.id === "btnThrow") keyboard.D = true;
+	});
+
+	window.addEventListener("touchend", (event) => {
+		if (event.target.id === "btnLeft") keyboard.LEFT = false;
+		if (event.target.id === "btnRight") keyboard.RIGHT = false;
+		if (event.target.id === "btnJump") keyboard.SPACE = false;
+		if (event.target.id === "btnThrow") keyboard.D = false;
+	});
+
+	window.addEventListener("touchcancel", (event) => {
+		if (event.target.id === "btnLeft") keyboard.LEFT = false;
+		if (event.target.id === "btnRight") keyboard.RIGHT = false;
+		if (event.target.id === "btnJump") keyboard.SPACE = false;
+		if (event.target.id === "btnThrow") keyboard.D = false;
+	});
 }

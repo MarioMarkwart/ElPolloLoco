@@ -136,8 +136,6 @@ class World {
 	}
 
 	pause() {
-		//TODO: stop all intervals
-
 		this.isPaused = true;
 		gameRunning = false;
 		cancelAnimationFrame(this.animationFrameId);
@@ -226,48 +224,3 @@ class World {
 		});
 	}
 }
-
-window.addEventListener("keydown", (event) => {
-	if (!world.isPaused) {
-		if (event.key === "ArrowLeft") keyboard.LEFT = true;
-		if (event.key === "ArrowRight") keyboard.RIGHT = true;
-		if (event.key === "d") keyboard.D = true;
-		if (event.key === " ") keyboard.SPACE = true;
-	}
-});
-
-window.addEventListener("keyup", (event) => {
-	if (!world.isPaused) {
-		if (event.key === "ArrowLeft") keyboard.LEFT = false;
-		if (event.key === "ArrowRight") keyboard.RIGHT = false;
-		if (event.key === "d") keyboard.D = false;
-		if (event.key === " ") keyboard.SPACE = false;
-	}
-});
-
-window.addEventListener("touchstart", (event) => {
-	if (!world.isPaused) {
-		if (event.target.id === "btnLeft") keyboard.LEFT = true;
-		if (event.target.id === "btnRight") keyboard.RIGHT = true;
-		if (event.target.id === "btnJump") keyboard.SPACE = true;
-		if (event.target.id === "btnThrow") keyboard.D = true;
-	}
-});
-
-window.addEventListener("touchend", (event) => {
-	if (!world.isPaused) {
-		if (event.target.id === "btnLeft") keyboard.LEFT = false;
-		if (event.target.id === "btnRight") keyboard.RIGHT = false;
-		if (event.target.id === "btnJump") keyboard.SPACE = false;
-		if (event.target.id === "btnThrow") keyboard.D = false;
-	}
-});
-
-window.addEventListener("touchcancel", (event) => {
-	if (!world.isPaused) {
-		if (event.target.id === "btnLeft") keyboard.LEFT = false;
-		if (event.target.id === "btnRight") keyboard.RIGHT = false;
-		if (event.target.id === "btnJump") keyboard.SPACE = false;
-		if (event.target.id === "btnThrow") keyboard.D = false;
-	}
-});
