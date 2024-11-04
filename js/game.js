@@ -198,10 +198,14 @@ function stopAllSounds() {
 	);
 }
 
-function addListenerForGodmode(){
-	document.addEventListener("keyup", (event) => {
-		if (event.key === "g") toggleGodmode();
-	});
+function addListenerForGodmode() {
+	let godModeSessionStorage = sessionStorage.getItem("godmode");
+	if (!godModeSessionStorage) {
+		document.addEventListener("keyup", (event) => {
+			if (event.key === "g") toggleGodmode();
+		});
+		sessionStorage.setItem("godmode", true);
+	}
 }
 
 function toggleGodmode(){
