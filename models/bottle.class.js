@@ -7,8 +7,8 @@ class Bottle extends MovableObject {
 	BOTTLE_COLLECT_SOUND = "assets/audio/bottle_collect.mp3";
 
 	BOTTLE_HIT_SOUNDS = [
-		"assets/audio/bottle_hit.mp3",
-		"assets/audio/bottle_hit_2.mp3",
+		"assets/audio/bottle_hit_0.mp3",
+		"assets/audio/bottle_hit_1.mp3",
 	];
 
 

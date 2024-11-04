@@ -10,12 +10,12 @@ class Chicken extends MovableObject {
 	];
 
 	SOUNDS_CHICKEN_CHIRP =[
+		'assets/audio/chicken_chirp_0.mp3',
 		'assets/audio/chicken_chirp_1.mp3',
 		'assets/audio/chicken_chirp_2.mp3',
 		'assets/audio/chicken_chirp_3.mp3',
 		'assets/audio/chicken_chirp_4.mp3',
 		'assets/audio/chicken_chirp_5.mp3',
-		'assets/audio/chicken_chirp_6.mp3',
 	];
 
 

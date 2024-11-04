@@ -79,12 +79,12 @@ class Character extends MovableObject {
 	];
 
 	CHARACTER_HURT_SOUNDS = [
-		'assets/audio/pepe_hurt_0.mp3',
-		'assets/audio/pepe_hurt_1.mp3',
+		'assets/audio/character_hurt_0.mp3',
+		'assets/audio/character_hurt_1.mp3',
 	]
 
 	CHARACTER_DEAD_SOUND = [
-		'assets/audio/pepe_dead.mp3'
+		'assets/audio/character_dead.mp3'
 	]
 
 	CHARACTER_KILLING_ENEMY_SOUNDS = [
