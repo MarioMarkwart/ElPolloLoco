@@ -7,13 +7,27 @@ class StatusBar extends DrawableObject {
 
     amount = 0;
     percentage = 100;
-    
+
+
+    /**
+     * Sets the percentage of the status bar.
+     *
+     * @param {number} percentage - the percentage of the status bar between 0 and 100
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndexPercentage()];
         this.img = this.imageCache[path];
     }
 
+    //TODO: HELPER?
+    /**
+     * Increases the amount of the status bar by one.
+     *
+     * If the increased amount is equal to 5 and the status bar is an instance of StatusBarCoins,
+     * the amount is reset to 0 and the amount of the world's StatusBarBottles is increased by one.
+     * Then, the setAmount method is called with the increased amount.
+     */
     increaseAmount() {
 		this.amount++;
         if (this instanceof StatusBarCoins){
@@ -25,17 +39,51 @@ class StatusBar extends DrawableObject {
         this.setAmount(this.amount);
 	}
 
+    //TODO: HELPER?
+    /**
+     * Decreases the amount of the status bar by one.
+     *
+     * The amount is decreased by one and the setAmount method is called with the decreased amount.
+     */
 	decreaseAmount() {
 		this.amount--;
 		this.setAmount(this.amount);
 	}
 
+
+    /**
+     * Sets the amount of the status bar and updates the displayed image.
+     *
+     * This function assigns the provided amount to the status bar's amount property,
+     * then determines the appropriate image from the IMAGES array to display based
+     * on the new amount. The image is retrieved from the image cache and set as the
+     * current image of the status bar.
+     *
+     * @param {number} amount - The new amount to set for the status bar.
+     */
     setAmount(amount) {
         this.amount = amount;
         let path = this.IMAGES[this.resolveImageIndexAmount()];
         this.img = this.imageCache[path];
     }
 
+
+    /**
+     * Returns the index of the image to display based on the amount property of the status bar.
+     *
+     * This function returns an integer between 0 and 5, which is used to index into the IMAGES
+     * array to retrieve the appropriate image to display for the current amount. The returned
+     * value is determined by the following rules:
+     *
+     * * If amount is 0, return 0.
+     * * If amount is 1, return 1.
+     * * If amount is 2, return 2.
+     * * If amount is 3, return 3.
+     * * If amount is 4, return 4.
+     * * Otherwise, return 5.
+     *
+     * @returns {number} The index of the image to display based on the amount property.
+     */
     resolveImageIndexAmount() {
 		if (this.amount == 0) return 0;
 		else if (this.amount == 1) return 1;
@@ -45,6 +93,23 @@ class StatusBar extends DrawableObject {
 		else return 5;
 	}
 
+
+    /**
+     * Returns the index of the image to display based on the percentage property of the status bar.
+     *
+     * This function returns an integer between 0 and 5, which is used to index into the IMAGES
+     * array to retrieve the appropriate image to display for the current percentage. The returned
+     * value is determined by the following rules:
+     *
+     * * If percentage is 80 or higher, return 5.
+     * * If percentage is 60 or higher but less than 80, return 4.
+     * * If percentage is 40 or higher but less than 60, return 3.
+     * * If percentage is 20 or higher but less than 40, return 2.
+     * * If percentage is greater than 0 but less than 20, return 1.
+     * * Otherwise, return 0.
+     *
+     * @returns {number} The index of the image to display based on the percentage property.
+     */
     resolveImageIndexPercentage() {
 		if (this.percentage >= 80) return 5;
 		else if (this.percentage >= 60) return 4;

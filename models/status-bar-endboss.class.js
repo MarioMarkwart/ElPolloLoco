@@ -13,6 +13,12 @@ class StatusBarEndboss extends StatusBar {
 	width = 200;
 	height = 60
 
+	/**
+	 * Constructor for StatusBarEndboss class.
+	 * 
+	 * Loads all required images for the endboss status bar and sets the initial
+	 * percentage to 100.
+	 */
 	constructor() {
 		super();
 		this.loadImages(this.IMAGES);

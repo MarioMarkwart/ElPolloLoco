@@ -11,6 +11,12 @@ class Bottle extends MovableObject {
 		"assets/audio/bottle_hit_2.mp3",
 	];
 
+
+	/**
+	 * Constructor for Bottle class.
+	 * Initializes bottle with random image, x and y coordinates and size.
+	 * Loads bottle collect sound and hit sounds.
+	 */
 	constructor() {
 		super();
 		this.loadImage(
@@ -25,6 +31,14 @@ class Bottle extends MovableObject {
 		this.loadSounds(this.BOTTLE_HIT_SOUNDS, 0.2);
 	}
 
+
+	/**
+	 * Collects a bottle, if the status bar bottle amount is less than 5.
+	 * Removes the bottle from the level, plays the bottle collect sound and
+	 * increases the status bar bottle amount.
+	 *
+	 * @param {Bottle} bottle - The bottle to be collected.
+	 */
 	collectBottle(bottle) {
 		if (world.statusBarBottles.amount < 5){
 			world.level.bottles.splice(world.level.bottles.indexOf(bottle), 1);
@@ -33,6 +47,13 @@ class Bottle extends MovableObject {
 		}
 	}
 
+
+	/**
+	 * Handles the event when the bottle hits the endboss.
+	 * Removes the bottle from the level and plays a random bottle hit sound.
+	 *
+	 * @param {Bottle} bottle - The bottle that hit the endboss.
+	 */
 	endbossHit(bottle) {
 		world.level.bottles.splice(world.level.bottles.indexOf(bottle), 1);
 		this.playSound(

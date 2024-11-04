@@ -66,7 +66,7 @@ class Character extends MovableObject {
 		'assets/img/2_character_pepe/1_idle/long_idle/I-19.png',
 		'assets/img/2_character_pepe/1_idle/long_idle/I-20.png'
 	]
-	
+
 	CHARACTER_WALKING_SOUND = 'assets/audio/character_walk.mp3';
 
 	CHARACTER_JUMPING_SOUNDS = [
@@ -93,6 +93,12 @@ class Character extends MovableObject {
 	]
 
 	world;
+	
+	
+	/**
+	 * Constructor of the Character.
+	 * Loads all the images and sounds and starts the animation and gravity.
+	 */
 	constructor() {
 		super().loadImage('assets/img/2_character_pepe/2_walk/W-21.png');
 		this.loadImages(this.CHARACTER_IMAGES_WALKING);
@@ -111,15 +117,24 @@ class Character extends MovableObject {
 		this.applyGravity();
 	}
 
+
+	/**
+	 * Plays the sound when the character wins the level and makes the character jump
+	 */
 	playWinSound() {
 		this.playSound(this.CHARACTER_WON_SOUND, .2);
 		this.jump();
 	}
 
+
+	/**
+	 * Plays the sound when the character loses a life and makes the character die
+	 */
 	playLostSound() {
 		this.playSound(this.CHARACTER_DEAD_SOUND, .2);
 	}
 
+	//TODO: REFACTOR
 	animateCharacter() {
 		setInterval(() => {
 			if (!world.isPaused) {
@@ -146,7 +161,6 @@ class Character extends MovableObject {
 		// animations
 		setInterval(() => {
 			if(!world.isPaused) {
-				
 				if (this.isDead()) {
 					this.playAnimation(this.CHARACTER_IMAGES_DEAD);
 					this.stopSound(this.CHARACTER_WALKING_SOUND);

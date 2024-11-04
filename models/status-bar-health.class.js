@@ -10,6 +10,12 @@ class StatusBarHealth extends StatusBar {
 
 	y = 0;
 
+
+	/**
+	 * Constructor for StatusBarHealth.
+	 * Calls the superclass constructor and loads the images in the IMAGES array.
+	 * Initializes the percentage to 100.
+	 */
 	constructor() {
 		super();
 		this.loadImages(this.IMAGES);

@@ -1,3 +1,11 @@
+/**
+ * Enables fullscreen mode for the element with the ID "content".
+ * 
+ * This function attempts to request fullscreen mode using the appropriate
+ * method for the browser, checking for compatibility with various vendor
+ * prefixes. It also updates the fullscreen button's image and onclick
+ * attribute to toggle fullscreen mode off when clicked.
+ */
 function fullscreenOn() {
 	const fullscreenElement = document.getElementById("content");
 	if (fullscreenElement.requestFullscreen) {
@@ -14,6 +22,15 @@ function fullscreenOn() {
 	btnFullscreen.setAttribute('onclick', 'fullscreenOff()');
 }
 
+
+/**
+ * Disables fullscreen mode for the document.
+ * 
+ * This function attempts to exit fullscreen mode using the appropriate
+ * method for the browser, checking for compatibility with various vendor
+ * prefixes. It also updates the fullscreen button's image and onclick
+ * attribute to toggle fullscreen mode on when clicked.
+ */
 function fullscreenOff() {
 	if (document.exitFullscreen) {
 		document.exitFullscreen();
