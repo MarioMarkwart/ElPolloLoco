@@ -5,7 +5,7 @@ class MovableObject extends DrawableObject {
 	acceleration = 0.5;
 	energy = 100;
 	lastHit = 0;
-	soundCache = {};
+	// soundCache = {};
 	isFalling = false;
 	amount = 0;
 
@@ -150,97 +150,6 @@ class MovableObject extends DrawableObject {
 
 
 	/**
-	 * Loads a sound from a given path and caches it.
-	 * 
-	 * @param {string} path - The path to the sound file.
-	 * @param {number} [vol=1] - The initial volume of the sound.
-	 */
-	loadSound(path, vol = 1) {
-		const sound = new Audio();
-		sound.src = path;
-		this.soundCache[path] = sound;
-
-		this.setSoundVolume(path, vol);
-	}
-
-
-	/**
-	 * Loads an array of sounds from given paths and caches them.
-	 *
-	 * The given volume is set for all the sounds.
-	 *
-	 * @param {Array.<string>} arr - The array of paths to the sound files.
-	 * @param {number} [vol=1] - The initial volume of the sound.
-	 */
-	loadSounds(arr, vol = 1) {
-		arr.forEach((path) => {
-			const sound = new Audio();
-			sound.src = path;
-			this.soundCache[path] = sound;
-			this.setSoundVolume(path, vol);
-		});
-	}
-
-
-	/**
-	 * Sets the volume for a sound file at the specified path.
-	 *
-	 * @param {string} path - The path to the sound file in the cache.
-	 * @param {number} vol - The volume level to set for the sound.
-	 */
-	setSoundVolume(path, vol) {
-		this.soundCache[path].volume = vol;
-	}
-
-
-	/**
-	 * Plays a sound from the cache at the given path after the specified delay.
-	 * 
-	 * @param {string} path - The path to the sound file in the cache.
-	 * @param {number} [delayInMs=0] - The delay in milliseconds before playing the sound.
-	 */
-	playSound(path, delayInMs = 0) {
-		if(this instanceof Chicken || this instanceof ChickenSmall) console.log(path, delayInMs);
-		setTimeout(() => {
-		    this.soundCache[path].play();
-		}, delayInMs) //FIXME: set to 'delay' when inserted Title-Screen - will work after user interacted with the page
-	}
-
-
-	/**
-	 * Plays a random sound from the array of paths given in the cache.
-	 * 
-	 * @param {Array.<string>} arr - The array of paths to the sound files in the cache.
-	 */
-	playRandomSound(arr){
-		let sound = this.soundCache[arr[this.getRandomInt(0, arr.length)]];
-		sound.play();
-	}
-
-
-	/**
-	 * Stops all sounds from the given array of paths in the cache.
-	 * 
-	 * @param {Array.<string>} arr - The array of paths to the sound files in the cache.
-	 */
-	stopAllSounds(arr) {
-		arr.forEach((sound) => {
-			this.soundCache[sound].pause();
-		});
-	}
-
-
-	/**
-	 * Stops the sound from the given path in the cache.
-	 * 
-	 * @param {string} path - The path to the sound file in the cache.
-	 */
-	stopSound(path) {
-		this.soundCache[path].pause();
-	}
-
-
-	/**
 	 * Handles the death of an enemy object.
 	 * 
 	 * This function stops the enemy's animation, stops all sounds associated with the enemy,
@@ -250,9 +159,9 @@ class MovableObject extends DrawableObject {
 	 * @param {Object} enemy - The enemy object that is dying, which contains sound cache and images.
 	 */
 	enemyDie(enemy) { //FIXME
-		console.log('enemies left: ', world.level.enemies.length);
+		console.log('enemy: ', enemy);
 		this.stopAnimation();
-		this.stopAllSounds(Object.keys(enemy.soundCache))
+		this.stopAllSounds(Object.keys(enemy.soundCache)) //TODO: stop sound when enemy removed from array
 		this.animate(enemy.IMAGES_DYING)
 		setTimeout(() => {
 			world.level.enemies.splice(world.level.enemies.indexOf(this), 1);

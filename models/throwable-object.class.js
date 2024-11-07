@@ -85,16 +85,17 @@ class ThrowableObject extends MovableObject {
 	/**
 	 * Checks if the bottle has hit the ground.
 	 * 
-	 * If the bottle has hit the ground, the bottle's speedY is set to 0, the bottleSplash function is called, and the interval
-	 * that is moving the bottle is cleared. The bottleSplash function animates the bottle splash and then makes the bottle
-	 * invisible. This is done to make it look like the bottle has hit the ground and splashed into the ground.
+	 * If the bottle has hit the ground, it stops its throwing animation and animates the bottle splash.
+	 * Then, it clears the interval that is animating the bottle's throwing animation and plays the bottle hit sound.
+	 * After 200 milliseconds, the bottle is made invisible by removing it from the world's array of throwable objects.
 	 */
 	checkIfBottleHitsTheGround() {
-		if (this.y > 360) {
+		if (this.y > 360  && !world.level.endboss[0].gotHit) {
 			this.speedY = 0;
 			this.bottleSplash();
 			clearInterval(this.moveToInterval);
-			setTimeout(() => world.throwableObjects.splice(world.throwableObjects.indexOf(this), 1), 200); 
+			world.soundBar.playSound('bottleHit'); //FIXME: Sound also plays when endboss was hit
+			setTimeout(() => world.throwableObjects.splice(world.throwableObjects.indexOf(this), 1), 100); 
 		}
 	}
 

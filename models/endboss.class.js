@@ -50,12 +50,6 @@ class Endboss extends MovableObject {
 		"assets/img/4_enemie_boss_chicken/5_dead/G26.png",
 	];
 
-	SOUNDS_HIT = [
-		"assets/audio/bottle_hit.mp3",
-		"assets/audio/bottle_hit_2.mp3",
-	];
-
-
 	/**
 	 * Initializes the Endboss object by loading initial images and sounds,
 	 * setting the default behavior, and checking for the first contact
@@ -69,7 +63,6 @@ class Endboss extends MovableObject {
 		this.loadImages(this.IMAGES_ATTACK);
 		this.loadImages(this.IMAGES_HIT);
 		this.loadImages(this.IMAGES_DEAD);
-		this.loadSounds(this.SOUNDS_HIT);
 		this.setBehaviour();
 		this.checkIfFirstContact();
 	}
@@ -190,12 +183,13 @@ class Endboss extends MovableObject {
 		if (!this.isDead()) {
 			this.gotHit = true;
 			this.behaviour = "HIT";
-			this.playRandomSound(this.SOUNDS_HIT);
+			world.soundBar.playSound('endbossHit');
 			setTimeout(() => this.gotHit = false, 1000);
 		} else {
 			this.behaviour = "DEAD";
 			setTimeout(() => youWon(), 500);
 		}
+		world.soundBar.stopSound('bottleHit')
 	}
 
 

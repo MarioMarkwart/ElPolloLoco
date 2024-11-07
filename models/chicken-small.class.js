@@ -9,8 +9,6 @@ class ChickenSmall extends MovableObject {
 		'assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png'
 	];
 
-	chicken_small_chirp = "assets/audio/chicken_small_chirp.mp3";
-
 
 /**
  * Initializes a new instance of the ChickenSmall class.
@@ -27,10 +25,10 @@ class ChickenSmall extends MovableObject {
 		this.y = this.getRandomInt(370, 380);
 		this.loadImages(this.CHICKEN_IMAGES_WALKING);
 		this.loadImages(this.IMAGES_DYING);
-		this.loadSound(this.chicken_small_chirp, 0.02);
-		this.playSound(this.chicken_small_chirp, this.getRandomFloat(200, 2000));
 		this.randomizeFirstPictures();
 		this.animate(this.CHICKEN_IMAGES_WALKING, 100);
 		this.moveLeftInterval();
+
+		world.soundBar.playSound('chickenSmallChirp');
 	}
 }

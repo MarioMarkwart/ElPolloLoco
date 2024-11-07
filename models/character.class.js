@@ -67,31 +67,6 @@ class Character extends MovableObject {
 		'assets/img/2_character_pepe/1_idle/long_idle/I-20.png'
 	]
 
-	CHARACTER_WALKING_SOUND = 'assets/audio/character_walk.mp3';
-
-	CHARACTER_JUMPING_SOUNDS = [
-		'assets/audio/character_jump_0.mp3',
-		'assets/audio/character_jump_1.mp3',
-	];
-
-	CHARACTER_WON_SOUND = [
-		'assets/audio/character_won.mp3'
-	];
-
-	CHARACTER_HURT_SOUNDS = [
-		'assets/audio/character_hurt_0.mp3',
-		'assets/audio/character_hurt_1.mp3',
-	]
-
-	CHARACTER_DEAD_SOUND = [
-		'assets/audio/character_dead.mp3'
-	]
-
-	CHARACTER_KILLING_ENEMY_SOUNDS = [
-		'assets/audio/character_enemy_kill_0.mp3',
-		'assets/audio/character_enemy_kill_1.mp3',
-	]
-
 	world;
 	
 	
@@ -107,12 +82,6 @@ class Character extends MovableObject {
 		this.loadImages(this.CHARACTER_IMAGES_DEAD);
 		this.loadImages(this.CHARACTER_IMAGES_IDLE);
 		this.loadImages(this.CHARACTER_IMAGES_LONG_IDLE);
-		this.loadSound(this.CHARACTER_WALKING_SOUND);
-		this.loadSounds(this.CHARACTER_JUMPING_SOUNDS, 0.3);
-		this.loadSounds(this.CHARACTER_HURT_SOUNDS, 0.5);
-		this.loadSounds(this.CHARACTER_KILLING_ENEMY_SOUNDS, 0.5);
-		this.loadSounds(this.CHARACTER_WON_SOUND, 0.5);
-		this.loadSounds(this.CHARACTER_DEAD_SOUND, 0.5);
 		this.initialAnimation();
 		this.animateCharacter();
 		this.applyGravity();
@@ -123,7 +92,8 @@ class Character extends MovableObject {
 	 * Plays the sound when the character wins the level and makes the character jump
 	 */
 	playWinSound() {
-		this.playSound(this.CHARACTER_WON_SOUND, .2);
+		world.soundBar.playSound('characterWon');
+		// this.playSound(this.CHARACTER_WON_SOUND, .2);
 		this.jump();
 	}
 
@@ -132,7 +102,7 @@ class Character extends MovableObject {
 	 * Plays the sound when the character loses a life and makes the character die
 	 */
 	playLostSound() {
-		this.playSound(this.CHARACTER_DEAD_SOUND, .2);
+		world.soundBar.playSound('characterLost');	
 	}
 
 	initialAnimation() {
@@ -150,16 +120,16 @@ class Character extends MovableObject {
 			if (!world.isPaused) {
 				if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x_max) {
 					this.moveRight();
-					this.playSound(this.CHARACTER_WALKING_SOUND);
+					world.soundBar.playSound('characterWalk');
 				}
 				if (this.world.keyboard.LEFT && this.x > -1300) {
 					this.moveLeft();
-					this.playSound(this.CHARACTER_WALKING_SOUND);
+					world.soundBar.playSound('characterWalk');
 				}
 				if (this.world.keyboard.SPACE && !this.isAboveGround()) {
 					this.currentImage = 0;
 					this.jump();
-					this.playRandomSound(this.CHARACTER_JUMPING_SOUNDS);
+					world.soundBar.playSound('characterJump');
 				}
 			}
 			this.world.camera_x = -this.x + 100;
@@ -170,13 +140,11 @@ class Character extends MovableObject {
 			if (!world.isPaused) {
 				if (this.isDead()) {
 					this.playAnimation(this.CHARACTER_IMAGES_DEAD);
-					this.stopSound(this.CHARACTER_WALKING_SOUND);
-					this.stopAllSounds(this.CHARACTER_HURT_SOUNDS);
-					this.stopAllSounds(this.CHARACTER_JUMPING_SOUNDS);
+					world.soundBar.stopSound('characterWalk');
 					youLost();
 				} else if (this.isHurt()) {
 					this.playAnimation(this.CHARACTER_IMAGES_HURT);
-					this.playRandomSound(this.CHARACTER_HURT_SOUNDS);
+					world.soundBar.playSound('characterHurt');
 					this.lastMovement = Date.now();
 				} else if (this.isAboveGround()) {
 					this.lastMovement = Date.now();
@@ -191,10 +159,9 @@ class Character extends MovableObject {
 						if (this.lastMovement < Date.now() - 2500) {
 							this.playAnimation(this.CHARACTER_IMAGES_LONG_IDLE);
 						} else if (this.lastMovement < Date.now()) {
-							debugger
 							this.playAnimation(this.CHARACTER_IMAGES_IDLE);
 						}
-						this.stopSound(this.CHARACTER_WALKING_SOUND);
+						world.soundBar.stopSound('characterWalk');
 					}
 				}
 			}

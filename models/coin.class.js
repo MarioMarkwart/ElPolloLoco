@@ -4,8 +4,6 @@ class Coin extends MovableObject {
 		"assets/img/8_coin/coin_2.png",
 	];
 
-	COIN_SOUND = "assets/audio/coin.mp3";
-
 
 	/**
 	 * Initializes a new instance of the Coin class.
@@ -22,7 +20,6 @@ class Coin extends MovableObject {
 		this.height = 70;
 		this.randomizeFirstPictures();
 		this.animate(this.COINS_IMAGES, this.getRandomInt(200, 300));
-		this.loadSound(this.COIN_SOUND);
 	}
 
 
@@ -37,7 +34,7 @@ class Coin extends MovableObject {
 		if (world.statusBarBottles.amount < 5){
 			world.level.coins.splice(world.level.coins.indexOf(coin), 1);
 			world.statusBarCoins.increaseAmount();
-			this.playSound(this.COIN_SOUND);
+			world.soundBar.playSound('coinCollect')
 		}
 	}
 }

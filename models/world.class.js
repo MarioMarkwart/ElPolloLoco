@@ -1,5 +1,6 @@
 class World {
 	character = new Character();
+	soundBar = new Sound()
 	statusBarHealth = new StatusBarHealth();
 	statusBarCoins = new StatusBarCoins();
 	statusBarBottles = new StatusBarBottles();
@@ -97,6 +98,7 @@ class World {
 				let endboss = this.level.endboss[0];
 				if (endboss.isColliding(to)) {
 					endboss.hit();
+					console.log('ENDBOSS HIT: ', to.y)
 					this.throwableObjects[this.throwableObjects.indexOf(to)].bottleSplash();
 					setTimeout(() => {
 						this.throwableObjects.splice(this.throwableObjects.indexOf(to),1);
