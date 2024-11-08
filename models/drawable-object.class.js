@@ -6,6 +6,10 @@ class DrawableObject {
 	currentImage = 0;
 	setCurrentImage = false;
 	intervalIds = [];
+	offsetX = 0;
+	offsetY = 0;
+	offsetWidth = 0;
+	offsetHeight = 0;
 
 
 	/**
@@ -190,12 +194,28 @@ class DrawableObject {
 			this instanceof Chicken ||
 			this instanceof ChickenSmall ||
 			this instanceof Character ||
-			this instanceof Endboss
+			this instanceof Endboss ||
+			this instanceof Coin ||
+			this instanceof Bottle
 		) {
 			ctx.beginPath();
 			ctx.lineWidth = 3;
 			ctx.strokeStyle = "blue";
 			ctx.rect(this.x, this.y, this.width, this.height);
+			ctx.stroke();
+		}
+		if (
+			this instanceof Chicken ||
+			this instanceof ChickenSmall ||
+			this instanceof Character ||
+			this instanceof Endboss ||
+			this instanceof Coin ||
+			this instanceof Bottle
+		) {
+			ctx.beginPath();
+			ctx.lineWidth = 3;
+			ctx.strokeStyle = "green";
+			ctx.rect(this.x + this.offsetX, this.y + this.offsetY, this.width - this.offsetWidth, this.height - this.offsetHeight);
 			ctx.stroke();
 		}
 	}

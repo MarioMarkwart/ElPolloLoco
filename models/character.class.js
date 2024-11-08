@@ -3,6 +3,11 @@ class Character extends MovableObject {
 	y = 180;
 	lastMovement;
 	energy = 100;
+	offsetX = 10;
+	offsetY = 90;
+	offsetWidth = 20;
+	offsetHeight = 90;
+
 
 	CHARACTER_IMAGES_WALKING = [
 		'assets/img/2_character_pepe/2_walk/W-21.png',

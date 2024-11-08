@@ -4,6 +4,10 @@ class Coin extends MovableObject {
 		"assets/img/8_coin/coin_2.png",
 	];
 
+	offsetX = 20;
+	offsetY = 20;
+	offsetWidth = 40;
+	offsetHeight =  40;
 
 	/**
 	 * Initializes a new instance of the Coin class.
