@@ -90,11 +90,11 @@ class ThrowableObject extends MovableObject {
 	 * After 200 milliseconds, the bottle is made invisible by removing it from the world's array of throwable objects.
 	 */
 	checkIfBottleHitsTheGround() {
-		if (this.y > 360  && !world.level.endboss[0].gotHit) {
+		if (this.y > 360) {
 			this.speedY = 0;
 			this.bottleSplash();
 			clearInterval(this.moveToInterval);
-			soundBar.playSound('bottleHit'); //FIXME: Sound also plays when endboss was hit
+			if (!world.level.endboss[0].gotHit) soundBar.playSound('bottleHit');
 			setTimeout(() => world.throwableObjects.splice(world.throwableObjects.indexOf(this), 1), 100); 
 		}
 	}

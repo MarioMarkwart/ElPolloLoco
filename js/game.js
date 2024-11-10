@@ -202,9 +202,8 @@ function setFinalScreen(result){
 function youWon(){
 	world.character.playWinSound();
 	setTimeout(() => {
-		// stopAllIntervals();
 		stopGame();
-		stopAllSounds();
+		soundBar.stopAllSounds();
 		setFinalScreen('won');
 	},1000)
 }
@@ -223,7 +222,7 @@ function youLost(){
 	setTimeout(() => {
 		// stopAllIntervals();
 		stopGame();
-		stopAllSounds();
+		soundBar.stopAllSounds();
 		setFinalScreen('lost');
 	}, 500)
 }
@@ -237,7 +236,7 @@ function youLost(){
  */
 function restartGame(){
 	switchGameState('startScreen');
-	stopAllSounds();
+	soundBar.stopAllSounds();
 	startGame();
 	switchGameState('game');
 }

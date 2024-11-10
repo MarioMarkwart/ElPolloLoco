@@ -190,20 +190,20 @@ class DrawableObject {
 	 * where the frame should be drawn.
 	 */
 	drawFrame(ctx) {
-		if (
-			this instanceof Chicken ||
-			this instanceof ChickenSmall ||
-			this instanceof Character ||
-			this instanceof Endboss ||
-			this instanceof Coin ||
-			this instanceof Bottle
-		) {
-			ctx.beginPath();
-			ctx.lineWidth = 3;
-			ctx.strokeStyle = "blue";
-			ctx.rect(this.x, this.y, this.width, this.height);
-			ctx.stroke();
-		}
+		// if (
+		// 	this instanceof Chicken ||
+		// 	this instanceof ChickenSmall ||
+		// 	this instanceof Character ||
+		// 	this instanceof Endboss ||
+		// 	this instanceof Coin ||
+		// 	this instanceof Bottle
+		// ) {
+		// 	ctx.beginPath();
+		// 	ctx.lineWidth = 3;
+		// 	ctx.strokeStyle = "blue";
+		// 	ctx.rect(this.x, this.y, this.width, this.height);
+		// 	ctx.stroke();
+		// }
 		if (
 			this instanceof Chicken ||
 			this instanceof ChickenSmall ||
@@ -218,5 +218,10 @@ class DrawableObject {
 			ctx.rect(this.x + this.offsetX, this.y + this.offsetY, this.width - this.offsetWidth, this.height - this.offsetHeight);
 			ctx.stroke();
 		}
+
+		// this.x + this.width - this.offsetWidth > mo.x &&
+		//   this.y + this.height - this.offsetHeight > mo.y &&
+		//   this.x < mo.x + mo.width - mo.offsetWidth &&
+		//   this.y < mo.y + mo.height - mo.offsetHeight
 	}
 }
