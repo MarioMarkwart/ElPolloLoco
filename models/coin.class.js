@@ -38,7 +38,7 @@ class Coin extends MovableObject {
 		if (world.statusBarBottles.amount < 5){
 			world.level.coins.splice(world.level.coins.indexOf(coin), 1);
 			world.statusBarCoins.increaseAmount();
-			world.soundBar.playSound('coinCollect')
+			soundBar.playSound('coinCollect')
 		}
 	}
 }

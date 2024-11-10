@@ -36,7 +36,7 @@ class Bottle extends MovableObject {
 	collectBottle(bottle) {
 		if (world.statusBarBottles.amount < 5){
 			world.level.bottles.splice(world.level.bottles.indexOf(bottle), 1);
-			world.soundBar.playSound('bottleCollect');
+			soundBar.playSound('bottleCollect');
 			world.statusBarBottles.increaseAmount();
 		}
 	}

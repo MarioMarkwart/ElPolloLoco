@@ -10,7 +10,7 @@ let totalImagesLoadedPercent = 0;
 let totalImagesLoadedPercentOld = 999;
 let allGraphicsLoaded = false;
 let loadingScreenImagesCache = {};
-
+let soundBar = new Sound();
 
 /**
  * Initializes the game by preloading loading screen images, adding keyboard event listeners, 
@@ -244,20 +244,6 @@ function restartGame(){
 
 
 /**
- * Stops all sounds from all enemies in the game world.
- *
- * This function iterates over all enemies in the game world and stops all
- * sounds from their sound cache. It is used when the game is lost or won.
- * @returns {void}
- */
-function stopAllSounds() {
-	world.level.enemies.forEach((enemy) =>
-		Object.keys(enemy.soundCache).forEach((sound) => enemy.soundCache[sound].pause())
-	);
-}
-
-
-/**
  * Toggles the godmode of the game. If the game is running, this function will toggle
  * the godmode boolean and set the amount of the world's StatusBarBottles to 500 if
  * godmode is enabled, or 5 if godmode is disabled. The function will log a warning
@@ -277,6 +263,19 @@ function toggleGodmode(){
 			world.statusBarBottles.setAmount(5);
 		}
 	}
+}
+
+
+/**
+ * Toggles the sound of the game. If the game is running, this function will toggle
+ * the soundIsEnabled boolean of the soundBar and update the sound button in the
+ * top right corner of the game to reflect the current state of the sound.
+ *
+ * @returns {void}
+ */
+function toggleSound(){
+	soundBar.soundIsEnabled = !soundBar.soundIsEnabled;
+	soundBar.setSoundButton();
 }
 
 

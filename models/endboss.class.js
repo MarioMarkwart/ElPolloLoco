@@ -186,13 +186,13 @@ class Endboss extends MovableObject {
 		if (!this.isDead()) {
 			this.gotHit = true;
 			this.behaviour = "HIT";
-			world.soundBar.playSound('endbossHit');
+			soundBar.playSound('endbossHit');
 			setTimeout(() => this.gotHit = false, 1000);
 		} else {
 			this.behaviour = "DEAD";
 			setTimeout(() => youWon(), 500);
 		}
-		world.soundBar.stopSound('bottleHit')
+		soundBar.stopSound('bottleHit')
 	}
 
 

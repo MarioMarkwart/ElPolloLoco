@@ -1,6 +1,6 @@
 class World {
 	character = new Character();
-	soundBar = new Sound()
+
 	statusBarHealth = new StatusBarHealth();
 	statusBarCoins = new StatusBarCoins();
 	statusBarBottles = new StatusBarBottles();

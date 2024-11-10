@@ -1,6 +1,6 @@
 class Sound extends MovableObject {
 	soundCache = {};
-	soundIsEnabled = true;
+	soundIsEnabled = false;
 
 	constructor() {
 		super();
@@ -42,6 +42,12 @@ class Sound extends MovableObject {
 		};
 	}
 
+
+	/**
+	 * Plays a random sound from the sound cache given by the soundKey.
+	 * If soundIsEnabled is set to false, the sound is not played.
+	 * @param {string} soundKey - The key in the soundCache object to play the sound from.
+	 */
 	playSound(soundKey) {
 		let random = Math.floor(Math.random() * this.soundCache[soundKey].length);
 		if (this.soundIsEnabled) {
@@ -52,6 +58,15 @@ class Sound extends MovableObject {
 		}
 	}
 
+
+/**
+ * Stops all sounds associated with the given soundKey.
+ * 
+ * This function iterates over the array of sounds corresponding to the provided
+ * soundKey in the soundCache, and pauses each sound if soundIsEnabled is true.
+ * 
+ * @param {string} soundKey - The key in the soundCache object whose sounds are to be stopped.
+ */
 	stopSound(soundKey) {
 		if (this.soundIsEnabled) {
 			this.soundCache[soundKey].forEach((sound) => {
@@ -59,12 +74,37 @@ class Sound extends MovableObject {
 			});
 		}
 	}
-	
+
+
+/**
+ * Stops all sounds from the sound cache.
+ * 
+ * This function iterates over all sound keys in the soundCache and stops each sound
+ * by invoking the stopSound method. It logs 'all sounds stop' to the console when called.
+ * This ensures that all currently playing sounds are paused.
+ */
 	stopAllSounds(){
+		console.log('all sounds stop')
 		Object.keys(this.soundCache).forEach((sound) => {
 			this.stopSound(sound);
 		});
 	}
+
+
+	/**
+	 * Sets the image of the sound button in the top right corner of the game
+	 * to either the sound on or sound off image, depending on the value of
+	 * soundIsEnabled.
+	 */
+	setSoundButton(){
+		let soundBtn = document.getElementById('btn-sound');
+	
+		this.soundIsEnabled 
+		? soundBtn.src = 'assets/img/buttons/sound_on.png'
+		: soundBtn.src = 'assets/img/buttons/sound_off.png';
+	}
+
+
 }
 
 //TODO: SOUND VOLUMES!

@@ -6,7 +6,7 @@ class Character extends MovableObject {
 	offsetX = 10;
 	offsetY = 90;
 	offsetWidth = 20;
-	offsetHeight = 90;
+	offsetHeight = 70;
 
 
 	CHARACTER_IMAGES_WALKING = [
@@ -97,7 +97,7 @@ class Character extends MovableObject {
 	 * Plays the sound when the character wins the level and makes the character jump
 	 */
 	playWinSound() {
-		world.soundBar.playSound('characterWon');
+		soundBar.playSound('characterWon');
 		// this.playSound(this.CHARACTER_WON_SOUND, .2);
 		this.jump();
 	}
@@ -107,7 +107,7 @@ class Character extends MovableObject {
 	 * Plays the sound when the character loses a life and makes the character die
 	 */
 	playLostSound() {
-		world.soundBar.playSound('characterLost');	
+		soundBar.playSound('characterLost');	
 	}
 
 	initialAnimation() {
@@ -125,16 +125,16 @@ class Character extends MovableObject {
 			if (!world.isPaused) {
 				if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x_max) {
 					this.moveRight();
-					world.soundBar.playSound('characterWalk');
+					soundBar.playSound('characterWalk');
 				}
 				if (this.world.keyboard.LEFT && this.x > -1300) {
 					this.moveLeft();
-					world.soundBar.playSound('characterWalk');
+					soundBar.playSound('characterWalk');
 				}
 				if (this.world.keyboard.SPACE && !this.isAboveGround()) {
 					this.currentImage = 0;
 					this.jump();
-					world.soundBar.playSound('characterJump');
+					soundBar.playSound('characterJump');
 				}
 			}
 			this.world.camera_x = -this.x + 100;
@@ -145,11 +145,11 @@ class Character extends MovableObject {
 			if (!world.isPaused) {
 				if (this.isDead()) {
 					this.playAnimation(this.CHARACTER_IMAGES_DEAD);
-					world.soundBar.stopSound('characterWalk');
+					soundBar.stopSound('characterWalk');
 					youLost();
 				} else if (this.isHurt()) {
 					this.playAnimation(this.CHARACTER_IMAGES_HURT);
-					world.soundBar.playSound('characterHurt');
+					soundBar.playSound('characterHurt');
 					this.lastMovement = Date.now();
 				} else if (this.isAboveGround()) {
 					this.lastMovement = Date.now();
@@ -166,7 +166,7 @@ class Character extends MovableObject {
 						} else if (this.lastMovement < Date.now()) {
 							this.playAnimation(this.CHARACTER_IMAGES_IDLE);
 						}
-						world.soundBar.stopSound('characterWalk');
+						soundBar.stopSound('characterWalk');
 					}
 				}
 			}

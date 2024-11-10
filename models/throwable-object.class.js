@@ -94,7 +94,7 @@ class ThrowableObject extends MovableObject {
 			this.speedY = 0;
 			this.bottleSplash();
 			clearInterval(this.moveToInterval);
-			world.soundBar.playSound('bottleHit'); //FIXME: Sound also plays when endboss was hit
+			soundBar.playSound('bottleHit'); //FIXME: Sound also plays when endboss was hit
 			setTimeout(() => world.throwableObjects.splice(world.throwableObjects.indexOf(this), 1), 100); 
 		}
 	}

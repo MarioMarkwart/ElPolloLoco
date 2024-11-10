@@ -29,6 +29,6 @@ class ChickenSmall extends MovableObject {
 		this.animate(this.CHICKEN_IMAGES_WALKING, 100);
 		this.moveLeftInterval();
 
-		world.soundBar.playSound('chickenSmallChirp');
+		soundBar.playSound('chickenSmallChirp');
 	}
 }
