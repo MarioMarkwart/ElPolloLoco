@@ -101,10 +101,10 @@ class MovableObject extends DrawableObject {
 	 */
 	isColliding(mo) {
 		return (
-		  this.x + this.width - this.offsetWidth > mo.x &&
-		  this.y + this.height - this.offsetHeight > mo.y &&
-		  this.x < mo.x + mo.width - mo.offsetWidth &&
-		  this.y < mo.y + mo.height - mo.offsetHeight
+			this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+			this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+			this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+			this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
 		);
 	  }
 
@@ -168,9 +168,8 @@ class MovableObject extends DrawableObject {
 	 * @param {Object} enemy - The enemy object that is dying, which contains sound cache and images.
 	 */
 	enemyDie(enemy) { //FIXME
-		console.log('enemy: ', enemy);
 		this.stopAnimation();
-		this.stopAllSounds(Object.keys(enemy.soundCache)) //TODO: stop sound when enemy removed from array
+		// this.stopAllSounds(Object.keys(enemy.soundCache)) //TODO: stop sound when enemy removed from array
 		this.animate(enemy.IMAGES_DYING)
 		setTimeout(() => {
 			world.level.enemies.splice(world.level.enemies.indexOf(this), 1);

@@ -46,7 +46,7 @@ class World {
 	 */
 	initialRun() {
 		this.adjustClouds();
-		setInterval(() => this.checkCollisions(), 200);
+		setInterval(() => this.checkCollisions(), 100);
 		setInterval(() => this.checkThrowObjects(), 100);
 		setInterval(() => this.removeObjWhenOutOfWorld(), 1000);
 		setInterval(() => this.createNewClouds(), 5000);
@@ -76,7 +76,7 @@ class World {
 			this.level.enemies.forEach((enemy) => {
 				if (this.character.isColliding(enemy) && this.character.isFalling) {
 					enemy.enemyDie(enemy);
-					this.character.playRandomSound(this.character.CHARACTER_KILLING_ENEMY_SOUNDS);
+					soundBar.playSound('characterKill');
 					this.character.jump();
 				} else if (this.character.isColliding(enemy) && !godmode) {
 					this.character.hit();
@@ -98,7 +98,6 @@ class World {
 				let endboss = this.level.endboss[0];
 				if (endboss.isColliding(to)) {
 					endboss.hit();
-					console.log('ENDBOSS HIT: ', to.y)
 					this.throwableObjects[this.throwableObjects.indexOf(to)].bottleSplash();
 					setTimeout(() => {
 						this.throwableObjects.splice(this.throwableObjects.indexOf(to),1);

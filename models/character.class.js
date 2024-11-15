@@ -3,10 +3,14 @@ class Character extends MovableObject {
 	y = 180;
 	lastMovement;
 	energy = 100;
-	offsetX = 10;
-	offsetY = 90;
-	offsetWidth = 20;
-	offsetHeight = 70;
+	offset = {
+		...this.offset,
+		left: 40,
+		right: 35,
+		top: 100,
+		bottom: 10
+	};
+
 
 
 	CHARACTER_IMAGES_WALKING = [
@@ -98,7 +102,6 @@ class Character extends MovableObject {
 	 */
 	playWinSound() {
 		soundBar.playSound('characterWon');
-		// this.playSound(this.CHARACTER_WON_SOUND, .2);
 		this.jump();
 	}
 

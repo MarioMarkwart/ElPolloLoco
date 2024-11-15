@@ -8,7 +8,13 @@ class Chicken extends MovableObject {
 	IMAGES_DYING = [
 		'assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
 	];
-
+	
+	offset = {
+		...this.offset,
+		left: -10,
+		right: -10,
+		top: 10,
+	};
 
 	/**
 	 * Constructor for the Chicken class.
@@ -25,7 +31,7 @@ class Chicken extends MovableObject {
 		this.randomizeFirstPictures();
 		this.animate(this.CHICKEN_IMAGES_WALKING);
 		this.moveLeftInterval();
-		soundBar.playSound('chickenChirp');
+		setInterval(() => soundBar.playSound('chickenChirp'),1000);
 	}
 	
 

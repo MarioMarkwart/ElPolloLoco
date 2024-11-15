@@ -6,10 +6,12 @@ class DrawableObject {
 	currentImage = 0;
 	setCurrentImage = false;
 	intervalIds = [];
-	offsetX = 0;
-	offsetY = 0;
-	offsetWidth = 0;
-	offsetHeight = 0;
+	offset = {
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0
+	};
 
 
 	/**
@@ -215,7 +217,7 @@ class DrawableObject {
 			ctx.beginPath();
 			ctx.lineWidth = 3;
 			ctx.strokeStyle = "green";
-			ctx.rect(this.x + this.offsetX, this.y + this.offsetY, this.width - this.offsetWidth, this.height - this.offsetHeight);
+			ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.top);
 			ctx.stroke();
 		}
 

@@ -9,8 +9,10 @@ class Endboss extends MovableObject {
 	gotHit = false;
 	behaviour = "ALERT";
 
-	offsetY = 40;
-	offsetHeight = 40;
+	offset = {
+		...this.offset,
+		top:40,
+	};
 
 	IMAGES_WALK = [
 		"assets/img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -201,6 +203,6 @@ class Endboss extends MovableObject {
 	 * This is used to determine if the Endboss should move towards the Character or not.
 	 */
 	checkDistanceToCharacter() {
-		return Math.abs(world.character.x - this.x) <= 100;
+		return Math.abs(world.character.x - this.x) <= 50;
 	}
 }
