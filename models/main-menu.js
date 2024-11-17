@@ -7,6 +7,7 @@
  * attribute to toggle fullscreen mode off when clicked.
  */
 function fullscreenOn() {
+	fullscreen = true;
 	const fullscreenElement = document.getElementById("content");
 	if (fullscreenElement.requestFullscreen) {
 		fullscreenElement.requestFullscreen();
@@ -20,6 +21,7 @@ function fullscreenOn() {
 	let btnFullscreen = document.getElementById('btn-fullscreen');
 	btnFullscreen.src = "assets/img/buttons/fullscreenOff.png";
 	btnFullscreen.setAttribute('onclick', 'fullscreenOff()');
+	setButtonsOnFullscreen();
 }
 
 
@@ -32,6 +34,7 @@ function fullscreenOn() {
  * attribute to toggle fullscreen mode on when clicked.
  */
 function fullscreenOff() {
+	fullscreen = false;
 	if (document.exitFullscreen) {
 		document.exitFullscreen();
 	} else if (document.mozCancelFullScreen) {
@@ -44,4 +47,16 @@ function fullscreenOff() {
 	let btnFullscreen = document.getElementById('btn-fullscreen');
 	btnFullscreen.src = "assets/img/buttons/fullscreenOn.png";
 	btnFullscreen.setAttribute('onclick', 'fullscreenOn()');
+	setButtonsOnFullscreen();
+}
+
+function setButtonsOnFullscreen(){
+	if(fullscreen){
+		document.getElementById('mobile-buttons').classList.add('mobile-buttons-fullscreen')
+		document.getElementById('keyboard-keys').classList.add('keyboard-keys-fullscreen')
+	}
+	else{
+		document.getElementById('mobile-buttons').classList.remove('mobile-buttons-fullscreen')
+		document.getElementById('keyboard-keys').classList.remove('keyboard-keys-fullscreen')
+	}
 }

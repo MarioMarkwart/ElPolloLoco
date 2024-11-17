@@ -42,7 +42,6 @@ canvas {
     /* background-color: black; */
     background-image: url('assets/img/background.jpg');
     width: 100%;
-    aspect-ratio: (16/9);
     max-height: 100%;
 }
 
@@ -57,11 +56,12 @@ canvas {
     justify-content: center;
     top: 0;
     left: 0;
-
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
 
 .rotate-device {
     background: url("assets/img/rotate.jpeg");
@@ -92,6 +92,7 @@ canvas {
 .start {
     background: url("assets/img/9_intro_outro_screens/start/startscreen_1.png");
     background-size: contain !important;
+    background-position: top !important;
     /* FIXME: height not 480px!!! */
 }
 
@@ -102,7 +103,6 @@ canvas {
     z-index: 500000;
     display: flex;
     gap: 5px;
-    border: 2px dashed red
 }
 
 .btn {
@@ -131,6 +131,14 @@ canvas {
     z-index: 100;
     justify-content: space-between;
 }
+
+.keyboard-keys-fullscreen,
+.mobile-buttons-fullscreen {
+    position: absolute;
+    bottom: 0;
+    color:white;
+}
+
 
 .key {
     display: flex;

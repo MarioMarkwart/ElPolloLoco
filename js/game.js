@@ -13,6 +13,7 @@ let loadingScreenImagesCache = {};
 let soundBar = new Sound();
 let isLandscape = false;
 let isMobile = false;
+let fullscreen = false;
 
 /**
  * Initializes the game by preloading loading screen images, adding keyboard event listeners, 
@@ -24,6 +25,7 @@ function init(){
 	addKeyboardEventListener();
 	addDeviceEventListeners();
 	switchGameState('startScreen');
+	toggleButtons();
 }
 
 // function checkIsMobile() {
@@ -34,15 +36,11 @@ function init(){
 // 	}
 // }
 
-
-function checkOrientation(){
-	
-}
-
 function checkIsMobile(){
 	if ("ontouchstart" in document.documentElement) isMobile = true
 	else isMobile = false;
 }
+
 
 function toggleButtons(){
 	if(isMobile){
@@ -50,6 +48,8 @@ function toggleButtons(){
 		document.getElementById('keyboard-keys').classList.toggle('d-none');
 	}
 }
+
+
 /**
  * Initializes the game world.
  * 
