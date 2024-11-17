@@ -43,6 +43,13 @@ function checkIsMobile(){
 	if ("ontouchstart" in document.documentElement) isMobile = true
 	else isMobile = false;
 }
+
+function toggleButtons(){
+	if(isMobile){
+		document.getElementById('mobile-buttons').classList.toggle('d-none');
+		document.getElementById('keyboard-keys').classList.toggle('d-none');
+	}
+}
 /**
  * Initializes the game world.
  * 

@@ -121,7 +121,8 @@ canvas {
     }
 }
 
-.keyboard-keys {
+.keyboard-keys,
+.mobile-buttons {
     display: flex;
     padding: 10px;
     width: 100%;
@@ -138,29 +139,27 @@ canvas {
     align-items: center;
     gap: 10px;
     font-weight: bold;
+    border: 2px dashed red;
 
     & img {
         width: 50px;
         height: 50px;
 
     }
-
-    & :hover {
-        cursor: pointer;
-        filter: brightness(70%);
-        -webkit-filter: brightness(70%);
-        -webkit-transition: all 125ms ease;
-        -moz-transition: all 125ms ease;
-        -o-transition: all 125ms ease;
-        -ms-transition: all 125ms ease;
-        transition: all 125ms ease;
-    }
-
 }
 
-.d-none {
-    display: none;
+.key-mobile:hover {
+    cursor: pointer;
+    filter: brightness(70%);
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 125ms ease;
+    -moz-transition: all 125ms ease;
+    -o-transition: all 125ms ease;
+    -ms-transition: all 125ms ease;
+    transition: all 125ms ease;
 }
+
+
 
 @media screen and (max-width: 720px) {
     .buttons {
@@ -190,4 +189,9 @@ canvas {
             max-width: 30px;
         }
     }
+}
+
+
+.d-none {
+    display: none;
 }
