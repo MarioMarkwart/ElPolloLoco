@@ -60,7 +60,13 @@ canvas {
 
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    /* background-size: cover; */
+}
+
+.rotate-device {
+    background: url("assets/img/rotate.jpeg");
+    background-color: black;
+    background-size: contain;
 }
 
 .lost {

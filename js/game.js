@@ -11,18 +11,37 @@ let totalImagesLoadedPercentOld = 999;
 let allGraphicsLoaded = false;
 let loadingScreenImagesCache = {};
 let soundBar = new Sound();
+let landscape = false;
 
 /**
  * Initializes the game by preloading loading screen images, adding keyboard event listeners, 
  * and switching the game state to the start screen.
  */
 function init(){
+	checkIsMobile();
 	preloadLoadingScreenImages();
 	addKeyboardEventListener();
+	addLandscapeEventListener();
 	switchGameState('startScreen');
 }
 
+// function checkIsMobile() {
+// 	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+// 		return true;
+// 	} else {
+// 		return false;
+// 	}
+// }
 
+
+function checkOrientation(){
+	
+}
+
+function checkIsMobile(){
+	if ("ontouchstart" in document.documentElement) console.log('mobile')
+	else(console.log('desktop'))
+}
 /**
  * Initializes the game world.
  * 
@@ -132,8 +151,14 @@ function switchGameState(state){
 	else if (state == 'game') removeClassesFromOverlay();
 	else if (state == 'won' || state == 'lost') setFinalScreen(state);
 	else if (state == 'restart') restartGame();
+	else if (state == 'rotateDevice') rotateDevice();
 }
 
+function rotateDevice(){
+	let overlay = document.getElementById('gamestate-screen');
+	overlay.removeAttribute('class');
+	overlay.classList.add('rotate-device');
+}
 
 /**
  * Changes the image and onclick attribute of the play button based on the current
@@ -325,3 +350,17 @@ function addKeyboardEventListener() {
 		if (event.target.id === "btnThrow") keyboard.D = false;
 	});
 }
+
+screen.orientation.addEventListener("change", (event) => {
+	const type = event.target.type;
+	if (type === "landscape-primary" || type === "landscape-secondary"){
+		// landscape = true;
+		world.resume()
+		switchGameState('game');
+	} 
+	else {
+		// landscape = false;
+		world.pause()
+		switchGameState('rotateDevice')
+	}
+  });
