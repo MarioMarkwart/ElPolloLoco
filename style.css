@@ -60,13 +60,13 @@ canvas {
 
     background-position: center;
     background-repeat: no-repeat;
-    /* background-size: cover; */
+    background-size: cover;
 }
 
 .rotate-device {
     background: url("assets/img/rotate.jpeg");
     background-color: black;
-    background-size: contain;
+    background-size: contain !important;
 }
 
 .lost {
@@ -100,11 +100,13 @@ canvas {
     top: 0;
     padding: 5px;
     z-index: 500000;
+    display: flex;
+    gap: 5px;
+    border: 2px dashed red
 }
 
 .btn {
     width: 50px;
-    top: 0;
 
     &:hover {
         cursor: pointer;
@@ -158,4 +160,34 @@ canvas {
 
 .d-none {
     display: none;
+}
+
+@media screen and (max-width: 720px) {
+    .buttons {
+        max-width: 200px;
+    }
+
+    .btn {
+        max-width: 40px;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+    .keyboard-keys {
+        font-size: x-small;
+
+        & img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .buttons {
+            max-width: 150px;
+        }
+
+        .btn {
+            max-width: 30px;
+        }
+    }
 }

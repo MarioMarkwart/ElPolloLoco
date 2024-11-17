@@ -11,7 +11,8 @@ let totalImagesLoadedPercentOld = 999;
 let allGraphicsLoaded = false;
 let loadingScreenImagesCache = {};
 let soundBar = new Sound();
-let landscape = false;
+let isLandscape = false;
+let isMobile = false;
 
 /**
  * Initializes the game by preloading loading screen images, adding keyboard event listeners, 
@@ -21,7 +22,7 @@ function init(){
 	checkIsMobile();
 	preloadLoadingScreenImages();
 	addKeyboardEventListener();
-	addLandscapeEventListener();
+	addDeviceEventListeners();
 	switchGameState('startScreen');
 }
 
@@ -39,8 +40,8 @@ function checkOrientation(){
 }
 
 function checkIsMobile(){
-	if ("ontouchstart" in document.documentElement) console.log('mobile')
-	else(console.log('desktop'))
+	if ("ontouchstart" in document.documentElement) isMobile = true
+	else isMobile = false;
 }
 /**
  * Initializes the game world.
@@ -350,17 +351,26 @@ function addKeyboardEventListener() {
 		if (event.target.id === "btnThrow") keyboard.D = false;
 	});
 }
+function addDeviceEventListeners() {
+	screen.orientation.addEventListener("change", (event) => setScreenOrientation(event));
+	window.addEventListener("resize", () => getOrientation());
+}
 
-screen.orientation.addEventListener("change", (event) => {
+function setScreenOrientation(event) {
 	const type = event.target.type;
-	if (type === "landscape-primary" || type === "landscape-secondary"){
-		// landscape = true;
-		world.resume()
-		switchGameState('game');
-	} 
-	else {
-		// landscape = false;
-		world.pause()
-		switchGameState('rotateDevice')
+	if (type === "landscape-primary" || type === "landscape-secondary") {
+		world.resume();
+		switchGameState("game");
+	} else {
+		world.pause();
+		switchGameState("rotateDevice");
 	}
-  });
+}
+
+function getOrientation(){
+	if(window.innerHeight >= window.innerWidth){
+		isLandscape = false;
+	}else{
+		isLandscape = true;
+	}
+}
