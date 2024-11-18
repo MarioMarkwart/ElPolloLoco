@@ -307,6 +307,7 @@ function toggleGodmode(){
  */
 function toggleSound(){
 	soundBar.soundIsEnabled = !soundBar.soundIsEnabled;
+	soundBar.soundIsEnabled ? soundBar.setInitialVolume() : soundBar.stopAllSounds();
 	soundBar.setSoundButton();
 }
 

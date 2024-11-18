@@ -4,6 +4,20 @@ class Sound extends MovableObject {
 
 	constructor() {
 		super();
+		this.loadSounds();
+		this.setInitialVolume()
+	}
+
+
+	/**
+	 * Loads all sound files into the sound cache.
+	 *
+	 * This function initializes the soundCache object with audio clips for various
+	 * game events such as character actions, environmental sounds, and item interactions.
+	 * Each key in the soundCache represents a category of sound, and the value is an array
+	 * of Audio objects corresponding to the sound files for that category.
+	 */
+	loadSounds(){
 		this.soundCache = {
 			characterWalk: [new Audio("assets/audio/character_walk.mp3")],
 			characterHurt: [
@@ -59,34 +73,33 @@ class Sound extends MovableObject {
 	}
 
 
-/**
- * Stops all sounds associated with the given soundKey.
- * 
- * This function iterates over the array of sounds corresponding to the provided
- * soundKey in the soundCache, and pauses each sound if soundIsEnabled is true.
- * 
- * @param {string} soundKey - The key in the soundCache object whose sounds are to be stopped.
- */
+	/**
+	 * Stops all sounds associated with the given soundKey.
+	 * 
+	 * This function iterates over the array of sounds corresponding to the provided
+	 * soundKey in the soundCache, and pauses each sound if soundIsEnabled is true.
+	 * 
+	 * @param {string} soundKey - The key in the soundCache object whose sounds are to be stopped.
+	 */
 	stopSound(soundKey) {
 		if (this.soundIsEnabled) {
 			this.soundCache[soundKey].forEach((sound) => {
 				sound.pause();
+				sound.currentTime = 0;
 			});
 		}
 	}
 
 
-/**
- * Stops all sounds from the sound cache.
- * 
- * This function iterates over all sound keys in the soundCache and stops each sound
- * by invoking the stopSound method. It logs 'all sounds stop' to the console when called.
- * This ensures that all currently playing sounds are paused.
- */
-	stopAllSounds(){
+	/**
+	 * Stops all sounds and sets the volume of all sounds to 0.
+	 * This function should be called when the game is stopped or paused.
+	 */
+	stopAllSounds() {
 		console.log('all sounds stop')
 		Object.keys(this.soundCache).forEach((sound) => {
 			this.stopSound(sound);
+			this.setVolume(this.soundCache[sound], 0);
 		});
 	}
 
@@ -96,22 +109,48 @@ class Sound extends MovableObject {
 	 * to either the sound on or sound off image, depending on the value of
 	 * soundIsEnabled.
 	 */
-	setSoundButton(){
+	setSoundButton() {
 		let soundBtn = document.getElementById('btn-sound');
-	
-		this.soundIsEnabled 
-		? soundBtn.src = 'assets/img/buttons/sound_on.png'
-		: soundBtn.src = 'assets/img/buttons/sound_off.png';
+
+		this.soundIsEnabled
+			? soundBtn.src = 'assets/img/buttons/sound_on.png'
+			: soundBtn.src = 'assets/img/buttons/sound_off.png';
 	}
 
 
+	/**
+	 * Sets the volume of the given array of audio elements to the given volume.
+	 *
+	 * @param {HTMLAudioElement[]} arr - The array of audio elements to set the volume for.
+	 * @param {number} volume - The volume to set for each audio element in the array.
+	 */
+	setVolume(arr, volume) {
+		for (let i = 0; i < arr.length; i++) {
+			arr[i].volume = volume
+		}
+	}
+
+
+	/**
+	 * Sets the initial volume for various sounds in the sound cache.
+	 *
+	 * This function assigns specific volume levels to different sound categories
+	 * such as character actions, environmental sounds, and item interactions.
+	 * Each sound category is mapped to a predefined volume level to balance the
+	 * audio experience in the game.
+	 */
+	setInitialVolume() {
+		this.setVolume(this.soundCache.characterWalk, 0.5);
+		this.setVolume(this.soundCache.characterHurt, 0.3);
+		this.setVolume(this.soundCache.characterJump, 0.3);
+		this.setVolume(this.soundCache.characterKill, 0.4);
+		this.setVolume(this.soundCache.characterWon, 0.4);
+		this.setVolume(this.soundCache.characterLost, 0.3);
+		this.setVolume(this.soundCache.chickenChirp, 0.3);
+		this.setVolume(this.soundCache.chickenSmallChirp, 0.3);
+		this.setVolume(this.soundCache.endbossHit, 0.3);
+		this.setVolume(this.soundCache.bottleCollect, 0.2);
+		this.setVolume(this.soundCache.bottleHit, 0.2);
+		this.setVolume(this.soundCache.coinCollect, 0.4);
+	}
 }
-
-//TODO: SOUND VOLUMES!
-
-		// this.loadSound(this.CHARACTER_WALKING_SOUND);
-		// this.loadSounds(this.CHARACTER_JUMPING_SOUNDS, 0.3);
-		// this.loadSounds(this.CHARACTER_HURT_SOUNDS, 0.5);
-		// this.loadSounds(this.CHARACTER_KILLING_ENEMY_SOUNDS, 0.5);
-		// this.loadSounds(this.CHARACTER_WON_SOUND, 0.5);
-		// this.loadSounds(this.CHARACTER_DEAD_SOUND, 0.5);
