@@ -169,11 +169,21 @@ class Endboss extends MovableObject {
 		this.behaviour = "WALK";
 		if (world.character.x > this.x) {
 			this.otherDirection = true;
-			this.x += 5;
+			this.x += this.getWalkingSpeedRelatedToDistance();
 		} else {
 			this.otherDirection = false;
-			this.x -= 5;
+			this.x -= this.getWalkingSpeedRelatedToDistance();
 		}
+	}
+
+
+	getWalkingSpeedRelatedToDistance(){
+		let distance = Math.abs(this.x - world.character.x);
+
+		if (distance > 1000) return 30;
+		else if (distance <= 1000 && distance > 700) return 25;
+		else if (distance <= 700 && distance > 200) return 20;
+		else return 10;
 	}
 
 
