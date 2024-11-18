@@ -1,11 +1,12 @@
 class Sound extends MovableObject {
 	soundCache = {};
-	soundIsEnabled = false;
+	soundIsEnabled = true;
 
 	constructor() {
 		super();
 		this.loadSounds();
 		this.setInitialVolume()
+		this.checkIfEnemiesAlive();
 	}
 
 
@@ -130,6 +131,21 @@ class Sound extends MovableObject {
 		}
 	}
 
+	checkIfEnemiesAlive() {
+		let intv = setInterval(() => {
+			if(gameRunning){
+				let chicken = 0;
+				let chickenSmall = 0;
+				for (let i = 0; i < world.level.enemies.length; i++) {
+					if(world.level.enemies[i] instanceof Chicken) chicken++;
+					else if (world.level.enemies[i] instanceof ChickenSmall) chickenSmall++;
+				}
+				if (chicken == 0) this.stopSound('chickenChirp')
+				if (chickenSmall == 0) this.stopSound('chickenSmallChirp')
+				if(chicken == 0 && chickenSmall == 0) clearInterval(intv);
+			}
+		},100)
+	}
 
 	/**
 	 * Sets the initial volume for various sounds in the sound cache.
