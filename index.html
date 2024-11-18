@@ -40,16 +40,13 @@
 <body onload="init()" oncontextmenu="return false;">
     <h1>El pollo loco</h1>
     <div id="content">
-        <canvas id="canvas" width="720px" height="480px"></canvas>
-            <div id="canvas-overlay">
-                <div id="loading-screen" class=""></div>
-                <div id="gamestate-screen" class=""></div>
-            </div>
+        <div id="canvas-container">  
+            <canvas id="canvas" width="720px" height="480px"></canvas>
             <div id="mobile-buttons" class="mobile-buttons d-none">
-                <div class="key"><img id="btnLeft" src="assets/img/buttons/keyboard_left.png"><span>Left</span></span></div>
-                <div class="key"><img id="btnRight" src="assets/img/buttons/keyboard_right.png"><span>Right</span></div>
-                <div class="key"><img id="btnJump" src="assets/img/buttons/mobile-jump.png"><span>Jump</span></div>
-                <div class="key"><img id="btnThrow" src="assets/img/buttons/mobile-bottle.png"><span>Throw Bottle</span></div>
+                <div class="key"><img id="btnLeft" src="assets/img/buttons/keyboard_left.png"></div>
+                <div class="key"><img id="btnRight" src="assets/img/buttons/keyboard_right.png"></div>
+                <div class="key"><img id="btnJump" src="assets/img/buttons/mobile-jump.png"></div>
+                <div class="key"><img id="btnThrow" src="assets/img/buttons/mobile-bottle.png"></div>
             </div>
             <div id="buttons" class="buttons">
                 <img class="btn" id="btn-play" src="assets/img/buttons/play.png" onclick="startGame()">
@@ -63,6 +60,12 @@
                 <div class="key"><img id="btnJump" src="assets/img/buttons/keyboard_space.png"><span>Jump</span></div>
                 <div class="key"><img id="btnThrow" src="assets/img/buttons/keyboard_d.png"><span>Throw Bottle</span></div>
             </div>
+        </div>
+        <div id="canvas-overlay">
+            <div id="loading-screen" class=""></div>
+            <div id="gamestate-screen" class=""></div>
+        </div>
+        
     </div>
 
 
