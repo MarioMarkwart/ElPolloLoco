@@ -6,7 +6,7 @@ class Sound extends MovableObject {
 		super();
 		this.loadSounds();
 		this.setInitialVolume()
-		this.checkIfEnemiesAlive();
+		// this.checkIfEnemiesAlive();
 	}
 
 
