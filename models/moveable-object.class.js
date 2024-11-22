@@ -5,7 +5,7 @@ class MovableObject extends DrawableObject {
 	acceleration = 0.5;
 	energy = 100;
 	lastHit = 0;
-	// soundCache = {};
+	soundLoopID = 0;
 	isFalling = false;
 	amount = 0;
 

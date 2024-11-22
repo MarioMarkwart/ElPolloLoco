@@ -15,6 +15,8 @@ class Chicken extends MovableObject {
 		right: -10,
 		top: 10,
 	};
+	
+	static chickenCount = 0;
 
 	/**
 	 * Constructor for the Chicken class.
@@ -22,6 +24,7 @@ class Chicken extends MovableObject {
 	 */
 	constructor() {
 		super().loadImage('assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png');
+		Chicken.chickenCount++;
 		this.height = 70;
 		this.width = 50;
 		this.x = this.getRandomInt(200, 2200);
@@ -31,8 +34,13 @@ class Chicken extends MovableObject {
 		this.randomizeFirstPictures();
 		this.animate(this.CHICKEN_IMAGES_WALKING);
 		this.moveLeftInterval();
-		setInterval(() => soundBar.playSound('chickenChirp'),1000);
+		soundBar.playSoundLoop('chickenChirp', 5000, this);
 	}
 	
+	static getChickenCounter() {
+		setInterval(() => {
+			console.log(Chicken.chickenCount);
 
+		},500)
+	}
 }

@@ -12,7 +12,8 @@ class ChickenSmall extends MovableObject {
 		...this.offset,
 		top: 5
 	}
-
+	
+	static chickenSmallCount = 0;
 
 /**
  * Initializes a new instance of the ChickenSmall class.
@@ -23,6 +24,7 @@ class ChickenSmall extends MovableObject {
  */
 	constructor() {
 		super().loadImage("assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
+		ChickenSmall.chickenSmallCount++;
 		this.height = 50;
 		this.width = 30;
 		this.x = this.getRandomInt(200, 2200);
@@ -32,7 +34,6 @@ class ChickenSmall extends MovableObject {
 		this.randomizeFirstPictures();
 		this.animate(this.CHICKEN_IMAGES_WALKING, 100);
 		this.moveLeftInterval();
-
-		soundBar.playSound('chickenSmallChirp');
+		soundBar.playSoundLoop('chickenSmallChirp', 5000, this);
 	}
 }
