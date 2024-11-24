@@ -5,7 +5,7 @@ class MovableObject extends DrawableObject {
 	acceleration = 0.5;
 	energy = 100;
 	lastHit = 0;
-	soundLoopID = 0;
+	soundLoopId = 0;;
 	isFalling = false;
 	amount = 0;
 
@@ -108,15 +108,6 @@ class MovableObject extends DrawableObject {
 		);
 	  }
 
-	//   isColliding(mo) {
-	// 	return (
-	// 		this.x + this.width > mo.x &&
-	// 		this.y + this.height > mo.y &&
-	// 		this.x < mo.x &&
-	// 		this.y < mo.y + mo.height
-	// 	);
-	// }
-
 
 	/**
 	 * Reduces the object's energy by 10.
@@ -167,10 +158,10 @@ class MovableObject extends DrawableObject {
 	 *
 	 * @param {Object} enemy - The enemy object that is dying, which contains sound cache and images.
 	 */
-	enemyDie(enemy) { //FIXME
+	enemyDie(enemy) {
 		this.stopAnimation();
-		// this.stopAllSounds(Object.keys(enemy.soundCache)) //TODO: stop sound when enemy removed from array
-		this.animate(enemy.IMAGES_DYING)
+		this.animate(enemy.IMAGES_DYING);
+		clearInterval(enemy.soundLoopId);
 		setTimeout(() => {
 			world.level.enemies.splice(world.level.enemies.indexOf(this), 1);
 		},300)

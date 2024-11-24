@@ -28,13 +28,6 @@ function init(){
 	toggleButtons();
 }
 
-// function checkIsMobile() {
-// 	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-// 		return true;
-// 	} else {
-// 		return false;
-// 	}
-// }
 
 function checkIsMobile(){
 	if ("ontouchstart" in document.documentElement) isMobile = true
@@ -61,8 +54,6 @@ function initWorld() {
 	canvas = document.getElementById("canvas");
 	world = '';
 	world = new World(canvas, keyboard);
-	console.log("My world is: ", world);
-	console.log("My character is: ", world.character);
 }
 
 
@@ -94,7 +85,6 @@ function stopGame() {
 		clearTimeout(i);
 	}
 	gameRunning = false;
-	console.log('Game stopped');
 }
 
 
@@ -287,11 +277,9 @@ function toggleGodmode(){
 	if (gameRunning) {
 		godmode = !godmode;
 		if (godmode){
-			console.warn('Godmode is on');
 			world.statusBarBottles.setAmount(500);
 		} 
 		else {
-			console.warn('Godmode is off');
 			world.statusBarBottles.setAmount(5);
 		}
 	}

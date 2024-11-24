@@ -6,7 +6,6 @@ class Sound extends MovableObject {
 		super();
 		this.loadSounds();
 		this.setInitialVolume()
-		// this.checkIfEnemiesAlive();
 	}
 
 
@@ -81,9 +80,6 @@ class Sound extends MovableObject {
 		obj.soundLoopId = intv;
 	}
 
-	stopSoundLoop(obj){
-		clearInterval(obj.soundLoopId);
-	}
 
 	/**
 	 * Stops all sounds associated with the given soundKey.
@@ -108,7 +104,6 @@ class Sound extends MovableObject {
 	 * This function should be called when the game is stopped or paused.
 	 */
 	stopAllSounds() {
-		console.log('all sounds stop')
 		Object.keys(this.soundCache).forEach((sound) => {
 			this.stopSound(sound);
 			this.setVolume(this.soundCache[sound], 0);
@@ -142,15 +137,6 @@ class Sound extends MovableObject {
 		}
 	}
 
-	checkIfEnemiesAlive() {
-		let intv = setInterval(() => {
-			if(gameRunning){
-				if (Chicken.chickenCount == 0) this.stopSound('chickenChirp')
-				if (ChickenSmall.chickenSmallCount == 0) this.stopSound('chickenSmallChirp')
-				if (Chicken.chickenCount == 0 && ChickenSmall.chickenSmallCount == 0) clearInterval(intv);
-			}
-		},100)
-	}
 
 	/**
 	 * Sets the initial volume for various sounds in the sound cache.

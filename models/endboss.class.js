@@ -103,7 +103,6 @@ class Endboss extends MovableObject {
 	checkIfFirstContact() {
 		let firstContactInterval = setInterval(() => {
 			if (this.x - world.character.x <= 420) {
-				console.log("HELP! ENDBOSS!!!");
 				clearInterval(firstContactInterval);
 				this.atFirstContact();
 			}

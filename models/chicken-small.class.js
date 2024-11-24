@@ -12,19 +12,17 @@ class ChickenSmall extends MovableObject {
 		...this.offset,
 		top: 5
 	}
-	
-	static chickenSmallCount = 0;
 
-/**
- * Initializes a new instance of the ChickenSmall class.
- * Loads the initial image, sets the size and random position,
- * loads walking and dying images, loads the small chicken chirp sound,
- * randomizes the first picture, starts playing the chirp sound,
- * initiates the walking animation, and sets up the leftward movement interval.
- */
+
+	/*
+	* Initializes a new instance of the ChickenSmall class.
+	* Loads the initial image, sets the size and random position,
+	* loads walking and dying images, loads the small chicken chirp sound,
+	* randomizes the first picture, starts playing the chirp sound,
+	* initiates the walking animation, and sets up the leftward movement interval.
+	*/
 	constructor() {
 		super().loadImage("assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
-		ChickenSmall.chickenSmallCount++;
 		this.height = 50;
 		this.width = 30;
 		this.x = this.getRandomInt(200, 2200);
@@ -34,6 +32,6 @@ class ChickenSmall extends MovableObject {
 		this.randomizeFirstPictures();
 		this.animate(this.CHICKEN_IMAGES_WALKING, 100);
 		this.moveLeftInterval();
-		soundBar.playSoundLoop('chickenSmallChirp', 5000, this);
+		soundBar.playSoundLoop('chickenSmallChirp', this.getRandomInt(1000, 3000), this);
 	}
 }
