@@ -39,8 +39,50 @@
 
 <body onload="init()" oncontextmenu="return false;">
     <h1>El pollo loco</h1>
+    <div id="instructions" class="d-none">
+        <div id="close-instructions">
+            <img class="btn" onclick="instructions()" src="assets/img/buttons/close.png">
+        </div>
+        <div class="instruction-text">
+            <h1>El Pollo Loco</h1>
+            <h2>The Legend of the Giant Chicken</h2>
+            <br>
+            <br>
+            In a small village in Mexico, there once lived a brave boy named Pepe. His village was terrorized by a gigantic, fire-breathing chicken. This monster had ravaged the fields and robbed the villagers of their livelihood. Pepe, the bravest boy in the village, decided to defeat the chicken and save his home.
+            <br>
+            <br>
+            <b>The Search for the Ultimate Weapon</b>
+            <br>
+            The village elders told Pepe of an old prophecy that said only a brave warrior could defeat the chicken with a special salsa. However, this salsa had to be bought with exactly five gold coins. Pepe set off to collect the coins and defeat the chicken.
+            <br>
+            <br>
+            <b>Your Mission</b>
+            <br>
+            Collect coins: Find the hidden coins in the village to buy the magic salsa.
+            Collect salsa: Buy the deadly salsa with the coins. For every five coins collected, you get one bottle of salsa.
+            Defeat the chicken: Use your collected salsa to defeat the giant chicken and save your village!
+            <br>
+            <br>
+            <b>Game rules</b>
+            <br>
+            <b>Coins:</b> Collect coins to buy bottles of salsa.<br>
+            <b>Salsa:</b> For every five coins collected, you get one bottle of salsa.<br>
+            
+            <b>Limit:</b> Once you have five bottles of salsa, you cannot collect any more bottles.<br>
+            <br>
+            <b>Goal</b><br>
+            Defeat the giant chicken with your salsa and become the hero of the village!
+            <br>
+            <br>
+        </div>
+        <div class="privacy-container">
+            <img class="privacy-btn" src="assets/img/buttons/privacy_policy.png">
+            <img class="privacy-btn" src="assets/img/buttons/legal_notice.png">
+        </div>
+    </div>
+
     <div id="content">
-        <div id="canvas-container">  
+        <div id="canvas-container">
             <canvas id="canvas" width="720px" height="480px"></canvas>
             <div id="mobile-buttons" class="mobile-buttons d-none">
                 <div class="key"><img id="btnLeft" src="assets/img/buttons/keyboard_left.png"></div>
@@ -50,22 +92,24 @@
             </div>
             <div id="buttons" class="buttons">
                 <img class="btn" id="btn-play" src="assets/img/buttons/play.png" onclick="startGame()">
-                <img class="btn" id="btn-help" src="assets/img/buttons/help.png">
-                <img class="btn" id="btn-fullscreen" src="assets/img/buttons/fullscreenOn.png"  onclick="fullscreenOn()" >
-                <img class="btn" id="btn-sound" src="assets/img/buttons/sound_off.png" onclick="toggleSound()" >
+                <img class="btn" id="btn-help" src="assets/img/buttons/help.png" onclick="instructions()">
+                <img class="btn" id="btn-fullscreen" src="assets/img/buttons/fullscreenOn.png" onclick="fullscreenOn()">
+                <img class="btn" id="btn-sound" src="assets/img/buttons/sound_off.png" onclick="toggleSound()">
             </div>
             <div id="keyboard-keys" class="keyboard-keys">
-                <div class="key"><img id="btnLeft" src="assets/img/buttons/keyboard_left.png"><span>Left</span></span></div>
+                <div class="key"><img id="btnLeft" src="assets/img/buttons/keyboard_left.png"><span>Left</span></span>
+                </div>
                 <div class="key"><img id="btnRight" src="assets/img/buttons/keyboard_right.png"><span>Right</span></div>
                 <div class="key"><img id="btnJump" src="assets/img/buttons/keyboard_space.png"><span>Jump</span></div>
-                <div class="key"><img id="btnThrow" src="assets/img/buttons/keyboard_d.png"><span>Throw Bottle</span></div>
+                <div class="key"><img id="btnThrow" src="assets/img/buttons/keyboard_d.png"><span>Throw Bottle</span>
+                </div>
             </div>
         </div>
         <div id="canvas-overlay">
             <div id="loading-screen" class=""></div>
             <div id="gamestate-screen" class=""></div>
         </div>
-        
+
     </div>
 
 

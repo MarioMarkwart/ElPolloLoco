@@ -370,3 +370,8 @@ function getOrientation(){
 		isLandscape = true;
 	}
 }
+
+function instructions(){
+	document.getElementById('instructions').classList.toggle('d-none');
+	document.getElementById('canvas').classList.toggle('d-none');
+}
