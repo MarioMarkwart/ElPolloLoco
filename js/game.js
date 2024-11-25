@@ -51,6 +51,7 @@ function toggleButtons(){
  * It also logs the world and character objects for debugging purposes.
  */
 function initWorld() {
+	canvas = '';
 	canvas = document.getElementById("canvas");
 	world = '';
 	world = new World(canvas, keyboard);
@@ -98,9 +99,13 @@ function startGame(){
 	initLevel();
 	initWorld();
 	gameRunning = true;
-	changePlayButton()
+	changeButtons()
 }
 
+function pauseGame(){
+	world.pause();
+	changeButtons();
+}
 
 /**
  * Transitions the game state to 'lost' by invoking the switchGameState function
@@ -150,6 +155,7 @@ function switchGameState(state){
 	else if (state == 'won' || state == 'lost') setFinalScreen(state);
 	else if (state == 'restart') restartGame();
 	else if (state == 'rotateDevice') rotateDevice();
+	else if (state == 'pause') pauseGame();
 }
 
 function rotateDevice(){
@@ -168,14 +174,20 @@ function rotateDevice(){
  * attribute is set to startGame().
  * @returns {void}
  */
-function changePlayButton(){
-	let btn = document.getElementById('btn-play');
+function changeButtons(){
+	let playBtn = document.getElementById('btn-play');
+	let helpBtn = document.getElementById('btn-help');
 	if (gameRunning){
-		btn.src = 'assets/img/buttons/restart.png'
-		btn.setAttribute('onclick', 'switchGameState("restart")');
+		playBtn.src = 'assets/img/buttons/pause.png'
+		playBtn.setAttribute('onclick', 'switchGameState("pause")');
+		helpBtn.src = 'assets/img/buttons/restart.png';
+		helpBtn.setAttribute('onclick', 'switchGameState("restart")');
 	} else {
-		btn.src = 'assets/img/buttons/play.png';
-		btn.setAttribute('onclick', 'startGame()');
+		helpBtn.src = 'assets/img/buttons/help.png';
+		helpBtn.setAttribute('onclick', 'openInstructions()');
+		playBtn.src = 'assets/img/buttons/play.png'
+		if(world.isPaused) playBtn.setAttribute('onclick', 'world.resume()');
+		else playBtn.setAttribute('onclick', 'startGame()');
 	}
 }
 
@@ -371,7 +383,14 @@ function getOrientation(){
 	}
 }
 
-function instructions(){
-	document.getElementById('instructions').classList.toggle('d-none');
-	document.getElementById('canvas').classList.toggle('d-none');
+function openInstructions(){
+	document.getElementById('instructions').style.display = 'flex';
+	document.getElementById('content').style.display = 'none';
+	document.getElementById('title').style.display = 'none';
+}
+
+function closeInstructions(){
+	document.getElementById('instructions').style.display = 'none'
+	document.getElementById('content').style.display = 'flex';
+	document.getElementById('title').style.display = 'flex';
 }

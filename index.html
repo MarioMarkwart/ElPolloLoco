@@ -38,10 +38,10 @@
 </head>
 
 <body onload="init()" oncontextmenu="return false;">
-    <h1>El pollo loco</h1>
+    <h1 id="title">El pollo loco</h1>
     <div id="instructions" class="d-none">
-        <div id="close-instructions">
-            <img class="btn" onclick="instructions()" src="assets/img/buttons/close.png">
+        <div class="close-button">
+            <img class="btn" onclick="closeInstructions()" src="assets/img/buttons/close.png">
         </div>
         <div class="instruction-text">
             <h1>El Pollo Loco</h1>
@@ -76,8 +76,8 @@
             <br>
         </div>
         <div class="privacy-container">
-            <img class="privacy-btn" src="assets/img/buttons/privacy_policy.png">
-            <img class="privacy-btn" src="assets/img/buttons/legal_notice.png">
+            <a href="privacy.html" target="_blank" rel="noopener noreferrer"><img class="privacy-btn" src="assets/img/buttons/privacy_policy.png"></a>
+            <a href="legal_notice.html" target="_blank" rel="noopener noreferrer"><img class="privacy-btn" src="assets/img/buttons/legal_notice.png" onclick="openLegalNotice()"></a>
         </div>
     </div>
 
@@ -92,7 +92,7 @@
             </div>
             <div id="buttons" class="buttons">
                 <img class="btn" id="btn-play" src="assets/img/buttons/play.png" onclick="startGame()">
-                <img class="btn" id="btn-help" src="assets/img/buttons/help.png" onclick="instructions()">
+                <img class="btn" id="btn-help" src="assets/img/buttons/help.png" onclick="openInstructions()">
                 <img class="btn" id="btn-fullscreen" src="assets/img/buttons/fullscreenOn.png" onclick="fullscreenOn()">
                 <img class="btn" id="btn-sound" src="assets/img/buttons/sound_off.png" onclick="toggleSound()">
             </div>

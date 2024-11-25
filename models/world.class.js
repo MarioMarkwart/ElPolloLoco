@@ -220,6 +220,7 @@ class World {
 		gameRunning = true;
 		this.isPaused = false;
 		this.animationFrameId = requestAnimationFrame(() => this.draw());
+		changeButtons()
 	}
 
 

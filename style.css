@@ -82,15 +82,22 @@ body {
     font-size: 16px;
     text-align: center;
     font-weight: 500;
+    /* display: flex; */
+    justify-content: center;
 
     backdrop-filter: blur(10px);
 }
 
-#close-instructions{
+.instruction-text{
+    max-width: 720px;
+}
+
+.close-button{
     position: absolute;
+    z-index:50;
     right: var(--instruction-padding) ;
     top:var(--instruction-padding);
-    }
+}
 
 .privacy-container{
     position: fixed;
@@ -106,22 +113,25 @@ body {
     cursor: pointer;
 }
 
-.instruction-text{
-    /* border: 2px solid yellow; */
-}
-
 #generator_results_content{
     display: flex;
+    width: 100%;
+    max-width: 720px;
+    align-items: center;
+    justify-content: flex-start;
     flex-direction: column;
-    border: 2px solid red;
     padding: var(--instruction-padding);
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    right:0;
+    bottom: 0;
+    color: white;
+    text-shadow: 0 0 7px BLACK;
 
     & h3, h2{
         padding-top: 20px;
-        border: 2px solid green
     }
 }
 
@@ -197,7 +207,6 @@ canvas {
     background: url("assets/img/9_intro_outro_screens/start/startscreen_1.png");
     background-size: contain !important;
     background-position: top !important;
-    /* FIXME: height not 480px!!! */
 }
 
 .buttons {

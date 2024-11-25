@@ -1,6 +1,7 @@
 let level1;
 
 function initLevel() {
+    level1 = null;
     level1 = new Level(
         [
             new Chicken(),
