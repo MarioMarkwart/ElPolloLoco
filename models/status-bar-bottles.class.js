@@ -10,6 +10,7 @@ class StatusBarBottles extends StatusBar {
 
 	y = 80;
 
+
 	/**
 	 * Constructor for StatusBarBottles class. Calls the superclass constructor, loads the bottle
 	 * images and sets the amount of bottles to 0 unless godmode is enabled, in which case it sets

@@ -176,6 +176,10 @@ class Endboss extends MovableObject {
 	}
 
 
+	/**
+	 * Calculates the walking speed of the Endboss depending on the distance to the Character.
+	 * @returns {number} The walking speed.
+	 */
 	getWalkingSpeedRelatedToDistance(){
 		let distance = Math.abs(this.x - world.character.x);
 

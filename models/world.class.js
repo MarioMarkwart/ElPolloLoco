@@ -128,7 +128,7 @@ class World {
 		}
 	}
 
-	//TODO: 
+
 	/**
 	 * Adjusts the clouds in the world to make them appear smaller and thus
 	 * creating a parallax effect with the background.
@@ -196,7 +196,6 @@ class World {
 	}
 
 
-	//TODO: isPaused und gamerunning doppelt?!
 	/**
 	 * Stops the game by pausing the animation and setting the gameRunning
 	 * variable to false.
@@ -209,7 +208,7 @@ class World {
 		cancelAnimationFrame(this.animationFrameId);
 	}
 
-	//TODO: isPaused und gamerunning doppelt?!
+
 	/**
 	 * Resumes the game by continuing the animation and setting the gameRunning
 	 * variable to true.

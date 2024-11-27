@@ -4,7 +4,6 @@ class StatusBar extends DrawableObject {
 	x = 40;
     width = 180;
     height = 50;
-
     amount = 0;
     percentage = 100;
 
@@ -20,7 +19,7 @@ class StatusBar extends DrawableObject {
         this.img = this.imageCache[path];
     }
 
-    //TODO: HELPER?
+
     /**
      * Increases the amount of the status bar by one.
      *
@@ -39,7 +38,7 @@ class StatusBar extends DrawableObject {
         this.setAmount(this.amount);
 	}
 
-    //TODO: HELPER?
+
     /**
      * Decreases the amount of the status bar by one.
      *

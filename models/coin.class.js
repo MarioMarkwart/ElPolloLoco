@@ -11,6 +11,7 @@ class Coin extends MovableObject {
 		bottom: 15
 	};
 
+
 	/**
 	 * Initializes a new instance of the Coin class.
 	 * Loads the initial image and animation images, sets random position and size,

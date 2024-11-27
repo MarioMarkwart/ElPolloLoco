@@ -8,7 +8,7 @@ class Chicken extends MovableObject {
 	IMAGES_DYING = [
 		'assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
 	];
-	
+
 	offset = {
 		...this.offset,
 		left: -10,

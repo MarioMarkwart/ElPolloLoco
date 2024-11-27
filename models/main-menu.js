@@ -50,6 +50,17 @@ function fullscreenOff() {
 	setButtonsOnFullscreen();
 }
 
+
+/**
+ * Adds or removes the "mobile-buttons-fullscreen" and "keyboard-keys-fullscreen"
+ * CSS classes from the elements with IDs "mobile-buttons" and "keyboard-keys",
+ * depending on the value of the global "fullscreen" variable.
+ *
+ * If fullscreen is true, the classes are added to the elements. Otherwise, the
+ * classes are removed.
+ *
+ * This function is called whenever the game enters or exits fullscreen mode.
+ */
 function setButtonsOnFullscreen(){
 	if(fullscreen){
 		document.getElementById('mobile-buttons').classList.add('mobile-buttons-fullscreen')

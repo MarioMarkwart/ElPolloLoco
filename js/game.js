@@ -29,12 +29,21 @@ function init(){
 }
 
 
+/**
+ * Checks whether the current device is a mobile device or not.
+ * @returns {void}
+ */
 function checkIsMobile(){
 	if ("ontouchstart" in document.documentElement) isMobile = true
 	else isMobile = false;
 }
 
 
+/**
+ * Toggles the visibility of the mobile buttons and keyboard keys based on whether the
+ * device is a mobile device or not.
+ * @returns {void}
+ */
 function toggleButtons(){
 	if(isMobile){
 		document.getElementById('mobile-buttons').classList.toggle('d-none');
@@ -163,6 +172,7 @@ function rotateDevice(){
 	overlay.removeAttribute('class');
 	overlay.classList.add('rotate-device');
 }
+
 
 /**
  * Changes the image and onclick attribute of the play button based on the current
@@ -359,11 +369,27 @@ function addKeyboardEventListener() {
 		if (event.target.id === "btnThrow") keyboard.D = false;
 	});
 }
+
+
+/**
+ * Adds event listeners for device orientation changes and window resizes.
+ * When the device orientation is changed, the game is either paused or resumed, depending on the new orientation.
+ * When the window is resized, the orientation is checked again to ensure the game is in the correct state.
+ * @private
+ */
 function addDeviceEventListeners() {
 	screen.orientation.addEventListener("change", (event) => setScreenOrientation(event));
 	window.addEventListener("resize", () => getOrientation());
 }
 
+
+/**
+ * Handles screen orientation changes.
+ * If the new orientation is landscape, the game is resumed and the game state is set to "game".
+ * If the new orientation is not landscape, the game is paused and the game state is set to "rotateDevice".
+ * @param {Event} event - The screen orientation change event.
+ * @private
+ */
 function setScreenOrientation(event) {
 	const type = event.target.type;
 	if (type === "landscape-primary" || type === "landscape-secondary") {
@@ -375,6 +401,14 @@ function setScreenOrientation(event) {
 	}
 }
 
+
+/**
+ * Checks the current window orientation and sets the isLandscape boolean accordingly.
+ * The function is used to check if the device is in landscape orientation and if
+ * the game should be paused or resumed. The function is called when the window is
+ * resized and when the device orientation is changed.
+ * @private
+ */
 function getOrientation(){
 	if(window.innerHeight >= window.innerWidth){
 		isLandscape = false;
@@ -383,12 +417,24 @@ function getOrientation(){
 	}
 }
 
+
+/**
+ * Opens the instruction screen and hides the content and title elements.
+ * This function is called when the instruction button is clicked.
+ * @returns {void}
+ */
 function openInstructions(){
 	document.getElementById('instructions').style.display = 'flex';
 	document.getElementById('content').style.display = 'none';
 	document.getElementById('title').style.display = 'none';
 }
 
+
+/**
+ * Closes the instruction screen and shows the content and title elements again.
+ * This function is called when the close button on the instruction screen is clicked.
+ * @returns {void}
+ */
 function closeInstructions(){
 	document.getElementById('instructions').style.display = 'none'
 	document.getElementById('content').style.display = 'flex';

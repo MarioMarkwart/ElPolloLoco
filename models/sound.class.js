@@ -1,6 +1,6 @@
 class Sound extends MovableObject {
 	soundCache = {};
-	soundIsEnabled = true;
+	soundIsEnabled = false;
 
 	constructor() {
 		super();
@@ -147,7 +147,7 @@ class Sound extends MovableObject {
 	 * audio experience in the game.
 	 */
 	setInitialVolume() {
-		this.setVolume(this.soundCache.characterWalk, 0.5);
+		this.setVolume(this.soundCache.characterWalk, 0.6);
 		this.setVolume(this.soundCache.characterHurt, 0.3);
 		this.setVolume(this.soundCache.characterJump, 0.3);
 		this.setVolume(this.soundCache.characterKill, 0.4);

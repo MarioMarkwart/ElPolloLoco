@@ -15,7 +15,6 @@ class StatusBarCoins extends StatusBar {
 	 * Calls the superclass constructor, loads the images for the status bar,
 	 * and sets the amount of the status bar to the current amount.
 	 */
-
 	constructor() {
 		super();
 		this.loadImages(this.IMAGES);

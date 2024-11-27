@@ -13,6 +13,7 @@ class StatusBarEndboss extends StatusBar {
 	width = 200;
 	height = 60
 
+
 	/**
 	 * Constructor for StatusBarEndboss class.
 	 * 

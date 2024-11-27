@@ -68,6 +68,7 @@ class ThrowableObject extends MovableObject {
 		}, 25);
 	}
 
+
 	/**
 	 * Throws the bottle to the right.
 	 * 
