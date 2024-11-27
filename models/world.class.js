@@ -357,10 +357,8 @@ class World {
 
 		world.level.enemies.forEach((enemy) => {
 			if (this.checkIsOutOfWorld(enemy)) {
-				world.level.enemies.splice(
-					world.level.enemies.indexOf(enemy),
-					1
-				);
+				world.level.enemies.splice(world.level.enemies.indexOf(enemy),1);
+				clearInterval(enemy.soundLoopId);
 			}
 		});
 	}

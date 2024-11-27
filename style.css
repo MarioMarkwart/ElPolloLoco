@@ -267,7 +267,6 @@ canvas {
 
 .key {
     display: flex;
-    flex-direction: row;
     height: 50px;
     align-items: center;
     gap: 10px;
@@ -275,8 +274,6 @@ canvas {
 
     & img {
         width: 50px;
-        height: 50px;
-
     }
 }
 
@@ -308,28 +305,42 @@ canvas {
     h1{
         font-size: 48px ;
     }
-    .mobile-buttons,
-    .keyboard-keys {
-        font-size: x-small;
+    .btn {
+        max-width: 30px;
+    }
+    .key > img{
+        width: 40px;
+    }
 
-        & img {
-            width: 40px;
-            height: 40px;
-        }
+    .keyboard-keys {
+        font-size: x-small;       
 
         .buttons {
             max-width: 150px;
         }
 
         .btn {
-            max-width: 30px;
+            max-width: 10px;
         }
     }
+    
     .instruction-text{
         font-size: smaller;
     }
 }
 
+@media screen and (max-width: 430px) {
+    .btn {
+        max-width: 25px;
+    }
+    .key{
+        gap: 3px;
+    }
+
+    .key > img{
+        width: 30px;
+    }
+}
 .d-none {
     display: none;
 }

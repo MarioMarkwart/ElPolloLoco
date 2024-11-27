@@ -111,6 +111,12 @@ function startGame(){
 	changeButtons()
 }
 
+
+/**
+ * Pauses the game by calling World.pause() and switching the play button.
+ *
+ * @returns {void}
+ */
 function pauseGame(){
 	world.pause();
 	changeButtons();
@@ -167,6 +173,13 @@ function switchGameState(state){
 	else if (state == 'pause') pauseGame();
 }
 
+
+/**
+ * Sets the game state to 'rotateDevice', which shows the 'rotate your device'
+ * screen and hides any other game state visuals.
+ *
+ * @returns {void}
+ */
 function rotateDevice(){
 	let overlay = document.getElementById('gamestate-screen');
 	overlay.removeAttribute('class');
