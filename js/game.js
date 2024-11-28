@@ -437,7 +437,7 @@ function getOrientation(){
  * @returns {void}
  */
 function openInstructions(){
-	document.getElementById('instructions').style.display = 'flex';
+	document.getElementById('instructions').classList.remove('d-none');
 	document.getElementById('content').style.display = 'none';
 	document.getElementById('title').style.display = 'none';
 }
@@ -449,7 +449,7 @@ function openInstructions(){
  * @returns {void}
  */
 function closeInstructions(){
-	document.getElementById('instructions').style.display = 'none'
+	document.getElementById('instructions').classList.add('d-none');
 	document.getElementById('content').style.display = 'flex';
 	document.getElementById('title').style.display = 'flex';
 }

@@ -71,3 +71,7 @@ function setButtonsOnFullscreen(){
 		document.getElementById('keyboard-keys').classList.remove('keyboard-keys-fullscreen')
 	}
 }
+
+function openPrivacy(page){
+	window.open(`${page}.html`, '_blank');
+}
