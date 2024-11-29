@@ -97,7 +97,7 @@ function setStoppableInterval(fn, time, description) {
  * repetitive or delayed actions in the game.
  */
 function stopGame() {
-	for (let i=0; i<10000;i++){
+	for (let i=0; i<1000000;i++){
 		clearInterval(i);
 		clearTimeout(i);
 	}
@@ -313,8 +313,9 @@ function youLost(){
  * @returns {void}
  */
 function restartGame(){
-	switchGameState('startScreen');
 
+	switchGameState('startScreen');
+	stopGame();
 	cancelAnimationFrame(world.animationFrameId);
 	soundBar.stopAllSounds();
 	startGame();

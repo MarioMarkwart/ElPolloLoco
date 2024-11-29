@@ -1,14 +1,16 @@
 let level1;
 
-function deleteLevel(){
-    level1 = '';
-    console.warn('level deleted');
-}
-
-
+/**
+ * Initializes the level1 object with the specified elements.
+ *
+ * @param {Array} enemies - An array of enemy objects in the level.
+ * @param {Object} endboss - The endboss object for the level.
+ * @param {Array} coins - An array of coin objects in the level.
+ * @param {Array} bottles - An array of bottle objects in the level.
+ * @param {Array} clouds - An array of cloud objects in the level.
+ * @param {Array} backgroundObjects - An array of background objects in the level.
+ */
 function initLevel() {
-    deleteLevel();
-
     level1 = new Level(
         [
             new Chicken(),
@@ -19,7 +21,6 @@ function initLevel() {
             new ChickenSmall(),
             new Chicken(),
             new ChickenSmall(),
-
         ],
         [
             new Endboss()
