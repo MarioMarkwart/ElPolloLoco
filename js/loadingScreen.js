@@ -26,7 +26,7 @@ const loadingScreenImages = [
       
       if (totalImagesLoadedPercent !== totalImagesLoadedPercentOld) {
           const imageSrc = loadingScreenImagesCache['assets/img/loadingScreen/loadingScreen_' + totalImagesLoadedPercent + '.png'].src;
-          loadingScreen.innerHTML = `<img src="${imageSrc}">`
+          loadingScreen.innerHTML = `<img id="loading-screen-image" src="${imageSrc}">`
           totalImagesLoadedPercentOld = totalImagesLoadedPercent;
       }
   

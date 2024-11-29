@@ -101,7 +101,7 @@ class Character extends MovableObject {
 	 */
 	playWinSound() {
 		soundBar.playSound('characterWon');
-		this.jump();
+		if(!this.isAboveGround()) this.jump();
 	}
 
 

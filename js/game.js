@@ -97,6 +97,7 @@ function setStoppableInterval(fn, time, description) {
  * repetitive or delayed actions in the game.
  */
 function stopGame() {
+	soundBar.stopAllSounds();
 	for (let i=0; i<1000000;i++){
 		clearInterval(i);
 		clearTimeout(i);
@@ -117,6 +118,7 @@ function startGame(){
 	gameRunning = true;
 	changeMenuButtons();
 	toggleControlButtons();
+	playBackgroundMusic();
 }
 
 
@@ -282,7 +284,6 @@ function youWon(){
 	world.character.playWinSound();
 	setTimeout(() => {
 		stopGame();
-		soundBar.stopAllSounds();
 		setFinalScreen('won');
 	},1000)
 }
@@ -300,7 +301,6 @@ function youLost(){
 	world.character.playLostSound();
 	setTimeout(() => {
 		stopGame();
-		soundBar.stopAllSounds();
 		setFinalScreen('lost');
 	}, 500)
 }
@@ -317,7 +317,6 @@ function restartGame(){
 	switchGameState('startScreen');
 	stopGame();
 	cancelAnimationFrame(world.animationFrameId);
-	soundBar.stopAllSounds();
 	startGame();
 	switchGameState('game');
 }
@@ -355,6 +354,22 @@ function toggleSound(){
 	soundBar.soundIsEnabled = !soundBar.soundIsEnabled;
 	soundBar.soundIsEnabled ? soundBar.setInitialVolume() : soundBar.stopAllSounds();
 	soundBar.setSoundButton();
+	playBackgroundMusic();
+}
+
+
+/**
+ * Plays the background music of the game if sound is enabled.
+ * 
+ * This function checks the soundIsEnabled flag of the soundBar object and plays the
+ * background music if sound is enabled. The background music is an Audio object stored
+ * in the world object.
+ * @returns {void}
+ */
+function playBackgroundMusic(){
+	if (gameRunning && soundBar.soundIsEnabled){
+		soundBar.playSound('backgroundMusic');
+	}
 }
 
 

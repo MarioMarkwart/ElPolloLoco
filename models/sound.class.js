@@ -52,7 +52,7 @@ class Sound extends MovableObject {
 				new Audio("assets/audio/bottle_hit_1.mp3"),
 			],
 			coinCollect: [new Audio("assets/audio/coin.mp3")],
-
+			backgroundMusic: [new Audio("assets/audio/background-music.mp3")]
 		};
 	}
 
@@ -159,5 +159,6 @@ class Sound extends MovableObject {
 		this.setVolume(this.soundCache.bottleCollect, 0.2);
 		this.setVolume(this.soundCache.bottleHit, 0.2);
 		this.setVolume(this.soundCache.coinCollect, 0.4);
+		this.setVolume(this.soundCache.backgroundMusic, 0.1);
 	}
 }

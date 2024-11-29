@@ -210,7 +210,16 @@ canvas {
 #loading-screen {
     z-index: 200;
     transform: rotate(15deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 60%;
 }
+
+#loading-screen-image{
+    height: 100%;
+}
+
 
 .start {
     background: url("assets/img/9_intro_outro_screens/start/startscreen_1.png");
