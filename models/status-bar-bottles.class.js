@@ -20,6 +20,6 @@ class StatusBarBottles extends StatusBar {
 		super();
 		this.loadImages(this.IMAGES);
 
-		godmode ? this.setAmount(1000) : this.setAmount(0)
+		godmode ? this.setAmount(500) : this.setAmount(0)
 	}
 }

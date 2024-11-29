@@ -23,9 +23,10 @@ function init(){
 	checkIsMobile();
 	preloadLoadingScreenImages();
 	addKeyboardEventListener();
+	addMobileButtonsEventListener();
 	addDeviceEventListeners();
 	switchGameState('startScreen');
-	toggleButtons();
+	toggleControlButtons();
 }
 
 
@@ -34,7 +35,9 @@ function init(){
  * @returns {void}
  */
 function checkIsMobile(){
-	if ("ontouchstart" in document.documentElement) isMobile = true
+	if ("ontouchstart" in document.documentElement){
+		isMobile = true;
+	}
 	else isMobile = false;
 }
 
@@ -44,10 +47,14 @@ function checkIsMobile(){
  * device is a mobile device or not.
  * @returns {void}
  */
-function toggleButtons(){
+function toggleControlButtons(){
 	if(isMobile){
-		document.getElementById('mobile-buttons').classList.toggle('d-none');
-		document.getElementById('keyboard-keys').classList.toggle('d-none');
+		if(gameRunning) document.getElementById('mobile-buttons').classList.remove('d-none');
+		document.getElementById('keyboard-keys').classList.add('d-none');
+	}
+	else{
+		document.getElementById('mobile-buttons').classList.add('d-none');
+		document.getElementById('keyboard-keys').classList.remove('d-none');
 	}
 }
 
@@ -60,9 +67,9 @@ function toggleButtons(){
  * It also logs the world and character objects for debugging purposes.
  */
 function initWorld() {
-	canvas = '';
 	canvas = document.getElementById("canvas");
 	world = '';
+	level = ''
 	world = new World(canvas, keyboard);
 }
 
@@ -108,7 +115,8 @@ function startGame(){
 	initLevel();
 	initWorld();
 	gameRunning = true;
-	changeButtons()
+	changeMenuButtons();
+	toggleControlButtons();
 }
 
 
@@ -119,7 +127,7 @@ function startGame(){
  */
 function pauseGame(){
 	world.pause();
-	changeButtons();
+	changeMenuButtons();
 }
 
 /**
@@ -197,21 +205,34 @@ function rotateDevice(){
  * attribute is set to startGame().
  * @returns {void}
  */
-function changeButtons(){
+function changeMenuButtons(){
+	if (gameRunning){
+		setButtonsWhenGameIsRunning();
+	} else {
+		setButtonsWhenGameIsNotRunning();
+	}
+}
+
+
+function setButtonsWhenGameIsRunning(){
 	let playBtn = document.getElementById('btn-play');
 	let helpBtn = document.getElementById('btn-help');
-	if (gameRunning){
-		playBtn.src = 'assets/img/buttons/pause.png'
-		playBtn.setAttribute('onclick', 'switchGameState("pause")');
-		helpBtn.src = 'assets/img/buttons/restart.png';
-		helpBtn.setAttribute('onclick', 'switchGameState("restart")');
-	} else {
-		helpBtn.src = 'assets/img/buttons/help.png';
-		helpBtn.setAttribute('onclick', 'openInstructions()');
-		playBtn.src = 'assets/img/buttons/play.png'
-		if(world.isPaused) playBtn.setAttribute('onclick', 'world.resume()');
-		else playBtn.setAttribute('onclick', 'startGame()');
-	}
+
+	playBtn.src = 'assets/img/buttons/pause.png'
+	playBtn.setAttribute('onclick', 'switchGameState("pause")');
+	helpBtn.src = 'assets/img/buttons/restart.png';
+	helpBtn.setAttribute('onclick', 'switchGameState("restart")');
+}
+
+function setButtonsWhenGameIsNotRunning(){
+	let playBtn = document.getElementById('btn-play');
+	let helpBtn = document.getElementById('btn-help');
+
+	helpBtn.src = 'assets/img/buttons/help.png';
+	helpBtn.setAttribute('onclick', 'openInstructions()');
+	playBtn.src = 'assets/img/buttons/play.png'
+	if(world.isPaused) playBtn.setAttribute('onclick', 'world.resume()');
+	else playBtn.setAttribute('onclick', 'startGame()');
 }
 
 
@@ -278,7 +299,6 @@ function youWon(){
 function youLost(){
 	world.character.playLostSound();
 	setTimeout(() => {
-		// stopAllIntervals();
 		stopGame();
 		soundBar.stopAllSounds();
 		setFinalScreen('lost');
@@ -294,6 +314,8 @@ function youLost(){
  */
 function restartGame(){
 	switchGameState('startScreen');
+
+	cancelAnimationFrame(world.animationFrameId);
 	soundBar.stopAllSounds();
 	startGame();
 	switchGameState('game');
@@ -360,27 +382,37 @@ function addKeyboardEventListener() {
 		if (event.key === " ") keyboard.SPACE = false;
 		if (event.key === "g") toggleGodmode();
 	});
+}
 
-	window.addEventListener("touchstart", (event) => {
-		if (event.target.id === "btnLeft") keyboard.LEFT = true;
-		if (event.target.id === "btnRight") keyboard.RIGHT = true;
-		if (event.target.id === "btnJump") keyboard.SPACE = true;
-		if (event.target.id === "btnThrow") keyboard.D = true;
-	});
 
-	window.addEventListener("touchend", (event) => {
-		if (event.target.id === "btnLeft") keyboard.LEFT = false;
-		if (event.target.id === "btnRight") keyboard.RIGHT = false;
-		if (event.target.id === "btnJump") keyboard.SPACE = false;
-		if (event.target.id === "btnThrow") keyboard.D = false;
-	});
+/**
+ * Adds event listeners for touch events to control character actions on mobile devices.
+ *
+ * The listeners handle touchstart, touchend, and touchcancel events for the mobile buttons
+ * with IDs btnLeft, btnRight, btnJump, and btnThrow. The respective actions are triggered
+ * when the buttons are touched or released. The function ensures that both mobile and
+ * keyboard interactions are supported for character control.
+ */
+function addMobileButtonsEventListener(){
+	let btnLeft = document.getElementById('btnLeft');
+	let btnRight = document.getElementById('btnRight');
+	let btnJump = document.getElementById('btnJump');
+	let btnThrow = document.getElementById('btnThrow');
 
-	window.addEventListener("touchcancel", (event) => {
-		if (event.target.id === "btnLeft") keyboard.LEFT = false;
-		if (event.target.id === "btnRight") keyboard.RIGHT = false;
-		if (event.target.id === "btnJump") keyboard.SPACE = false;
-		if (event.target.id === "btnThrow") keyboard.D = false;
-	});
+	btnLeft.addEventListener('touchstart', (event) => { event.preventDefault(); keyboard.LEFT = true});
+	btnRight.addEventListener('touchstart', (event) => { event.preventDefault(); keyboard.RIGHT = true});
+	btnJump.addEventListener('touchstart', (event) => { event.preventDefault(); keyboard.SPACE = true});
+	btnThrow.addEventListener('touchstart', (event) => { event.preventDefault(); keyboard.D = true});
+
+	btnLeft.addEventListener('touchend', (event) => { event.preventDefault(); keyboard.LEFT = false});
+	btnRight.addEventListener('touchend', (event) => { event.preventDefault(); keyboard.RIGHT = false});
+	btnJump.addEventListener('touchend', (event) => { event.preventDefault(); keyboard.SPACE = false});
+	btnThrow.addEventListener('touchend', (event) => { event.preventDefault(); keyboard.D = false});
+	
+	btnLeft.addEventListener('touchcancel', (event) => { event.preventDefault(); keyboard.LEFT = false});
+	btnRight.addEventListener('touchcancel', (event) => { event.preventDefault(); keyboard.RIGHT = false});
+	btnJump.addEventListener('touchcancel', (event) => { event.preventDefault(); keyboard.SPACE = false});
+	btnThrow.addEventListener('touchcancel', (event) => { event.preventDefault(); keyboard.D = false});
 }
 
 

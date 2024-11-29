@@ -1,6 +1,14 @@
 let level1;
 
+function deleteLevel(){
+    level1 = '';
+    console.warn('level deleted');
+}
+
+
 function initLevel() {
+    deleteLevel();
+
     level1 = new Level(
         [
             new Chicken(),

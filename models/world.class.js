@@ -219,7 +219,7 @@ class World {
 		gameRunning = true;
 		this.isPaused = false;
 		this.animationFrameId = requestAnimationFrame(() => this.draw());
-		changeButtons()
+		changeMenuButtons()
 	}
 
 
@@ -236,7 +236,6 @@ class World {
 		}
 
 		mo.draw(this.ctx);
-		// mo.drawFrame(this.ctx);
 
 		if (mo.otherDirection) {
 			this.flipImageBack(mo);
