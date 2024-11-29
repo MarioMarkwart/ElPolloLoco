@@ -15,6 +15,7 @@ let isLandscape = false;
 let isMobile = false;
 let fullscreen = false;
 
+
 /**
  * Initializes the game by preloading loading screen images, adding keyboard event listeners, 
  * and switching the game state to the start screen.
@@ -74,15 +75,12 @@ function initWorld() {
 }
 
 
-/**
- * Stops the game by clearing all intervals and timeouts, setting the gameRunning
- * flag to false, and logging 'Game stopped' to the console.
- *
- * This function iterates through a large range of IDs to ensure that all
- * intervals and timeouts are cleared, effectively stopping any ongoing
- * repetitive or delayed actions in the game.
- */
 function stopGame() {
+/**
+ * Stops the game by stopping all sounds and clearing all intervals and timeouts,
+ * and sets the gameRunning flag to false.
+ * @returns {void}
+ */
 	soundBar.stopAllSounds();
 	for (let i=0; i<1000000;i++){
 		clearInterval(i);
@@ -117,6 +115,7 @@ function pauseGame(){
 	world.pause();
 	changeMenuButtons();
 }
+
 
 /**
  * Transitions the game state to 'lost' by invoking the switchGameState function
@@ -202,6 +201,16 @@ function changeMenuButtons(){
 }
 
 
+/**
+ * Changes the image and onclick attribute of the play button and help button
+ * when the game is running.
+ *
+ * The play button is changed to the pause button and its onclick attribute is
+ * set to switchGameState("pause"), and the help button is changed to the
+ * restart button and its onclick attribute is set to switchGameState("restart").
+ *
+ * @returns {void}
+ */
 function setButtonsWhenGameIsRunning(){
 	let playBtn = document.getElementById('btn-play');
 	let helpBtn = document.getElementById('btn-help');
@@ -212,6 +221,16 @@ function setButtonsWhenGameIsRunning(){
 	helpBtn.setAttribute('onclick', 'switchGameState("restart")');
 }
 
+/**
+ * Changes the image and onclick attribute of the play button and help button based on the current
+ * game state.
+ * 
+ * If the game is not running, the play button is changed to the start button and its onclick
+ * attribute is set to startGame(), and the help button is changed to the instruction button and its
+ * onclick attribute is set to openInstructions(). If the game is paused, the play button is changed
+ * to the resume button and its onclick attribute is set to world.resume().
+ * @returns {void}
+ */
 function setButtonsWhenGameIsNotRunning(){
 	let playBtn = document.getElementById('btn-play');
 	let helpBtn = document.getElementById('btn-help');
@@ -299,7 +318,6 @@ function youLost(){
  * @returns {void}
  */
 function restartGame(){
-
 	switchGameState('startScreen');
 	stopGame();
 	cancelAnimationFrame(world.animationFrameId);
@@ -319,12 +337,8 @@ function restartGame(){
 function toggleGodmode(){
 	if (gameRunning) {
 		godmode = !godmode;
-		if (godmode){
-			world.statusBarBottles.setAmount(500);
-		} 
-		else {
-			world.statusBarBottles.setAmount(5);
-		}
+		if (godmode) world.statusBarBottles.setAmount(500);
+		else world.statusBarBottles.setAmount(5);
 	}
 }
 
@@ -376,7 +390,6 @@ function addKeyboardEventListener() {
 		if (event.key === "d") keyboard.D = true;
 		if (event.key === " ") keyboard.SPACE = true;
 	});
-
 	window.addEventListener("keyup", (event) => {
 		if (event.key === "ArrowLeft") keyboard.LEFT = false;
 		if (event.key === "ArrowRight") keyboard.RIGHT = false;

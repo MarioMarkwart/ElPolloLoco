@@ -48,10 +48,8 @@ class ThrowableObject extends MovableObject {
 			this.IMAGES_BOTTLE_ROTATION, 50);
 		this.speedY = 10;
 		this.applyGravity();
-		if (world.character.otherDirection) {
-			this.throwToLeft();
-		} else
-			this.throwToRight();
+		if (world.character.otherDirection) this.throwToLeft();
+		else this.throwToRight();
 	}
 
 

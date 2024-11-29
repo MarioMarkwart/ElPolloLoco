@@ -3,6 +3,7 @@ class Character extends MovableObject {
 	y = 180;
 	lastMovement;
 	energy = 100;
+	invincible = true;
 	offset = {
 		...this.offset,
 		left: 40,
@@ -260,6 +261,24 @@ class Character extends MovableObject {
 		if (this.world.keyboard.D) {
 			this.lastMovement = Date.now();
 		}
+	}
+
+
+	/**
+	 * Checks if the character has moved by monitoring keyboard inputs.
+	 * 
+	 * This function sets an interval that continuously checks if any of the movement keys 
+	 * (right, left, space, or D) are pressed. If any of these keys are detected, it sets the
+	 * character's invincibility to false and clears the interval, indicating that the character
+	 * has moved.
+	 */
+	checkIfCharHasMoved() {
+		let intv = setInterval(() => {
+			if (keyboard.RIGHT || keyboard.LEFT || keyboard.SPACE || keyboard.D) {
+				this.invincible = false;
+				clearInterval(intv);
+			}
+		}, 100)
 	}
 
 
