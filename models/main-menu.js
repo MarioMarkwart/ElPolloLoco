@@ -72,6 +72,35 @@ function setButtonsOnFullscreen(){
 	}
 }
 
+
+/**
+ * Opens the instruction screen and hides the content and title elements.
+ * This function is called when the instruction button is clicked.
+ * @returns {void}
+ */
+function openInstructions(){
+	document.getElementById('instructions').classList.remove('d-none');
+	document.getElementById('instructions').classList.add('d-flex');
+	document.getElementById('content').style.display = 'none';
+	document.getElementById('title').style.display = 'none';
+	document.body.classList.add('bg-blur');
+}
+
+
+/**
+ * Closes the instruction screen and shows the content and title elements again.
+ * This function is called when the close button on the instruction screen is clicked.
+ * @returns {void}
+ */
+function closeInstructions(){
+	document.getElementById('instructions').classList.add('d-none');
+	document.getElementById('instructions').classList.remove('d-flex');
+	document.getElementById('content').style.display = 'flex';
+	document.getElementById('title').style.display = 'flex';
+	document.body.classList.remove('bg-blur');
+}
+
+
 function openPrivacy(page){
 	window.open(`${page}.html`, '_blank');
 }

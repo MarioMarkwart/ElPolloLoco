@@ -75,20 +75,6 @@ function initWorld() {
 
 
 /**
- * Sets a stoppable interval for executing the given function at the specified time interval,
- * and stores the interval ID along with a description.
- *
- * @param {Function} fn - The function to be executed at each interval.
- * @param {number} time - The time interval in milliseconds for executing the function.
- * @param {string} description - A description of the interval for tracking purposes.
- */
-function setStoppableInterval(fn, time, description) {
-	let id = setInterval(fn, time);
-	globalIntervalIds.push({ 'interval': id, 'description': description });
-}
-
-
-/**
  * Stops the game by clearing all intervals and timeouts, setting the gameRunning
  * flag to false, and logging 'Game stopped' to the console.
  *
@@ -476,28 +462,4 @@ function getOrientation(){
 	}else{
 		isLandscape = true;
 	}
-}
-
-
-/**
- * Opens the instruction screen and hides the content and title elements.
- * This function is called when the instruction button is clicked.
- * @returns {void}
- */
-function openInstructions(){
-	document.getElementById('instructions').classList.remove('d-none');
-	document.getElementById('content').style.display = 'none';
-	document.getElementById('title').style.display = 'none';
-}
-
-
-/**
- * Closes the instruction screen and shows the content and title elements again.
- * This function is called when the close button on the instruction screen is clicked.
- * @returns {void}
- */
-function closeInstructions(){
-	document.getElementById('instructions').classList.add('d-none');
-	document.getElementById('content').style.display = 'flex';
-	document.getElementById('title').style.display = 'flex';
 }

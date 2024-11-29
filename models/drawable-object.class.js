@@ -15,31 +15,6 @@ class DrawableObject {
 
 
 	/**
-	 * Sets a stoppable interval for executing the given function at the specified time interval.
-	 * Stops any previously set intervals before starting the new one and tracks the interval ID.
-	 *
-	 * @param {Function} fn - The function to be executed at each interval.
-	 * @param {number} time - The time interval in milliseconds for executing the function.
-	 */
-	setStoppableInterval(fn, time) {
-		this.stopIntervals();
-		let id = setInterval(fn, time)
-		this.intervalIds.push(id)
-	}
-
-
-	/**
-	 * Stops all intervals set by setStoppableInterval by clearing them and resetting the interval ID array.
-	 */
-	stopIntervals(){
-		this.intervalIds.forEach((intervalId) => {
-			clearInterval(intervalId);
-		})
-		this.intervalIds = [];
-	}
-
-
-	/**
 	 * Generates a random integer between the specified minimum and maximum values.
 	 *
 	 * @param {number} min - The minimum value (inclusive).
