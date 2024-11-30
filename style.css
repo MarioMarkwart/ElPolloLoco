@@ -238,7 +238,9 @@ canvas {
 
 .btn {
     width: 50px;
+}
 
+.btn:not(.mobile){
     &:hover {
         cursor: pointer;
 

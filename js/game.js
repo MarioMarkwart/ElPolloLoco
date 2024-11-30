@@ -40,8 +40,22 @@ function init(){
 function checkIsMobile(){
 	if ("ontouchstart" in document.documentElement){
 		isMobile = true;
+		addClassMobileToMenuButton();
 	}
 	else isMobile = false;
+}
+
+
+/**
+ * Adds the class 'mobile' to the play, help, fullscreen, and sound buttons on the main menu.
+ * This disables the hover effect on these buttons on mobile devices.
+ * @returns {void}
+ */
+function addClassMobileToMenuButton(){
+	document.getElementById('btn-play').classList.add('mobile');
+	document.getElementById('btn-help').classList.add('mobile');
+	document.getElementById('btn-fullscreen').classList.add('mobile');
+	document.getElementById('btn-sound').classList.add('mobile');
 }
 
 
