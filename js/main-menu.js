@@ -48,8 +48,8 @@ function fullscreenOff() {
  * than or equal to 480 pixels.
  */
 function automaticallyToFullscreen(){
-	if(window.innerHeight <=480){
-		fullscreenOn();
+	if(window.innerHeight <= 600){
+		setTimeout(() => fullscreenOn(), 600);
 	}
 }
 

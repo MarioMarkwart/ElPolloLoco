@@ -317,7 +317,7 @@ function setMaxCanvasHeight(){
 function getOrientation(){
 	toggleHeadline();
 	setMaxCanvasHeight();
-	if(window.innerHeight >= window.innerWidth){
+	if(isMobile && window.innerHeight >= window.innerWidth){
 		switchGameState("rotateDevice");
 	}else{
 		isLandscape = true;
