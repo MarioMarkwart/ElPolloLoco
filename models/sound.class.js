@@ -64,12 +64,9 @@ class Sound extends MovableObject {
 	 */
 	playSound(soundKey) {
 		let random = Math.floor(Math.random() * this.soundCache[soundKey].length);
-		if (this.soundIsEnabled && gameRunning) {
-			const sound = this.soundCache[soundKey][random];
-			if (sound) {
-				sound.play();
-			}
-		}
+		const sound = this.soundCache[soundKey][random];
+		if(soundKey == 'backgroundMusic' && sound) sound.play();
+		if (this.soundIsEnabled && gameRunning && sound) sound.play();
 	}
 	
 	

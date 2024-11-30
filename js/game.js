@@ -394,7 +394,7 @@ function toggleSound(){
  * @returns {void}
  */
 function playBackgroundMusic(){
-	if (gameRunning && soundBar.soundIsEnabled){
+	if (soundBar.soundIsEnabled){
 		soundBar.playSound('backgroundMusic');
 	}
 }
@@ -469,6 +469,7 @@ function addMobileButtonsEventListener(){
 function addDeviceEventListeners() {
 	screen.orientation.addEventListener("change", (event) => setScreenOrientation(event));
 	window.addEventListener('resize', () => toggleHeadline())
+	window.addEventListener('resize', () => setMaxCanvasHeight())
 }
 
 
@@ -490,6 +491,7 @@ function setScreenOrientation(event) {
 	}
 }
 
+
 /**
  * Toggles the visibility of the headline, depending on the window height.
  * The headline is hidden when the window height is less than or equal to 600px.
@@ -503,6 +505,18 @@ function toggleHeadline(){
 
 
 /**
+ * Sets the canvas height to the current window height if the window height is
+ * less than or equal to 480px. This is used to prevent the canvas from being
+ * too large on small screens.
+ * @private
+ */
+function setMaxCanvasHeight(){
+	if (window.innerHeight <= 480){
+		document.getElementById('canvas').setAttribute('height', window.innerHeight + 'px')
+	}
+}
+
+/**
  * Checks the current window orientation and sets the isLandscape boolean accordingly.
  * The function is used to check if the device is in landscape orientation and if
  * the game should be paused or resumed. The function is called when the window is
@@ -511,6 +525,7 @@ function toggleHeadline(){
  */
 function getOrientation(){
 	toggleHeadline();
+	setMaxCanvasHeight();
 	if(window.innerHeight >= window.innerWidth){
 		switchGameState("rotateDevice");
 	}else{
