@@ -334,6 +334,7 @@ function restartGame(){
 	stopGame();
 	cancelAnimationFrame(world.animationFrameId);
 	startGame();
+	if (soundBar.soundIsEnabled) soundBar.setInitialVolume();
 	switchGameState('game');
 }
 
