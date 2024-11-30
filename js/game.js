@@ -459,13 +459,16 @@ function addMobileButtonsEventListener(){
 
 
 /**
- * Adds event listeners for device orientation changes and window resizes.
- * When the device orientation is changed, the game is either paused or resumed, depending on the new orientation.
- * When the window is resized, the orientation is checked again to ensure the game is in the correct state.
- * @private
- */
+ * Adds event listeners for device-specific events such as screen orientation changes
+ * and window resizing. The screen orientation listener triggers the 
+ * setScreenOrientation function to handle changes, while the resize listener
+ * triggers toggleHeadline to adjust elements based on window size.
+*
+* @returns {void}
+*/
 function addDeviceEventListeners() {
 	screen.orientation.addEventListener("change", (event) => setScreenOrientation(event));
+	window.addEventListener('resize', () => toggleHeadline())
 }
 
 
@@ -487,6 +490,17 @@ function setScreenOrientation(event) {
 	}
 }
 
+/**
+ * Toggles the visibility of the headline, depending on the window height.
+ * The headline is hidden when the window height is less than or equal to 600px.
+ * @private
+ */
+function toggleHeadline(){
+	window.innerHeight <= 600
+	?document.getElementById('title').classList.add('d-none')
+	:document.getElementById('title').classList.remove('d-none');
+}
+
 
 /**
  * Checks the current window orientation and sets the isLandscape boolean accordingly.
@@ -496,6 +510,7 @@ function setScreenOrientation(event) {
  * @private
  */
 function getOrientation(){
+	toggleHeadline();
 	if(window.innerHeight >= window.innerWidth){
 		switchGameState("rotateDevice");
 	}else{
