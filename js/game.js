@@ -91,21 +91,6 @@ function initWorld() {
 }
 
 
-function stopGame() {
-/**
- * Stops the game by stopping all sounds and clearing all intervals and timeouts,
- * and sets the gameRunning flag to false.
- * @returns {void}
- */
-	soundBar.stopAllSounds();
-	for (let i=0; i<1000000;i++){
-		clearInterval(i);
-		clearTimeout(i);
-	}
-	gameRunning = false;
-}
-
-
 /**
  * Initializes the game by calling initLevel() and initWorld(),
  * sets the gameRunning flag to true, and changes the play button.
@@ -124,33 +109,7 @@ function startGame(){
 }
 
 
-/**
- * Pauses the game by calling World.pause() and switching the play button.
- *
- * @returns {void}
- */
-function pauseGame(){
-	world.pause();
-	changeMenuButtons();
-}
 
-
-/**
- * Transitions the game state to 'lost' by invoking the switchGameState function
- * with the 'lost' parameter, indicating that the player has lost the game.
- */
-function gameLost(){
-	switchGameState('lost');
-}
-
-
-/**
- * Transitions the game state to 'won' by invoking the switchGameState function
- * with the 'won' parameter, indicating that the player has won the game.
- */
-function gameWon(){
-	switchGameState('won');
-}
 
 
 /**
@@ -169,28 +128,6 @@ function removeClassesFromOverlay() {
 			overlay.classList.add('start')
 		}
 		}
-}
-
-
-/**
- * Switches the game state to the specified state.
- * 
- * This function manages the transition between different game states, such as
- * 'startScreen', 'game', 'won', 'lost', and 'restart'. Each state triggers a
- * corresponding action to update the game state and display the appropriate
- * screen. The function ensures that the game logic and visuals are consistently
- * updated according to the current state.
- * 
- * @param {string} state - The desired game state to switch to.
- * @returns {void}
- */
-function switchGameState(state){
-	if (state == 'startScreen') setStartScreen();
-	else if (state == 'game') removeClassesFromOverlay();
-	else if (state == 'won' || state == 'lost') setFinalScreen(state);
-	else if (state == 'restart') restartGame();
-	else if (state == 'rotateDevice') rotateDevice();
-	else if (state == 'pause') pauseGame();
 }
 
 
@@ -277,80 +214,6 @@ function setStartScreen(){
 	let overlay = document.getElementById('gamestate-screen');
 	overlay.classList.remove('rotate-device')
 	overlay.classList.add('start');
-
-}
-
-
-/**
- * Sets the final screen of the game based on the result of the game.
- * If the game is won, the 'won' class is added to the 'gamestate-screen' overlay element.
- * If the game is lost, the 'lost' class is added to the overlay element, and after a delay of 2 seconds,
- * the 'game-over' class is added and the 'lost' class is removed.
- * @param {string} result - The result of the game, either 'won' or 'lost'.
- * @returns {void}
- */
-function setFinalScreen(result){
-	let overlay = document.getElementById('gamestate-screen');
-	overlay.classList.remove('d-none');
-	if (result === 'won'){
-		overlay.classList.add('won');
-	}
-	if (result === 'lost'){
-		overlay.classList.add('lost')
-		setTimeout(() => {
-			overlay.classList.remove('lost');
-			overlay.classList.add('game-over');
-		},2000)
-	}
-}
-
-/**
- * Triggers the win sequence of the game.
- * 
- * This function is called when the player has won the game. It plays the win sound
- * of the character, stops all intervals and sounds, and sets the final screen of the
- * game to 'won' after a delay of 1 second.
- * @returns {void}
- */
-function youWon(){
-	world.character.playWinSound();
-	setTimeout(() => {
-		stopGame();
-		setFinalScreen('won');
-	},1000)
-}
-
-
-/**
- * Triggers the loss sequence of the game.
- * 
- * This function is called when the player has lost the game. It plays the lost sound
- * of the character, stops all intervals and sounds, and sets the final screen of the
- * game to 'lost' after a delay of 0.5 seconds.
- * @returns {void}
- */
-function youLost(){
-	world.character.playLostSound();
-	setTimeout(() => {
-		stopGame();
-		setFinalScreen('lost');
-	}, 500)
-}
-
-
-/**
- * Restarts the game by setting the game state to 'startScreen', stopping the game and
- * all intervals, stopping all sounds, starting the game again, and finally setting the
- * game state to 'game'.
- * @returns {void}
- */
-function restartGame(){
-	switchGameState('startScreen');
-	stopGame();
-	cancelAnimationFrame(world.animationFrameId);
-	startGame();
-	if (soundBar.soundIsEnabled) soundBar.setInitialVolume();
-	switchGameState('game');
 }
 
 
@@ -398,79 +261,6 @@ function playBackgroundMusic(){
 	if (soundBar.soundIsEnabled){
 		soundBar.playSound('backgroundMusic');
 	}
-}
-
-
-/**
- * Adds event listeners for both keyboard and touch events to control character actions.
- *
- * The listeners handle keydown and keyup events for arrow keys, space, and 'd' for movement
- * and actions. It also toggles godmode on 'g' keyup. For touch events, it listens for touchstart,
- * touchend, and touchcancel on buttons with specific IDs to handle the corresponding actions.
- * The function ensures that both keyboard and touch interactions are supported for character control.
- *
- * @returns {void}
- */
-function addKeyboardEventListener() {
-	window.addEventListener("keydown", (event) => {
-		if (event.key === "ArrowLeft") keyboard.LEFT = true;
-		if (event.key === "ArrowRight") keyboard.RIGHT = true;
-		if (event.key === "d") keyboard.D = true;
-		if (event.key === " ") keyboard.SPACE = true;
-	});
-	window.addEventListener("keyup", (event) => {
-		if (event.key === "ArrowLeft") keyboard.LEFT = false;
-		if (event.key === "ArrowRight") keyboard.RIGHT = false;
-		if (event.key === "d") keyboard.D = false;
-		if (event.key === " ") keyboard.SPACE = false;
-		if (event.key === "g") toggleGodmode();
-	});
-}
-
-
-/**
- * Adds event listeners for touch events to control character actions on mobile devices.
- *
- * The listeners handle touchstart, touchend, and touchcancel events for the mobile buttons
- * with IDs btnLeft, btnRight, btnJump, and btnThrow. The respective actions are triggered
- * when the buttons are touched or released. The function ensures that both mobile and
- * keyboard interactions are supported for character control.
- */
-function addMobileButtonsEventListener(){
-	let btnLeft = document.getElementById('btnLeft');
-	let btnRight = document.getElementById('btnRight');
-	let btnJump = document.getElementById('btnJump');
-	let btnThrow = document.getElementById('btnThrow');
-
-	btnLeft.addEventListener('touchstart', (event) => { event.preventDefault(); keyboard.LEFT = true});
-	btnRight.addEventListener('touchstart', (event) => { event.preventDefault(); keyboard.RIGHT = true});
-	btnJump.addEventListener('touchstart', (event) => { event.preventDefault(); keyboard.SPACE = true});
-	btnThrow.addEventListener('touchstart', (event) => { event.preventDefault(); keyboard.D = true});
-
-	btnLeft.addEventListener('touchend', (event) => { event.preventDefault(); keyboard.LEFT = false});
-	btnRight.addEventListener('touchend', (event) => { event.preventDefault(); keyboard.RIGHT = false});
-	btnJump.addEventListener('touchend', (event) => { event.preventDefault(); keyboard.SPACE = false});
-	btnThrow.addEventListener('touchend', (event) => { event.preventDefault(); keyboard.D = false});
-	
-	btnLeft.addEventListener('touchcancel', (event) => { event.preventDefault(); keyboard.LEFT = false});
-	btnRight.addEventListener('touchcancel', (event) => { event.preventDefault(); keyboard.RIGHT = false});
-	btnJump.addEventListener('touchcancel', (event) => { event.preventDefault(); keyboard.SPACE = false});
-	btnThrow.addEventListener('touchcancel', (event) => { event.preventDefault(); keyboard.D = false});
-}
-
-
-/**
- * Adds event listeners for device-specific events such as screen orientation changes
- * and window resizing. The screen orientation listener triggers the 
- * setScreenOrientation function to handle changes, while the resize listener
- * triggers toggleHeadline to adjust elements based on window size.
-*
-* @returns {void}
-*/
-function addDeviceEventListeners() {
-	screen.orientation.addEventListener("change", (event) => setScreenOrientation(event));
-	window.addEventListener('resize', () => toggleHeadline())
-	window.addEventListener('resize', () => setMaxCanvasHeight())
 }
 
 

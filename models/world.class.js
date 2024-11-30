@@ -46,7 +46,7 @@ class World {
 	 */
 	initialRun() {
 		this.adjustClouds();
-		setInterval(() => this.checkCollisions(), 100);
+		setInterval(() => checkCollisions(), 100);
 		setInterval(() => this.checkThrowObjects(), 100);
 		setInterval(() => this.removeObjWhenOutOfWorld(), 1000);
 		setInterval(() => this.createNewClouds(), 5000);
@@ -54,115 +54,6 @@ class World {
 		setInterval(() => this.createNewCoins(), 2000);
 	}
 
-
-	/**
-	 * Checks for collisions between the character and various game objects
-	 * including the endboss, enemies, coins, bottles, and flying bottles.
-	 * This method only executes if the game is not paused and the character
-	 * is not invincible.
-	 */
-	checkCollisions() {
-		if (!this.isPaused && !this.character.invincible) {
-			this.checkCollisionWithEndboss();
-			this.checkCollisionWithEnemies();
-			this.checkCollisionWithCoin();
-			this.checkCollisionWithBottle();
-			this.checkCollisionWithFlyingBottle();
-		}
-	}
-
-
-	/**
-	 * Checks for collisions between the character and the endboss.
-	 * If the character is not above the ground and is not in godmode,
-	 * and the character is colliding with the endboss, the character
-	 * is hit and its health is reduced. The health is then updated
-	 * on the status bar.
-	 */
-	checkCollisionWithEndboss() {
-		this.level.endboss.forEach((endboss) => {
-			if (
-				this.character.isColliding(endboss) &&
-				!this.character.isAboveGround(100) &&
-				!godmode
-			) {
-				this.character.hit(20);
-				this.statusBarHealth.setPercentage(this.character.energy);
-			}
-		});
-	}
-
-
-	/**
-	 * Checks for collisions between the character and enemies.
-	 * If the character is colliding with an enemy and is falling,
-	 * the enemy is killed and the character jumps. If the character
-	 * is colliding with an enemy and is not in godmode, the character
-	 * is hit and its health is reduced. The health is then updated
-	 * on the status bar.
-	 */
-	checkCollisionWithEnemies(){
-		this.level.enemies.forEach((enemy) => {
-			if (this.character.isColliding(enemy) && this.character.isFalling) {
-				enemy.enemyDie(enemy);
-				soundBar.playSound('characterKill');
-				this.character.jump();
-			} else if (this.character.isColliding(enemy) && !godmode) {
-				this.character.hit(10);
-				this.statusBarHealth.setPercentage(this.character.energy);
-			}
-		});
-	}
-
-
-	/**
-	 * Checks for collisions between the character and coins.
-	 * If the character is colliding with a coin, the coin is collected
-	 * and the character's score is increased by 10.
-	 */
-	checkCollisionWithCoin(){
-		this.level.coins.forEach((coin) => {
-			if (this.character.isColliding(coin)) {
-				coin.collectCoin(coin);
-			}
-		});
-	}
-
-
-	/**
-	 * Checks for collisions between the character and bottles.
-	 * If the character is colliding with a bottle, the bottle is collected
-	 * and the character's health is increased by 10. The health is then
-	 * updated on the status bar.
-	 */
-	checkCollisionWithBottle(){
-		this.level.bottles.forEach((bottle) => {
-			if (this.character.isColliding(bottle)) {
-				bottle.collectBottle(bottle);
-			}
-		});
-	}
-
-
-    /**
-     * Checks for collisions between the flying bottles and the endboss.
-     * If a collision is detected, the endboss is hit and the bottle splash
-     * animation is played. The bottle is removed from the world's array
-     * of throwable objects after a short delay.
-     */
-	checkCollisionWithFlyingBottle(){
-		this.throwableObjects.forEach((to) => {
-			let endboss = this.level.endboss[0];
-			if (endboss.isColliding(to)) {
-				endboss.hit();
-				this.throwableObjects[this.throwableObjects.indexOf(to)].bottleSplash();
-				setTimeout(() => {
-					this.throwableObjects.splice(this.throwableObjects.indexOf(to),1);
-				}, 100);
-			}
-		});
-	}
-	
 
 	/**
 	 * Checks if the player is pressing the throw key (D) and if the player has
@@ -174,10 +65,10 @@ class World {
 	checkThrowObjects() {
 		if (this.keyboard.D) {
 			if (world.statusBarBottles.amount > 0) {
-				let bottle = new ThrowableObject(
-					this.character.x + 50,
-					this.character.y + 100
-				);
+					bottle = new ThrowableObject(
+						this.character.x + 50,
+						this.character.y + 100
+					);
 				this.throwableObjects.push(bottle);
 				world.statusBarBottles.decreaseAmount();
 			}

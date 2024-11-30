@@ -164,9 +164,7 @@ class Character extends MovableObject {
 				if (this.isDead()) this.charIsDead();
 				else if (this.isHurt()) this.charIsHurt();
 				else if (this.isAboveGround()) this.charIsJumping();
-				else {
-					this.setCharaterAnimationState();
-				}
+				else this.setCharaterAnimationState();
 			}
 		}, 125);
 	}

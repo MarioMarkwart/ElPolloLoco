@@ -11,6 +11,7 @@ class Bottle extends MovableObject {
 		top: 15,
 	};
 
+
 	/**
 	 * Constructor for Bottle class.
 	 * Initializes bottle with random image, x and y coordinates and size.

@@ -197,7 +197,7 @@ class Endboss extends MovableObject {
 	 * "DEAD" and triggers the victory condition after a delay.
 	 */
 	hit() {
-		world.statusBarEndboss.setPercentage((this.energy -= 10));
+		world.statusBarEndboss.setPercentage((this.energy -= 5));
 		if (!this.isDead()) {
 			this.gotHit = true;
 			this.behaviour = "HIT";
