@@ -120,6 +120,7 @@ function startGame(){
 	changeMenuButtons();
 	toggleControlButtons();
 	playBackgroundMusic();
+	automaticallyToFullscreen();
 }
 
 
