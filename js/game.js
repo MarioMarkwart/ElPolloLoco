@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let globalIntervalIds = [];
+let gameStarted = false;
 let gameRunning = false;
 let godmode = false;
 let	totalImages = 0;
@@ -28,6 +29,7 @@ function init(){
 	addDeviceEventListeners();
 	switchGameState('startScreen');
 	toggleControlButtons();
+	getOrientation();
 }
 
 
@@ -99,6 +101,7 @@ function stopGame() {
 function startGame(){
 	initLevel();
 	initWorld();
+	gameStarted = true;
 	gameRunning = true;
 	changeMenuButtons();
 	toggleControlButtons();
@@ -139,11 +142,18 @@ function gameWon(){
  * Removes all classes from the 'gamestate-screen' overlay element if the game is running.
  * This is used to clear any visual state indicators from the overlay during gameplay.
  */
-function removeClassesFromOverlay(){
+function removeClassesFromOverlay() {
 	let overlay = document.getElementById('gamestate-screen');
-	if(gameRunning){
+	if (gameRunning) {
 		overlay.removeAttribute('class');
-	}
+	} else {
+		if (gameStarted) {
+			overlay.removeAttribute('class');
+		} else {
+			overlay.removeAttribute('class');
+			overlay.classList.add('start')
+		}
+		}
 }
 
 
@@ -250,7 +260,9 @@ function setButtonsWhenGameIsNotRunning(){
  */
 function setStartScreen(){
 	let overlay = document.getElementById('gamestate-screen');
+	overlay.classList.remove('rotate-device')
 	overlay.classList.add('start');
+
 }
 
 
@@ -439,7 +451,6 @@ function addMobileButtonsEventListener(){
  */
 function addDeviceEventListeners() {
 	screen.orientation.addEventListener("change", (event) => setScreenOrientation(event));
-	window.addEventListener("resize", () => getOrientation());
 }
 
 
@@ -453,10 +464,10 @@ function addDeviceEventListeners() {
 function setScreenOrientation(event) {
 	const type = event.target.type;
 	if (type === "landscape-primary" || type === "landscape-secondary") {
-		world.resume();
+		if(gameStarted) world.resume();
 		switchGameState("game");
 	} else {
-		world.pause();
+		if(gameStarted)world.pause();
 		switchGameState("rotateDevice");
 	}
 }
@@ -471,7 +482,7 @@ function setScreenOrientation(event) {
  */
 function getOrientation(){
 	if(window.innerHeight >= window.innerWidth){
-		isLandscape = false;
+		switchGameState("rotateDevice");
 	}else{
 		isLandscape = true;
 	}

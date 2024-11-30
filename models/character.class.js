@@ -91,6 +91,7 @@ class Character extends MovableObject {
 		this.loadImages(this.CHARACTER_IMAGES_IDLE);
 		this.loadImages(this.CHARACTER_IMAGES_LONG_IDLE);
 		this.initialAnimation();
+		this.checkIfCharHasMoved();
 		this.characterMovements();
 		this.animateCharacter();
 		this.applyGravity();
