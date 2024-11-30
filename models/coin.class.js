@@ -38,7 +38,7 @@ class Coin extends MovableObject {
 	 * @param {Coin} coin - The coin to be collected.
 	 */
 	collectCoin(coin) {
-		if (world.statusBarBottles.amount < 5){
+		if (world.statusBarCoins.amount < 5){
 			world.level.coins.splice(world.level.coins.indexOf(coin), 1);
 			world.statusBarCoins.increaseAmount();
 			soundBar.playSound('coinCollect')

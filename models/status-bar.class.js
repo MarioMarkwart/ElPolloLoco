@@ -22,21 +22,42 @@ class StatusBar extends DrawableObject {
 
     /**
      * Increases the amount of the status bar by one.
-     *
-     * If the increased amount is equal to 5 and the status bar is an instance of StatusBarCoins,
-     * the amount is reset to 0 and the amount of the world's StatusBarBottles is increased by one.
-     * Then, the setAmount method is called with the increased amount.
+     * If the status bar is an instance of StatusBarCoins and the amount reaches 5,
+     * it checks the world's StatusBarBottles amount. If the bottle amount is less than 5,
+     * it resets the coin amount to 0 and increases the bottle amount. Otherwise, it calls
+     * checkIfBottleAmountDecreased to handle further logic.
+     * Finally, it updates the status bar with the new amount.
      */
     increaseAmount() {
 		this.amount++;
         if (this instanceof StatusBarCoins){
             if (this.amount == 5) {
-                this.amount = 0;
-                world.statusBarBottles.increaseAmount();
+                if(world.statusBarBottles.amount < 5){
+                    this.amount = 0;
+                    world.statusBarBottles.increaseAmount();
+                }else{
+                    this.checkIfBottleAmountDecreased();
+                }
             }
-        }
+	    }
         this.setAmount(this.amount);
-	}
+    }
+
+
+    /**
+     * Checks if the amount of the world's StatusBarBottles is less than 5 in intervals of 100ms.
+     * If the amount is less than 5, the amount of the world's StatusBarBottles is increased by one,
+     * the interval is cleared and the amount of the status bar is set to 0.
+     */
+    checkIfBottleAmountDecreased(){
+        let intv = setInterval(() => {
+            if (world.statusBarBottles.amount < 5){ 
+                world.statusBarBottles.increaseAmount();
+                clearInterval(intv);
+                this.setAmount(0);
+            }
+        },100)
+    }
 
 
     /**

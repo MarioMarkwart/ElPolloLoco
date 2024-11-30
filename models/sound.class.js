@@ -158,7 +158,7 @@ class Sound extends MovableObject {
 		this.setVolume(this.soundCache.endbossHit, 0.3);
 		this.setVolume(this.soundCache.bottleCollect, 0.2);
 		this.setVolume(this.soundCache.bottleHit, 0.2);
-		this.setVolume(this.soundCache.coinCollect, 0.4);
+		this.setVolume(this.soundCache.coinCollect, 0.6);
 		this.setVolume(this.soundCache.backgroundMusic, 0.1);
 	}
 }
