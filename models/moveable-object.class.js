@@ -116,10 +116,10 @@ class MovableObject extends DrawableObject {
 	 * has passed since the last hit. The object's lastHit property is set to the current time
 	 * and the object's energy is reduced by 10.
 	 */
-	hit() {
+	hit(reduceEnergyAmount) {
 		if (this.energy > 0 && this.lastHit < new Date().getTime() - 1000) {
 			this.lastHit = new Date().getTime();
-			this.energy -= 10;
+			this.energy -= reduceEnergyAmount;
 		}
 	}
 

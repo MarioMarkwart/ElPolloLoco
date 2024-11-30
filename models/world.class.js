@@ -86,7 +86,7 @@ class World {
 				!this.character.isAboveGround(100) &&
 				!godmode
 			) {
-				this.character.hit();
+				this.character.hit(20);
 				this.statusBarHealth.setPercentage(this.character.energy);
 			}
 		});
@@ -108,7 +108,7 @@ class World {
 				soundBar.playSound('characterKill');
 				this.character.jump();
 			} else if (this.character.isColliding(enemy) && !godmode) {
-				this.character.hit();
+				this.character.hit(10);
 				this.statusBarHealth.setPercentage(this.character.energy);
 			}
 		});
