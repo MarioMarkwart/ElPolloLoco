@@ -67,5 +67,4 @@ function addMobileButtonsEventListener(){
 function addDeviceEventListeners() {
 	screen.orientation.addEventListener("change", (event) => setScreenOrientation(event));
 	window.addEventListener('resize', () => toggleHeadline())
-	window.addEventListener('resize', () => setMaxCanvasHeight())
 }

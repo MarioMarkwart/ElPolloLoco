@@ -44,17 +44,6 @@ function fullscreenOff() {
 
 
 /**
- * Automatically enables fullscreen mode if the window's height is less
- * than or equal to 480 pixels.
- */
-function automaticallyToFullscreen(){
-	if(window.innerHeight <= 600){
-		setTimeout(() => fullscreenOn(), 600);
-	}
-}
-
-
-/**
  * Adds or removes the "mobile-buttons-fullscreen" and "keyboard-keys-fullscreen"
  * CSS classes from the elements with IDs "mobile-buttons" and "keyboard-keys",
  * depending on the value of the global "fullscreen" variable.

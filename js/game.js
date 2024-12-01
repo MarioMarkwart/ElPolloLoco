@@ -86,7 +86,7 @@ function toggleControlButtons(){
 function initWorld() {
 	canvas = document.getElementById("canvas");
 	world = '';
-	level = ''
+	level = '';
 	world = new World(canvas, keyboard);
 }
 
@@ -105,11 +105,7 @@ function startGame(){
 	changeMenuButtons();
 	toggleControlButtons();
 	playBackgroundMusic();
-	automaticallyToFullscreen();
 }
-
-
-
 
 
 /**
@@ -200,7 +196,7 @@ function setButtonsWhenGameIsNotRunning(){
 	helpBtn.src = 'assets/img/buttons/help.png';
 	helpBtn.setAttribute('onclick', 'openInstructions()');
 	playBtn.src = 'assets/img/buttons/play.png'
-	if(world.isPaused) playBtn.setAttribute('onclick', 'world.resume()');
+	if(world) playBtn.setAttribute('onclick', 'world.resume()');
 	else playBtn.setAttribute('onclick', 'startGame()');
 }
 
@@ -296,18 +292,6 @@ function toggleHeadline(){
 
 
 /**
- * Sets the canvas height to the current window height if the window height is
- * less than or equal to 480px. This is used to prevent the canvas from being
- * too large on small screens.
- * @private
- */
-function setMaxCanvasHeight(){
-	if (window.innerHeight <= 480){
-		document.getElementById('canvas').setAttribute('height', window.innerHeight + 'px')
-	}
-}
-
-/**
  * Checks the current window orientation and sets the isLandscape boolean accordingly.
  * The function is used to check if the device is in landscape orientation and if
  * the game should be paused or resumed. The function is called when the window is
@@ -316,7 +300,6 @@ function setMaxCanvasHeight(){
  */
 function getOrientation(){
 	toggleHeadline();
-	setMaxCanvasHeight();
 	if(isMobile && window.innerHeight >= window.innerWidth){
 		switchGameState("rotateDevice");
 	}else{

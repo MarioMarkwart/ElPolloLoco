@@ -127,7 +127,7 @@ canvas {
     background-repeat: no-repeat;
     width: 100%;
     height: 100%;
-    box-shadow: unset;
+    max-height: 100svh;
 }
 
 #canvas-container{
@@ -253,7 +253,7 @@ canvas {
 }
 
 .keyboard-keys-fullscreen,
-.mobile-buttons-fullscreen {
+.mobile-buttons-fullscreen {max-height: 100svh;
     position: absolute;
     bottom: 0;
     color: var(--pearl);
