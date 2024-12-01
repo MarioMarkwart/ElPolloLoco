@@ -210,11 +210,17 @@ canvas {
     padding: 5px;
     z-index: 500;
     display: flex;
-    gap: 5px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .btn {
     width: 50px;
+}
+
+.btn-wide{
+    width: 115px;
 }
 
 .btn:not(.mobile){

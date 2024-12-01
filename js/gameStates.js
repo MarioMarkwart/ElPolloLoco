@@ -66,6 +66,7 @@ function backToHome(){
 	switchGameState('startScreen');
     stopGame();
     cancelAnimationFrame(world.animationFrameId);
+	toggleResetButton('hide');
 	changeMenuButtons();
 	toggleControlButtons();
 	document.getElementById('btn-play').setAttribute('onclick', 'startGame()');
@@ -145,4 +146,5 @@ function setFinalScreen(result){
 			overlay.classList.add('game-over');
 		},2000)
 	}
+	toggleResetButton('show')
 }

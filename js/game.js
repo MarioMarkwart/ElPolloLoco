@@ -77,6 +77,12 @@ function toggleControlButtons(){
 }
 
 
+function toggleResetButton(state){
+	if(state == 'show') document.getElementById('btn-reset').classList.remove('d-none');
+	if (state == 'hide') document.getElementById('btn-reset').classList.add('d-none');
+}
+
+
 /**
  * Initializes the game world.
  * 
@@ -104,6 +110,7 @@ function startGame(){
 	gameStarted = true;
 	gameRunning = true;
 	changeMenuButtons();
+	toggleResetButton('hide');
 	toggleControlButtons();
 	playBackgroundMusic();
 }

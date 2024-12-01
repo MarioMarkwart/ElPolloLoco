@@ -84,7 +84,7 @@
             <br>
         </div>
         <div class="privacy-container">
-            <div class="privacy-btn"  onclick="openPrivacy('legal_notice')"><img src="assets/img/buttons/legal_notice.png"></div>
+            <div class="privacy-btn btn-wide" onclick="openPrivacy('legal_notice')"><img src="assets/img/buttons/legal_notice.png"></div>
         </div>
     </div>
 
@@ -102,10 +102,15 @@
                 </div>
             </div>
             <div id="buttons" class="buttons">
-                <img class="btn" id="btn-play" src="assets/img/buttons/play.png" onclick="startGame()">
-                <img class="btn" id="btn-help" src="assets/img/buttons/help.png" onclick="openInstructions()">
-                <img class="btn" id="btn-fullscreen" src="assets/img/buttons/fullscreenOn.png" onclick="fullscreenOn()">
-                <img class="btn" id="btn-sound" src="assets/img/buttons/sound_off.png" onclick="toggleSound()">
+                <div>
+                    <img class="btn" id="btn-play" src="assets/img/buttons/play.png" onclick="startGame()">
+                    <img class="btn" id="btn-help" src="assets/img/buttons/help.png" onclick="openInstructions()">
+                    <img class="btn" id="btn-fullscreen" src="assets/img/buttons/fullscreenOn.png" onclick="fullscreenOn()">
+                    <img class="btn" id="btn-sound" src="assets/img/buttons/sound_off.png" onclick="toggleSound()">
+                </div>
+                <div>
+                    <img class="btn-wide d-none" id="btn-reset" src="assets/img/buttons/restart_wide.png" onclick="restartGame()">
+                </div>
             </div>
             <div id="keyboard-keys" class="keyboard-keys d-none">
                 <div class="key"><img id="btnLeft" src="assets/img/buttons/keyboard_left.png"><span>Left</span></span>
