@@ -90,6 +90,7 @@ function closeInstructions(){
 	document.getElementById('content').style.display = 'flex';
 	document.getElementById('title').style.display = 'flex';
 	document.body.classList.remove('bg-blur');
+	toggleHeadline();
 }
 
 

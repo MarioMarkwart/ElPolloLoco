@@ -14,6 +14,7 @@ function switchGameState(state){
 	if (state == 'startScreen') setStartScreen();
 	else if (state == 'game') removeClassesFromOverlay();
 	else if (state == 'won' || state == 'lost') setFinalScreen(state);
+	else if (state == 'home') backToHome();
 	else if (state == 'restart') restartGame();
 	else if (state == 'rotateDevice') rotateDevice();
 	else if (state == 'pause') pauseGame();
@@ -59,6 +60,15 @@ function restartGame(){
     startGame();
     if (soundBar.soundIsEnabled) soundBar.setInitialVolume();
     switchGameState('game');
+}
+
+function backToHome(){
+	switchGameState('startScreen');
+    stopGame();
+    cancelAnimationFrame(world.animationFrameId);
+	changeMenuButtons();
+	toggleControlButtons();
+	document.getElementById('btn-play').setAttribute('onclick', 'startGame()');
 }
 
 

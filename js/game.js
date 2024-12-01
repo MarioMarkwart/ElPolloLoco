@@ -66,7 +66,8 @@ function addClassMobileToMenuButton(){
  */
 function toggleControlButtons(){
 	if(isMobile){
-		if(gameRunning) document.getElementById('mobile-buttons').classList.remove('d-none');
+		if(gameRunning) document.getElementById('mobile-buttons').classList.remove('d-none'); 
+		else document.getElementById('mobile-buttons').classList.add('d-none');
 		document.getElementById('keyboard-keys').classList.add('d-none');
 	}
 	else{
@@ -175,9 +176,10 @@ function setButtonsWhenGameIsRunning(){
 
 	playBtn.src = 'assets/img/buttons/pause.png'
 	playBtn.setAttribute('onclick', 'switchGameState("pause")');
-	helpBtn.src = 'assets/img/buttons/restart.png';
-	helpBtn.setAttribute('onclick', 'switchGameState("restart")');
+	helpBtn.src = 'assets/img/buttons/home.png';
+	helpBtn.setAttribute('onclick', 'switchGameState("home")');
 }
+
 
 /**
  * Changes the image and onclick attribute of the play button and help button based on the current
@@ -286,8 +288,8 @@ function setScreenOrientation(event) {
  */
 function toggleHeadline(){
 	window.innerHeight <= 600
-	?document.getElementById('title').classList.add('d-none')
-	:document.getElementById('title').classList.remove('d-none');
+	?document.getElementById('title').style.display = 'none'
+	:document.getElementById('title').style.display = 'flex';
 }
 
 
