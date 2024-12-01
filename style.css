@@ -159,7 +159,7 @@ canvas {
     background: url("assets/img/rotate.jpeg");
     backdrop-filter: blur(4px);
     background-size: contain !important;
-    z-index: 500;
+    z-index: 400;
 }
 
 .left,
