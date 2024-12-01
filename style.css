@@ -14,15 +14,6 @@
 }
 
 @font-face {
-    font-family: 'Zabars';
-    src: url('assets/font/Zabars.ttf');
-}
-@font-face {
-    font-family: 'Frederic';
-    src: url('assets/font/frederickathegreat.ttf');
-}
-
-@font-face {
     font-family: 'Irish';
     src: url('assets/font/IrishGrover-Regular.ttf');
 }
