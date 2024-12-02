@@ -70,10 +70,8 @@ body {
     font-size: 16px;
     text-align: center;
     font-weight: 500;
-    justify-content: center;
     overflow-y: auto;
     width: 100%;
-    /* display: flex; */
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
@@ -110,11 +108,13 @@ body {
     position: relative;
     max-width: 720px;
     width: 100%;
+    padding: var(--instruction-padding);
+    display: flex;
+    flex-direction: column;
 }
 
 #generator_results_content{
     width: 100%;
-    padding: var(--instruction-padding);
     word-break: break-word;
 
     & h3, h2{
@@ -351,8 +351,13 @@ canvas {
     #instructions{
         padding: calc(var(--instruction-padding) - var(--instruction-padding) / 2);
     }
+
     .instruction-text{
         font-size: smaller;
+    }
+
+    #generator_results{
+        padding: calc(var(--instruction-padding) - var(--instruction-padding) / 2);
     }
 }
 
