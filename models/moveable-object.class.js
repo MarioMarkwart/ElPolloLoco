@@ -10,15 +10,15 @@ class MovableObject extends DrawableObject {
 	amount = 0;
 
 
-	/**
-	 * Applies gravity to the object.
-	 * 
-	 * This function is called automatically upon the object's creation. It makes the object fall
-	 * down by subtracting its speedY from its y position. The object's speedY is itself decreased
-	 * by the acceleration every frame. This will make the object fall down until it hits the ground
-	 * (where y = 180). The object's isFalling property is set to true while it is falling and set
-	 * to false when it is not.
-	 */
+/**
+ * Applies gravity to the object.
+ *
+ * Continuously adjusts the object's vertical position and speed based on its current speed and acceleration.
+ * If the object is above the ground or moving upwards, its y position is decreased by its speedY, 
+ * simulating a falling effect. The speedY is also decreased by the acceleration value to simulate gravity.
+ * If speedY becomes negative, the object is considered to be falling.
+ * The process runs at a rate of 60 frames per second unless the world is paused.
+ */
 	applyGravity() {
 		setInterval(() => {
 			if ((this.isAboveGround() || this.speedY > 0) && !world.isPaused) {
