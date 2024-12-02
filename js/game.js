@@ -294,9 +294,12 @@ function setScreenOrientation(event) {
  * @private
  */
 function toggleHeadline(){
-	window.innerHeight <= 600
-	?document.getElementById('title').style.display = 'none'
-	:document.getElementById('title').style.display = 'flex';
+	let title = document.getElementById('title');
+	if(window.innerHeight >= 600 && !document.getElementById('instructions').hasAttribute('opened')){
+		title.style.display = 'flex';
+	}else{
+		title.style.display = 'none'
+	}
 }
 
 

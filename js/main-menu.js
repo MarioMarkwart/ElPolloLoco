@@ -71,11 +71,11 @@ function setButtonsOnFullscreen(){
  * @returns {void}
  */
 function openInstructions(){
-	document.getElementById('instructions').classList.remove('d-none');
-	document.getElementById('instructions').classList.add('d-flex');
+	document.getElementById('instructions').classList = 'd-flex';
 	document.getElementById('content').style.display = 'none';
-	document.getElementById('title').style.display = 'none';
+	document.getElementById('instructions').setAttribute('opened','')
 	document.body.classList.add('bg-blur');
+	toggleHeadline();
 }
 
 
@@ -83,13 +83,12 @@ function openInstructions(){
  * Closes the instruction screen and shows the content and title elements again.
  * This function is called when the close button on the instruction screen is clicked.
  * @returns {void}
- */
+*/
 function closeInstructions(){
-	document.getElementById('instructions').classList.add('d-none');
-	document.getElementById('instructions').classList.remove('d-flex');
+	document.getElementById('instructions').classList = 'd-none';
 	document.getElementById('content').style.display = 'flex';
-	document.getElementById('title').style.display = 'flex';
 	document.body.classList.remove('bg-blur');
+	document.getElementById('instructions').removeAttribute('opened','')
 	toggleHeadline();
 }
 

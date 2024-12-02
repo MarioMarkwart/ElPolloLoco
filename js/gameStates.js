@@ -138,13 +138,14 @@ function setFinalScreen(result){
 	overlay.classList.remove('d-none');
 	if (result === 'won'){
 		overlay.classList.add('won');
+		toggleResetButton('show')
 	}
 	if (result === 'lost'){
 		overlay.classList.add('lost')
 		setTimeout(() => {
 			overlay.classList.remove('lost');
 			overlay.classList.add('game-over');
+			toggleResetButton('show')
 		},2000)
 	}
-	toggleResetButton('show')
 }
