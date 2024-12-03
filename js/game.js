@@ -1,7 +1,6 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let globalIntervalIds = [];
 let gameStarted = false;
 let gameRunning = false;
 let godmode = false;
@@ -9,7 +8,6 @@ let	totalImages = 0;
 let totalImagesLoaded = 0;
 let totalImagesLoadedPercent = 0;
 let totalImagesLoadedPercentOld = 999;
-let allGraphicsLoaded = false;
 let loadingScreenImagesCache = {};
 let soundBar = new Sound();
 let isLandscape = false;
@@ -77,6 +75,11 @@ function toggleControlButtons(){
 }
 
 
+/**
+ * Shows or hides the reset button based on the provided state.
+ * @param {string} state - The state of the reset button. Should be either 'show' or 'hide'.
+ * @returns {void}
+ */
 function toggleResetButton(state){
 	if(state == 'show') document.getElementById('btn-reset').classList.remove('d-none');
 	if (state == 'hide') document.getElementById('btn-reset').classList.add('d-none');
@@ -105,6 +108,7 @@ function initWorld() {
  * @returns {void}
  */
 function startGame(){
+	resetLoadingScreenImages();
 	initLevel();
 	initWorld();
 	gameStarted = true;
@@ -121,8 +125,6 @@ function startGame(){
  * This is used to clear any visual state indicators from the overlay during gameplay.
  */
 function removeScreensFromOverlay() {
-	console.log('gameStarted: ', gameStarted);
-	console.log('gameRunning: ', gameRunning);
 	let overlay = document.getElementById('gamestate-screen');
 	if (gameRunning) overlay.removeAttribute('class');
 	if (!gameStarted) overlay.classList.add('start')

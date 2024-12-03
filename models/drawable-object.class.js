@@ -4,8 +4,8 @@ class DrawableObject {
 	img;
 	imageCache = {};
 	currentImage = 0;
-	setCurrentImage = false;
 	intervalIds = [];
+
 	offset = {
 		left: 0,
 		right: 0,

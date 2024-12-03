@@ -4,8 +4,6 @@ class StatusBar extends DrawableObject {
 	x = 40;
     width = 180;
     height = 50;
-    amount = 0;
-    percentage = 100;
 
 
     /**

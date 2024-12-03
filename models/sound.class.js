@@ -68,8 +68,8 @@ class Sound extends MovableObject {
 		if(soundKey == 'backgroundMusic' && sound) sound.play();
 		if (this.soundIsEnabled && gameRunning && sound) sound.play();
 	}
-	
-	
+
+
 	playSoundLoop(soundKey, timerange, obj) {
 		let intv = setInterval(() => {
 			this.playSound(soundKey)

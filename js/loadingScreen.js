@@ -47,3 +47,14 @@ function setLoadingScreenImage() {
         switchGameState('game');
     }
 }
+
+
+/**
+ * Resets all the variables related to tracking the progress of loading images.
+ */
+function resetLoadingScreenImages() {
+    totalImages = 0;
+    totalImagesLoaded = 0;
+    totalImagesLoadedPercent = 0;
+    totalImagesLoadedPercentOld = 0;
+}
