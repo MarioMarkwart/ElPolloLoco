@@ -12,8 +12,7 @@
  */
 function switchGameState(state){
 	if (state == 'startScreen') setStartScreen();
-	else if (state == 'game') removeClassesFromOverlay();
-	else if (state == 'won' || state == 'lost') setFinalScreen(state);
+	else if (state == 'game') removeScreensFromOverlay();
 	else if (state == 'home') backToHome();
 	else if (state == 'restart') restartGame();
 	else if (state == 'rotateDevice') rotateDevice();
@@ -70,24 +69,6 @@ function backToHome(){
 	changeMenuButtons();
 	toggleControlButtons();
 	document.getElementById('btn-play').setAttribute('onclick', 'startGame()');
-}
-
-
-/**
- * Transitions the game state to 'lost' by invoking the switchGameState function
- * with the 'lost' parameter, indicating that the player has lost the game.
- */
-function gameLost(){
-	switchGameState('lost');
-}
-
-
-/**
- * Transitions the game state to 'won' by invoking the switchGameState function
- * with the 'won' parameter, indicating that the player has won the game.
- */
-function gameWon(){
-	switchGameState('won');
 }
 
 

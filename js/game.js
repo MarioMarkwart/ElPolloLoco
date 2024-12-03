@@ -120,18 +120,12 @@ function startGame(){
  * Removes all classes from the 'gamestate-screen' overlay element if the game is running.
  * This is used to clear any visual state indicators from the overlay during gameplay.
  */
-function removeClassesFromOverlay() {
+function removeScreensFromOverlay() {
+	console.log('gameStarted: ', gameStarted);
+	console.log('gameRunning: ', gameRunning);
 	let overlay = document.getElementById('gamestate-screen');
-	if (gameRunning) {
-		overlay.removeAttribute('class');
-	} else {
-		if (gameStarted) {
-			overlay.removeAttribute('class');
-		} else {
-			overlay.removeAttribute('class');
-			overlay.classList.add('start')
-		}
-		}
+	if (gameRunning) overlay.removeAttribute('class');
+	if (!gameStarted) overlay.classList.add('start')
 }
 
 
