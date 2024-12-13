@@ -27,6 +27,7 @@ function init(){
 	addDeviceEventListeners();
 	switchGameState('startScreen');
 	toggleControlButtons();
+	toggleClassMobileToMenuButton();
 	getOrientation();
 }
 

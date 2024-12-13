@@ -87,39 +87,39 @@
         <div id="content">
             <div id="canvas-container">
                 <canvas id="canvas" width="720px" height="480px"></canvas>
-                <div id="mobile-buttons" class="mobile-buttons d-none">
-                    <div class="left">
-                        <div class="key"><img id="btnLeft" src="assets/img/buttons/keyboard_left.png"></div>
-                        <div class="key"><img id="btnRight" src="assets/img/buttons/keyboard_right.png"></div>
-                    </div>
-                    <div class="right">
-                        <div class="key"><img id="btnJump" src="assets/img/buttons/mobile-jump.png"></div>
-                        <div class="key"><img id="btnThrow" src="assets/img/buttons/mobile-bottle.png"></div>
-                    </div>
-                </div>
-                <div id="buttons" class="buttons">
-                    <div id="gameplay-buttons">
-                        <img class="btn" id="btn-play" src="assets/img/buttons/play.png" onclick="startGame()">
-                        <img class="btn" id="btn-help" src="assets/img/buttons/help.png" onclick="openInstructions()">
-                        <img class="btn" id="btn-fullscreen" src="assets/img/buttons/fullscreenOn.png" onclick="fullscreenOn()">
-                        <img class="btn" id="btn-sound" src="assets/img/buttons/sound_off.png" onclick="toggleSound()">
-                    </div>
-                    <div>
-                        <img class="btn-wide d-none" id="btn-reset" src="assets/img/buttons/restart_wide.png" onclick="restartGame()">
-                    </div>
-                </div>
-                <div id="keyboard-keys" class="keyboard-keys d-none">
-                    <div class="key"><img id="btnLeft" src="assets/img/buttons/keyboard_left.png"><span>Left</span></span>
-                    </div>
-                    <div class="key"><img id="btnRight" src="assets/img/buttons/keyboard_right.png"><span>Right</span></div>
-                    <div class="key"><img id="btnJump" src="assets/img/buttons/keyboard_space.png"><span>Jump</span></div>
-                    <div class="key"><img id="btnThrow" src="assets/img/buttons/keyboard_d.png"><span>Throw Bottle</span>
-                    </div>
+                <div id="canvas-overlay">
+                    <div id="loading-screen" class=""></div>
+                    <div id="gamestate-screen" class=""></div>
                 </div>
             </div>
-            <div id="canvas-overlay">
-                <div id="loading-screen" class=""></div>
-                <div id="gamestate-screen" class=""></div>
+            <div id="mobile-buttons" class="mobile-buttons d-none">
+                <div class="left">
+                    <div class="key"><img id="btnLeft" src="assets/img/buttons/keyboard_left.png"></div>
+                    <div class="key"><img id="btnRight" src="assets/img/buttons/keyboard_right.png"></div>
+                </div>
+                <div class="right">
+                    <div class="key"><img id="btnJump" src="assets/img/buttons/mobile-jump.png"></div>
+                    <div class="key"><img id="btnThrow" src="assets/img/buttons/mobile-bottle.png"></div>
+                </div>
+            </div>
+            <div id="buttons" class="buttons">
+                <div id="gameplay-buttons">
+                    <img class="btn" id="btn-play" src="assets/img/buttons/play.png" onclick="startGame()">
+                    <img class="btn" id="btn-help" src="assets/img/buttons/help.png" onclick="openInstructions()">
+                    <img class="btn" id="btn-fullscreen" src="assets/img/buttons/fullscreenOn.png" onclick="fullscreenOn()">
+                    <img class="btn" id="btn-sound" src="assets/img/buttons/sound_off.png" onclick="toggleSound()">
+                </div>
+                <div>
+                    <img class="btn-wide d-none" id="btn-reset" src="assets/img/buttons/restart_wide.png" onclick="restartGame()">
+                </div>
+            </div>
+            <div id="keyboard-keys" class="keyboard-keys d-none">
+                <div class="key"><img id="btnLeft" src="assets/img/buttons/keyboard_left.png"><span>Left</span></span>
+                </div>
+                <div class="key"><img id="btnRight" src="assets/img/buttons/keyboard_right.png"><span>Right</span></div>
+                <div class="key"><img id="btnJump" src="assets/img/buttons/keyboard_space.png"><span>Jump</span></div>
+                <div class="key"><img id="btnThrow" src="assets/img/buttons/keyboard_d.png"><span>Throw Bottle</span>
+                </div>
             </div>
         </div>
 

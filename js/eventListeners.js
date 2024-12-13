@@ -69,7 +69,7 @@ function addDeviceEventListeners() {
 	window.addEventListener('resize', () => {
 		toggleHeadline();
 		checkIsMobile();
-		toggleClassMobileToMenuButton();
 		toggleControlButtons()
+		toggleClassMobileToMenuButton();
 	});
 }

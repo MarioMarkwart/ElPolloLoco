@@ -308,15 +308,20 @@ canvas {
 
 
 @media screen and (max-width: 720px) {
-        h1{
-            font-size: 48px ;
-        }
+    h1{
+        font-size: 48px ;
+    }
+
     .buttons {
         max-width: 200px;
     }
 
     .btn {
         max-width: 40px;
+    }
+
+    .btn-wide{
+        width: 95px;
     }
 
     .privacy-btn{
@@ -329,9 +334,15 @@ canvas {
     h1{
         font-size: 36px ;
     }
+
     .btn {
         max-width: 30px;
     }
+
+    .btn-wide{
+        width: 80px;
+    }
+
     .key > img{
         width: 40px;
     }
