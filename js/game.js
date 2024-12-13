@@ -36,11 +36,12 @@ function init(){
  * @returns {void}
  */
 function checkIsMobile(){
-	if ("ontouchstart" in document.documentElement){
+	if (matchMedia('(pointer:coarse)').matches){
 		isMobile = true;
-		addClassMobileToMenuButton();
 	}
-	else isMobile = false;
+	if(matchMedia('(pointer:fine)').matches) {
+		isMobile = false;
+	}
 }
 
 
@@ -49,11 +50,11 @@ function checkIsMobile(){
  * This disables the hover effect on these buttons on mobile devices.
  * @returns {void}
  */
-function addClassMobileToMenuButton(){
-	document.getElementById('btn-play').classList.add('mobile');
-	document.getElementById('btn-help').classList.add('mobile');
-	document.getElementById('btn-fullscreen').classList.add('mobile');
-	document.getElementById('btn-sound').classList.add('mobile');
+function toggleClassMobileToMenuButton(){
+	let gameplayButtons = document.getElementById('gameplay-buttons');
+	[...gameplayButtons.children].forEach(btn => {
+		isMobile ? btn.classList.add('mobile') : btn.classList.remove('mobile');
+	});
 }
 
 
