@@ -46,7 +46,6 @@ class Character extends MovableObject {
 		'assets/img/2_character_pepe/5_dead/D-54.png',
 		'assets/img/2_character_pepe/5_dead/D-55.png',
 		'assets/img/2_character_pepe/5_dead/D-56.png',
-		'assets/img/2_character_pepe/5_dead/D-57.png',
 	];
 
 	CHARACTER_IMAGES_IDLE = [

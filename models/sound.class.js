@@ -146,7 +146,7 @@ class Sound extends MovableObject {
 	setInitialVolume() {
 		this.setVolume(this.soundCache.characterWalk, 0.6);
 		this.setVolume(this.soundCache.characterHurt, 0.3);
-		this.setVolume(this.soundCache.characterJump, 0.3);
+		this.setVolume(this.soundCache.characterJump, 0.2);
 		this.setVolume(this.soundCache.characterKill, 0.4);
 		this.setVolume(this.soundCache.characterWon, 0.4);
 		this.setVolume(this.soundCache.characterLost, 0.3);

@@ -7,6 +7,7 @@ class Endboss extends MovableObject {
 	hadFirstContact = false;
 	nearToCharacter = false;
 	gotHit = false;
+	isInvincible = false;
 	behaviour = "ALERT";
 
 	offset = {
@@ -200,9 +201,11 @@ class Endboss extends MovableObject {
 		world.statusBarEndboss.setPercentage((this.energy -= 5));
 		if (!this.isDead()) {
 			this.gotHit = true;
+			this.isInvincible = true;
 			this.behaviour = "HIT";
 			soundBar.playSound('endbossHit');
-			setTimeout(() => this.gotHit = false, 1000);
+			setTimeout(() => this.gotHit = false, 750);
+			setTimeout(() => this.isInvincible = false, 50);
 		} else {
 			this.behaviour = "DEAD";
 			setTimeout(() => youWon(), 500);

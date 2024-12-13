@@ -1,5 +1,4 @@
 class ThrowableObject extends MovableObject {
-	throwingAnimationId = null;
 	moveToInterval = null;
 
 	IMAGES_BOTTLE_ROTATION = [
@@ -44,8 +43,7 @@ class ThrowableObject extends MovableObject {
 	 * The bottle will also apply gravity, so it will eventually fall down.
 	 */
 	throw() {
-		this.throwingAnimationId = this.animate(
-			this.IMAGES_BOTTLE_ROTATION, 50);
+		this.animate(this.IMAGES_BOTTLE_ROTATION,50);
 		this.speedY = 10;
 		this.applyGravity();
 		if (world.character.otherDirection) this.throwToLeft();
@@ -108,11 +106,12 @@ class ThrowableObject extends MovableObject {
 	 * width are set to 0, effectively making it invisible.
 	 */
 	bottleSplash() {
-		clearInterval(this.throwingAnimationId);
+		this.intervalIds.forEach((intervalId) => clearInterval(intervalId));
 		this.animate(this.IMAGES_BOTTLE_SPLASH, 50);
 		setTimeout(() => {
 			this.height = 0;
 			this.width = 0;
+			this.intervalIds.forEach((intervalId) => clearInterval(intervalId));
 		}, 100);
 	}
 }

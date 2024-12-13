@@ -102,7 +102,7 @@ function youLost(){
 	setTimeout(() => {
 		stopGame();
 		setFinalScreen('lost');
-	}, 500)
+	}, 400)
 }
 
 

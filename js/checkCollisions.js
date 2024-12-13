@@ -96,7 +96,7 @@ function checkCollisionWithBottle(){
 function checkCollisionWithFlyingBottle(){
     world.throwableObjects.forEach((to) => {
         let endboss = world.level.endboss[0];
-        if (endboss.isColliding(to)) {
+        if (!endboss.isInvincible && endboss.isColliding(to)) {
             endboss.hit();
             world.throwableObjects[world.throwableObjects.indexOf(to)].bottleSplash();
             setTimeout(() => {

@@ -164,6 +164,7 @@ class MovableObject extends DrawableObject {
 		clearInterval(enemy.soundLoopId);
 		setTimeout(() => {
 			world.level.enemies.splice(world.level.enemies.indexOf(this), 1);
+			this.intervalIds.forEach((intervalId) => clearInterval(intervalId));
 		},300)
 	}
 }
