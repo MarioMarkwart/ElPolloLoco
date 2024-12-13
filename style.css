@@ -257,6 +257,7 @@ canvas {
     justify-content: space-between;
     position: absolute;
     bottom: 0;
+    user-select: none !important;
     -webkit-touch-callout: none !important;
     -webkit-user-select: none !important;
 }
@@ -332,6 +333,15 @@ canvas {
 
 }
 
+@media screen and (max-height: 430px) and (min-width: 550px) {
+    .btn {
+        max-width: 30px;
+    }
+    .key > img{
+        width: 40px;
+    }
+}
+
 @media screen and (max-width: 550px) {
     h1{
         font-size: 36px ;
@@ -396,3 +406,4 @@ canvas {
         width: 75px;
     }
 }
+
