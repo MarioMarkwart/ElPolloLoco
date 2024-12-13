@@ -114,18 +114,10 @@ class StatusBar extends DrawableObject {
 
 
     /**
-     * Returns the index of the image to display based on the percentage property of the status bar.
+     * Determines the index of the image to display based on the percentage property of the status bar.
      *
-     * This function returns an integer between 0 and 5, which is used to index into the IMAGES
-     * array to retrieve the appropriate image to display for the current percentage. The returned
-     * value is determined by the following rules:
-     *
-     * * If percentage is 80 or higher, return 5.
-     * * If percentage is 60 or higher but less than 80, return 4.
-     * * If percentage is 40 or higher but less than 60, return 3.
-     * * If percentage is 20 or higher but less than 40, return 2.
-     * * If percentage is greater than 0 but less than 20, return 1.
-     * * Otherwise, return 0.
+     * This function returns an integer between 0 and 20, which is used to index into the IMAGES
+     * array to retrieve the appropriate image to display for the current percentage.
      *
      * @returns {number} The index of the image to display based on the percentage property.
      */
@@ -151,18 +143,5 @@ class StatusBar extends DrawableObject {
         else if (this.percentage >= 5) return 2;
         else if (this.percentage >= 0) return 1;
         else return 0;
-		// else if (this.percentage >= 90) return 19;
-		// else if (this.percentage >= 90) return 19;
-		// else if (this.percentage >= 90) return 19;
-		// else if (this.percentage >= 90) return 19;
-		// else if (this.percentage >= 90) return 19;
-		// else if (this.percentage >= 90) return 19;
-		// else if (this.percentage >= 90) return 19;
-		// else if (this.percentage >= 90) return 19;
-		// else if (this.percentage >= 90) return 19;
-		// else if (this.percentage >= 40) return 3;
-		// else if (this.percentage >= 20) return 2;
-		// else if (this.percentage > 0) return 1;
-		// else return 0;
 	}
 }
