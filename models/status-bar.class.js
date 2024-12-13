@@ -14,6 +14,7 @@ class StatusBar extends DrawableObject {
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndexPercentage()];
+        console.log(path)
         this.img = this.imageCache[path];
     }
 
@@ -129,11 +130,39 @@ class StatusBar extends DrawableObject {
      * @returns {number} The index of the image to display based on the percentage property.
      */
     resolveImageIndexPercentage() {
-		if (this.percentage >= 80) return 5;
-		else if (this.percentage >= 60) return 4;
-		else if (this.percentage >= 40) return 3;
-		else if (this.percentage >= 20) return 2;
-		else if (this.percentage > 0) return 1;
-		else return 0;
+		if (this.percentage >= 95) return 20;
+		else if (this.percentage >= 90) return 19;
+		else if (this.percentage >= 85) return 18;
+        else if (this.percentage >= 80) return 17;
+        else if (this.percentage >= 75) return 16;
+        else if (this.percentage >= 70) return 15;
+        else if (this.percentage >= 65) return 14;
+        else if (this.percentage >= 60) return 13;
+        else if (this.percentage >= 55) return 12;
+        else if (this.percentage >= 50) return 11;
+        else if (this.percentage >= 45) return 10;
+        else if (this.percentage >= 40) return 9;
+        else if (this.percentage >= 35) return 8;
+        else if (this.percentage >= 30) return 7;
+        else if (this.percentage >= 25) return 6;
+        else if (this.percentage >= 20) return 5;
+        else if (this.percentage >= 15) return 4;
+        else if (this.percentage >= 10) return 3;
+        else if (this.percentage >= 5) return 2;
+        else if (this.percentage >= 0) return 1;
+        else return 0;
+		// else if (this.percentage >= 90) return 19;
+		// else if (this.percentage >= 90) return 19;
+		// else if (this.percentage >= 90) return 19;
+		// else if (this.percentage >= 90) return 19;
+		// else if (this.percentage >= 90) return 19;
+		// else if (this.percentage >= 90) return 19;
+		// else if (this.percentage >= 90) return 19;
+		// else if (this.percentage >= 90) return 19;
+		// else if (this.percentage >= 90) return 19;
+		// else if (this.percentage >= 40) return 3;
+		// else if (this.percentage >= 20) return 2;
+		// else if (this.percentage > 0) return 1;
+		// else return 0;
 	}
 }
