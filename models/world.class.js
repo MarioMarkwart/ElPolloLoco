@@ -46,7 +46,7 @@ class World {
 	 */
 	initialRun() {
 		this.adjustClouds();
-		setInterval(() => checkCollisions(), 100);
+		setInterval(() => checkCollisions(), 50);
 		setInterval(() => this.checkThrowObjects(), 100);
 		setInterval(() => this.removeObjWhenOutOfWorld(), 1000);
 		setInterval(() => this.createNewClouds(), 5000);
