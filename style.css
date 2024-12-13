@@ -257,6 +257,8 @@ canvas {
     justify-content: space-between;
     position: absolute;
     bottom: 0;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
 }
 
 .keyboard-keys-fullscreen,
