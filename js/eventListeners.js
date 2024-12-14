@@ -21,6 +21,7 @@ function addKeyboardEventListener() {
 		if (event.key === "d") keyboard.D = false;
 		if (event.key === " ") keyboard.SPACE = false;
 		if (event.key === "g") toggleGodmode();
+		if (event.key === "m") toggleSound();
 	});
 }
 

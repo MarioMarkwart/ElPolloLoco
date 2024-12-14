@@ -69,10 +69,12 @@ function toggleControlButtons(){
 		if(gameRunning) document.getElementById('mobile-buttons').classList.remove('d-none'); 
 		else document.getElementById('mobile-buttons').classList.add('d-none');
 		document.getElementById('keyboard-keys').classList.add('d-none');
+		document.getElementById('control-description').classList.add('d-none');
 	}
 	else{
 		document.getElementById('mobile-buttons').classList.add('d-none');
 		document.getElementById('keyboard-keys').classList.remove('d-none');
+		document.getElementById('control-description').classList.remove('d-none');
 	}
 }
 
