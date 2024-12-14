@@ -13,6 +13,8 @@ class World {
 	camera_x = -100;
 	isPaused = false;
 	animationFrameId;
+	cooldown = 150;
+	lastThrowTime = 0;
 
 
 	/**
@@ -63,7 +65,7 @@ class World {
 	 * 100 pixels down. The player's amount of bottles is then decreased by 1.
 	 */
 	checkThrowObjects() {
-		if (this.keyboard.D) {
+		if (this.keyboard.D && Date.now() - this.lastThrowTime > this.cooldown){
 			if (world.statusBarBottles.amount > 0) {
 					let bottle = new ThrowableObject(
 						this.character.x + 50,
@@ -71,6 +73,7 @@ class World {
 					);
 				this.throwableObjects.push(bottle);
 				world.statusBarBottles.decreaseAmount();
+				this.lastThrowTime = Date.now();
 			}
 		}
 	}
